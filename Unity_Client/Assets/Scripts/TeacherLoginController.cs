@@ -6,9 +6,6 @@ public class TeacherLoginController : MonoBehaviour
 {
     private string username;
     private string password;
-    private Teacher teacher;
-
-    private string test;
 
     public void ReadUsernameInput(string s)
     {
@@ -24,11 +21,9 @@ public class TeacherLoginController : MonoBehaviour
 
     public void Login()
     {
-        teacher = new Teacher(username);
-        // user.setUserName(username);
-        test = teacher.getUserName();
-        Debug.Log(test);
-        // Debug.Log("Login Successful");
+        //API call to backend return teacherId to be saved in playerprefs
+
+
     }
 
 }
