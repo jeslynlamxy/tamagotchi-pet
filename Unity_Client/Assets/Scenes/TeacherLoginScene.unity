@@ -224,9 +224,9 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 134182161}
-        m_TargetAssemblyTypeName: ReadInput, Assembly-CSharp
-        m_MethodName: ReadStringInput
+      - m_Target: {fileID: 466252850}
+        m_TargetAssemblyTypeName: TeacherLoginController, Assembly-CSharp
+        m_MethodName: ReadPasswordInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -589,7 +589,6 @@ GameObject:
   - component: {fileID: 134182160}
   - component: {fileID: 134182159}
   - component: {fileID: 134182158}
-  - component: {fileID: 134182161}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -662,18 +661,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &134182161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134182157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c989f5cbadfbbb14dab92bcf3c182c93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &137964465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,6 +1208,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401690558}
   m_CullTransparentMesh: 1
+--- !u!1 &466252849
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 466252851}
+  - component: {fileID: 466252850}
+  m_Layer: 0
+  m_Name: TeacherLoginController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &466252850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466252849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0bbe8c53dcf7f34087a3bb947797970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &466252851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466252849}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 320, y: 240, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &710714210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,6 +1334,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 466252850}
+        m_TargetAssemblyTypeName: TeacherLoginController, Assembly-CSharp
+        m_MethodName: Login
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: TeacherMenuScene
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 160616952}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: Load
@@ -2282,9 +2324,9 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 134182161}
-        m_TargetAssemblyTypeName: ReadInput, Assembly-CSharp
-        m_MethodName: ReadStringInput
+      - m_Target: {fileID: 466252850}
+        m_TargetAssemblyTypeName: TeacherLoginController, Assembly-CSharp
+        m_MethodName: ReadUsernameInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
