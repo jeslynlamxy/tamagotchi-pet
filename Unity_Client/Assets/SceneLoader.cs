@@ -6,16 +6,12 @@ using System;
 
 public class SceneLoader : MonoBehaviour
 {
-    public void LoadStudentLogin()
+    public void LoadPrevScene()
     {
-        SceneManager.LoadScene("StudentLoginScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
     }
 
-    public void LoadTeacherLogin()
-    {
-        SceneManager.LoadScene("TeacherLoginScene");
-    }
-    
+
     public void Load(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
