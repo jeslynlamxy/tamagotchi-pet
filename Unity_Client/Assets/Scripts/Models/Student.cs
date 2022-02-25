@@ -2,30 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static User;
 
 [System.Serializable]
-public class Student
+public class Student : User
 {
+    public static List<string> tamagotchiUnlocked;
 
-    [SerializeField]
-    private string userName;
+    public static int currentFood;
 
-
-    public Student(string username)
-    {
-        this.userName = username;
-    }
-
-
-    public string getUserName()
-    {
-        return this.userName;
-    }
-
-    public void setUserName(string userName)
-    {
-        this.userName = userName;
-    }
+    public static int currentWater;
 
 
 

@@ -2,30 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static User;
 
 [System.Serializable]
-public class Teacher
+public class Teacher : User
 {
-
-    [SerializeField]
-    private string userName;
-
-
-    public Teacher(string username)
+    public void viewStatistics()
     {
-        this.userName = username;
+        Debug.Log("View stats");
     }
 
-
-    public string getUserName()
+    public void createAssignment()
     {
-        return this.userName;
+        Debug.Log("Create assignment");
     }
 
-    public void setUserName(string userName)
-    {
-        this.userName = userName;
-    }
 
 
 
