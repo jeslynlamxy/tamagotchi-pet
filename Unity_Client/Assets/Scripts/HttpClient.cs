@@ -28,10 +28,12 @@ public class HttpClient
         {
             var result = JsonConvert.DeserializeObject<TResultType>(jsonResponse);
             Debug.Log($"Sucess: {www.downloadHandler.text}");
+            return result;
         }
         catch (Exception ex)
         {
             Debug.LogError($"Could not parse response {jsonResponse}");
+            return default(TResultType);
         }
     }
 }

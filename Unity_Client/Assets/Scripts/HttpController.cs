@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 public class HttpController : MonoBehaviour
 {
-    private string test;
+    private int test;
     public async void GetUser()
     {
         var httpClient = new HttpClient();
         var url = "https://jsonplaceholder.typicode.com/todos/1";
 
-        var result = await httpClient.Get<User>(url);
-        test = User.Title.get();
+        var user = await httpClient.Get<User>(url);
+        test = user.UserId;
         Debug.Log(test);
     }
 }
