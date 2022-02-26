@@ -23,9 +23,9 @@ public class TeacherLoginController : MonoBehaviour
     public void Login()
     {
         //API call to backend return teacherId to be saved in playerprefs
-        Teacher.userName = username;
-        test = Teacher.userName;
-        Debug.Log(test);
+        // Teacher.userName = username;
+        // test = Teacher.userName;
+        // Debug.Log(test);
 
 
     }
