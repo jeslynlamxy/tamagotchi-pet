@@ -7,12 +7,11 @@ using static User;
 [System.Serializable]
 public class Student : User
 {
-    public static List<string> tamagotchiUnlocked;
-
-    public static int currentFood;
-
-    public static int currentWater;
-
+    public int overallScore { get; set; }
+    public List<Pet> petsUnlocked { get; set; }
+    public int currentFood { get; set; }
+    public int currentWater { get; set; }
+    public int NumOfGamesCompleted { get; set; }
 
 
 }

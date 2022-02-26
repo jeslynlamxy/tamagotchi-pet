@@ -7,7 +7,7 @@ public class StudentLoginController : MonoBehaviour
     private string username;
     private string password;
     private string test;
-    UserHttpController userHttp = new UserHttpController();
+
     public void ReadUsernameInput(string s)
     {
         username = s;
@@ -27,8 +27,8 @@ public class StudentLoginController : MonoBehaviour
         // Student.userName = username;
         // test = Student.userName;
         // Debug.Log(test);
-        var user = userHttp.readUser();
-        Debug.Log(user.Title);
+        // var user = userHttp.readUser();
+        // Debug.Log(user.Title);
 
     }
 
