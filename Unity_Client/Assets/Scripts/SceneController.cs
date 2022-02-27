@@ -51,7 +51,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadGameUI()
     {
-        var pref = PlayerPrefs.GetString("SingleOrMulti");
+        var pref = StudentData.gameTypeSelected;
         if (pref == "Single")
         {
             SceneManager.LoadScene("SinglePlayerGameUI");
@@ -65,7 +65,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadGameCompletionUI()
     {
-        var pref = PlayerPrefs.GetString("SingleOrMulti");
+        var pref = StudentData.gameTypeSelected;
         if (pref == "Single")
         {
             SceneManager.LoadScene("SinglePlayerGameCompletionUI");

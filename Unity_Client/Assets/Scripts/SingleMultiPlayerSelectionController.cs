@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class SingleMultiPlayerSelectionController : MonoBehaviour
 {
-    // Start is called before the first frame update
     public void IndividualButton()
     {
-        PlayerPrefs.SetString("SingleOrMulti", "Single");
+        StudentData.gameTypeSelected = "Single";
     }
 
-    // Update is called once per frame
     public void CompeteButton()
     {
-        PlayerPrefs.SetString("SingleOrMulti", "Multi");
+        StudentData.gameTypeSelected = "Multi";
     }
 }

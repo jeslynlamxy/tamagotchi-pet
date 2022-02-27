@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Student;
+using static Pet;
 
 public class StudentLoginController : MonoBehaviour
 {
@@ -26,24 +27,27 @@ public class StudentLoginController : MonoBehaviour
 
     public void Login()
     {
-        //API call to backend return studentId to be saved in playerprefs
-        // //API call to backend return teacherId to be saved in playerprefs
-        // Student.userName = username;
-        // test = Student.userName;
-        // Debug.Log(test);
-        // var user = userHttp.readUser();
-        // Debug.Log(user.Title);
+        //API call to backend 
+
+        // put placeholders for now, to be replaced by http req result
+        List<Pet> PetList = new List<Pet>();
+        PetList.Add(new Pet("cat", 1, "extra 5 seconds", 10, 2));
+        List<string> LvlList = new List<string>();
+        LvlList.Add("SRS");
+
+        StudentData.userName = "poggers";
+        StudentData.id = 1;
+        StudentData.overallScore = 800;
+        StudentData.petsUnlocked = PetList;
+        StudentData.currentFood = 30;
+        StudentData.currentWater = 15;
+        StudentData.NumOfGamesCompleted = 22;
+        StudentData.levelsUnlocked = LvlList;
 
     }
     public void RegisterAndLogin()
     {
-        //API call to backend return studentId to be saved in playerprefs
-        // //API call to backend return teacherId to be saved in playerprefs
-        // Student.userName = username;
-        // test = Student.userName;
-        // Debug.Log(test);
-        // var user = userHttp.readUser();
-        // Debug.Log(user.Title);
+
 
     }
 
