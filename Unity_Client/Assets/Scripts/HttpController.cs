@@ -1,20 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-public class HttpController : MonoBehaviour
+using System.Net.Http;
+public class HttpController
 {
-    private int test;
-    public async void GetUser()
-    {
-        var httpClient = new HttpClient();
-        var url = "https://jsonplaceholder.typicode.com/todos/1";
+    HttpClient client = new HttpClient();
 
-        var user = await httpClient.Get<User>(url);
-        test = user.UserId;
-        Debug.Log(test);
+    public TResultType Get<TResultType>(string url)
+    {
+        HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
+        string responseStr = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        Debug.Log(responseStr);
+        var result = JsonConvert.DeserializeObject<TResultType>(responseStr);
+        return result;
+    }
+
+    public string Post<TPostType>(string url, TPostType obj)
+    {
+        var formContent = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
+        HttpResponseMessage response = client.PostAsync(url, formContent).GetAwaiter().GetResult();
+        string responseStr = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        return responseStr;
+    }
+
+    public string Put<TPutType>(string url, TPutType obj)
+    {
+        var formContent = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
+        HttpResponseMessage response = client.PutAsync(url, formContent).GetAwaiter().GetResult();
+        string responseStr = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        return responseStr;
+    }
+
+    public string Delete(string url)
+    {
+        HttpResponseMessage response = client.DeleteAsync(url).GetAwaiter().GetResult();
+        string responseStr = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        return responseStr;
     }
 }
