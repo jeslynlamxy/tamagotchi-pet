@@ -6,27 +6,48 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StartScene.unity
+    path: Assets/Scenes/MainPageUI.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/StudentLoginScene.unity
+    path: Assets/Scenes/StudentLoginUI.unity
     guid: a4005f7e173b0364d840ead8cfdad25e
   - enabled: 1
-    path: Assets/Scenes/StudentMenuScene.unity
+    path: Assets/Scenes/StudentWelcomeUI.unity
     guid: afa717e7106f64540be3f16fd91a5e44
   - enabled: 1
-    path: Assets/Scenes/TeacherLoginScene.unity
+    path: Assets/Scenes/TeacherLoginUI.unity
     guid: fc531327f5f89004f9ff5782bf64e546
   - enabled: 1
-    path: Assets/Scenes/TeacherMenuScene.unity
+    path: Assets/Scenes/TeacherWelcomeUI.unity
     guid: 17d221ca791fd8f49ab96548fcaadd63
   - enabled: 1
     path: Assets/Scenes/CreateAccountScene.unity
     guid: 827a893f50345f04289ebca74cdeecb1
   - enabled: 1
+    path: Assets/Scenes/WorldAndDifficultySelectionUI.unity
+    guid: 0345ddfb48f6f9549bf5d14b7cdc5e3a
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelectionUI.unity
+    guid: 8287edf1c6e1357429ae7d0747e2fbef
+  - enabled: 1
+    path: Assets/Scenes/SinglePlayerGameUI.unity
+    guid: 7de0a568088472547b30777756dfa5b4
+  - enabled: 1
+    path: Assets/Scenes/SinglePlayerGameCompletionUI.unity
+    guid: b2973d4f4081c17499f3b35ffaf32fec
+  - enabled: 1
+    path: Assets/Scenes/MultiPlayerGameUI.unity
+    guid: 73d4ae5b233d1b746929f9400ec1a320
+  - enabled: 1
+    path: Assets/Scenes/MultiPlayerGameCompletionUI.unity
+    guid: 0591b1d5ba918614abd7e59100f20732
+  - enabled: 1
     path: Assets/Scenes/LeaderboardScene.unity
     guid: ed8081addc3c30c44ad4ff9c445aa9a1
   - enabled: 1
-    path: Assets/Scenes/StartGameScene.unity
+    path: Assets/Scenes/LeaderboardUI.unity
+    guid: 181e49cba5014514c81fde72728556b0
+  - enabled: 1
+    path: Assets/Scenes/SingleMultiPlayerSelectionUI.unity
     guid: da9a277e3184ef744a0348958d9076c4
   m_configObjects: {}

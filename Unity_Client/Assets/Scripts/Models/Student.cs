@@ -12,6 +12,7 @@ public class Student : User
     public int currentFood { get; set; }
     public int currentWater { get; set; }
     public int NumOfGamesCompleted { get; set; }
+    public List<string> levelsUnlocked { get; set; }
 
 
 }
