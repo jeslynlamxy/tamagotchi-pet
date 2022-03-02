@@ -613,7 +613,7 @@ GameObject:
   - component: {fileID: 351998489}
   - component: {fileID: 351998488}
   m_Layer: 0
-  m_Name: SceneController
+  m_Name: SceneLoaderManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -628,7 +628,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 351998487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e934b22dca69ba540ab255d2964e0498, type: 3}
+  m_Script: {fileID: 11500000, guid: e112d5043fda0874897c75c38bb15861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &351998489
@@ -656,7 +656,7 @@ GameObject:
   - component: {fileID: 475368016}
   - component: {fileID: 475368015}
   m_Layer: 0
-  m_Name: SingleMultiPlayerSelectionController
+  m_Name: SingleMultiPlayerSelectionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -671,7 +671,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 475368014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b44b12578301162419cb2fd679151010, type: 3}
+  m_Script: {fileID: 11500000, guid: e6c4e378210b2da4eac1e7d474dba90e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &475368016

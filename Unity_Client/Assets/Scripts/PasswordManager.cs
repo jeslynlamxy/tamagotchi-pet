@@ -3,7 +3,7 @@ using System.Text;
 using System.Security.Cryptography;
 
 
-public class PasswordController
+public class PasswordManager
 {
     string key = "A60A5770FE5E7AB200BA9CFC94E4E8B0"; //set any string of 32 chars
     string iv = "1234567887654321"; //set any string of 16 chars

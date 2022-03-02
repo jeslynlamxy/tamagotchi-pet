@@ -7,7 +7,7 @@ using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http;
-public class HttpController
+public class HttpManager
 {
     HttpClient client = new HttpClient();
 
@@ -22,7 +22,9 @@ public class HttpController
 
     public string Post<TPostType>(string url, TPostType obj)
     {
-        var formContent = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
+        var jsonString = JsonConvert.SerializeObject(obj);
+        Debug.Log(jsonString);
+        var formContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
         HttpResponseMessage response = client.PostAsync(url, formContent).GetAwaiter().GetResult();
         string responseStr = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
         return responseStr;

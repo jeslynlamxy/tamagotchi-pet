@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 
-public class SceneController : MonoBehaviour
+public class SceneLoaderManager : MonoBehaviour
 {
     public void LoadPrevScene()
     {
@@ -51,7 +51,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadGameUI()
     {
-        var pref = StudentData.gameTypeSelected;
+        var pref = PlayerPrefs.GetString("gameTypeSelected");
         if (pref == "Single")
         {
             SceneManager.LoadScene("SinglePlayerGameUI");
@@ -65,7 +65,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadGameCompletionUI()
     {
-        var pref = StudentData.gameTypeSelected;
+        var pref = PlayerPrefs.GetString("gameTypeSelected");
         if (pref == "Single")
         {
             SceneManager.LoadScene("SinglePlayerGameCompletionUI");
