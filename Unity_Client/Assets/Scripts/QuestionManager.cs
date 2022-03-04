@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 
 
-public class GameManager : MonoBehaviour
+public class QuestionManager : MonoBehaviour
 {
     public Question[] questions;
     private static List<Question> unansweredQuestions;
@@ -27,19 +27,38 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Text ansFourText;
 
-
     [SerializeField]
     private float timeBetweenQuestion = 1f;
-    
+
+    float currentTime = 0f;
+    float startingTime = 30f;
+
+    [SerializeField]
+    public Text countdownText;
+
     void Start() {
         if (unansweredQuestions == null || unansweredQuestions.Count == 0){
             unansweredQuestions = questions.ToList<Question>();
             Debug.Log("NextLevel");
         }
         SetCurrentQuestion();
-        // Debug.Log(currentQuestion.QuestionText + " = " + currentQuestion.AnswerIndex);
-
+        currentTime = startingTime;
     }
+
+    void Update() {
+        currentTime -= 1 *  Time.deltaTime;
+        countdownText.text = currentTime.ToString("0");
+
+        if (currentTime < 10f) {
+            countdownText.color = Color.red;
+        }
+
+        if (currentTime <= 0) {
+            currentTime = 0;
+            StartCoroutine(TransitionToNextQuestion());
+        }
+    }
+
 
     void SetCurrentQuestion(){
         int randomQuestionIndex = Random.Range (0,unansweredQuestions.Count);
@@ -54,52 +73,50 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator TransitionToNextQuestion(){
-
         unansweredQuestions.Remove(currentQuestion);
         yield return new WaitForSeconds(timeBetweenQuestion);
         // load this scene agn
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-
     }
 
     public void UserSelectOne (){
         if (currentQuestion.AnswerIndex == 0){
-            Debug.Log("good");
+            ansOneText.color = Color.green;
         }
         else {
-            Debug.Log("noob");
+            ansOneText.color = Color.red;
         }
         StartCoroutine(TransitionToNextQuestion());
     }
 
     public void UserSelectTwo (){
         if (currentQuestion.AnswerIndex == 1){
-            Debug.Log("good");
+            ansTwoText.color = Color.green;
         }
         else {
-            Debug.Log("noob");
+            ansTwoText.color = Color.red;
         }
         StartCoroutine(TransitionToNextQuestion());
     }
 
     public void UserSelectThree (){
         if (currentQuestion.AnswerIndex == 2){
-            Debug.Log("good");
+            ansThreeText.color = Color.green;
         }
         else {
-            Debug.Log("noob");
+            ansThreeText.color = Color.red;
         }
         StartCoroutine(TransitionToNextQuestion());
     }
 
     public void UserSelectFour (){
         if (currentQuestion.AnswerIndex == 3){
-            Debug.Log("good");
+            ansFourText.color = Color.green;
         }
         else {
-            Debug.Log("noob");
+            ansFourText.color = Color.red;
         }
         StartCoroutine(TransitionToNextQuestion());
     }
 }
+
