@@ -1065,11 +1065,11 @@ MonoBehaviour:
     - two
     - three
     - four
-  qText: {fileID: 1857158445}
-  oneText: {fileID: 2041678802}
-  twoText: {fileID: 402879415}
-  threeText: {fileID: 540317277}
-  fourText: {fileID: 1031646365}
+  quesText: {fileID: 1857158445}
+  ansOneText: {fileID: 2041678802}
+  ansTwoText: {fileID: 402879415}
+  ansThreeText: {fileID: 540317277}
+  ansFourText: {fileID: 1031646365}
   timeBetweenQuestion: 1
 --- !u!4 &772860523
 Transform:
