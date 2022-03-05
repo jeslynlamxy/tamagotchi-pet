@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [System.Serializable]
-public class Level
+public class RoundData
 {
-
-    public string LevelName;
-
+    public string name;
+    public Question[] questions;
 }
