@@ -39,7 +39,7 @@ public class QuestionManager : MonoBehaviour
     void Start() {
         if (unansweredQuestions == null || unansweredQuestions.Count == 0){
             unansweredQuestions = questions.ToList<Question>();
-            Debug.Log("NextLevel");
+            Debug.Log("End Game");
         }
         SetCurrentQuestion();
         currentTime = startingTime;
@@ -75,7 +75,6 @@ public class QuestionManager : MonoBehaviour
     IEnumerator TransitionToNextQuestion(){
         unansweredQuestions.Remove(currentQuestion);
         yield return new WaitForSeconds(timeBetweenQuestion);
-        // load this scene agn
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
