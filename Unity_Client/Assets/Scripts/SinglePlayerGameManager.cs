@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 using UnityEngine.SceneManagement;
 public class SinglePlayerGameManager : MonoBehaviour
 {
@@ -118,7 +117,7 @@ public class SinglePlayerGameManager : MonoBehaviour
             SetCurrentQuestion();
         }
         else {
-            Invoke("EndRound", timeBetweenQuestion);
+            EndRound();
         }
     }
 
@@ -131,11 +130,11 @@ public class SinglePlayerGameManager : MonoBehaviour
     public void UserSelectOne (){
         if (currentQuestion.AnswerIndex == 0){
             ansOneText.color = Color.green;
-            Invoke("addScore", timeBetweenQuestion);
+            addScore();
         }
         else {
             ansOneText.color = Color.red;
-            Invoke("loseLife", timeBetweenQuestion);
+            loseLife();
         }
         ManageNext();
     }
@@ -143,11 +142,11 @@ public class SinglePlayerGameManager : MonoBehaviour
     public void UserSelectTwo (){
         if (currentQuestion.AnswerIndex == 1){
             ansTwoText.color = Color.green;
-            Invoke("addScore", timeBetweenQuestion);
+            addScore();
         }
         else {
             ansTwoText.color = Color.red;
-            Invoke("loseLife", timeBetweenQuestion);
+            loseLife();
         }
         ManageNext();
     }
@@ -155,11 +154,11 @@ public class SinglePlayerGameManager : MonoBehaviour
     public void UserSelectThree (){
         if (currentQuestion.AnswerIndex == 2){
             ansThreeText.color = Color.green;
-            Invoke("addScore", timeBetweenQuestion);
+            addScore();
         }
         else {
             ansThreeText.color = Color.red;
-            Invoke("loseLife", timeBetweenQuestion);
+            loseLife();
         }
         ManageNext();
     }
@@ -167,11 +166,11 @@ public class SinglePlayerGameManager : MonoBehaviour
     public void UserSelectFour (){
         if (currentQuestion.AnswerIndex == 3){
             ansFourText.color = Color.green;
-            Invoke("addScore", timeBetweenQuestion);
+            addScore();
         }
         else {
             ansFourText.color = Color.red;
-            Invoke("loseLife", timeBetweenQuestion);
+            loseLife();
         }
         ManageNext();
     }
