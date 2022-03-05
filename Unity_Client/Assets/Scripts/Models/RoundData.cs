@@ -6,6 +6,5 @@ using UnityEngine;
 public class RoundData
 {
     public string name;
-    public float timeLimitSeconds;
     public Question[] questions;
 }
