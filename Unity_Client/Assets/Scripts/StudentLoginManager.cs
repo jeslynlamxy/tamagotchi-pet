@@ -101,6 +101,7 @@ public class StudentLoginManager : MonoBehaviour
 
             if (response == "Successfully authenticated")
             {
+                PlayerPrefs.SetString("username", usernameInput);
                 scene.LoadStudentWelcomeUI();
             }
 
@@ -118,7 +119,7 @@ public class StudentLoginManager : MonoBehaviour
             studentLogin = new StudentLoginDetails(usernameInput, passwordEncrypted);
             http = new HttpManager();
             scene = new SceneLoaderManager();
-            var url = "http://172.21.148.165/register_Student";
+            var url = "http://172.21.148.165/register_student";
             var response = http.Post(url, studentLogin);
             Debug.Log(response);
             response = response.Substring(1, response.Length - 2);
@@ -126,14 +127,15 @@ public class StudentLoginManager : MonoBehaviour
 
             if (response == "User successfully registered")
             {
+                PlayerPrefs.SetString("studentUsername", usernameInput);
                 scene.LoadStudentWelcomeUI();
             }
 
         }
-        // else
-        // {
-        //     MessageLabel.text = "Please enter details again";
-        // }
+        else
+        {
+            MessageLabel.text = "Please enter details again";
+        }
 
     }
 

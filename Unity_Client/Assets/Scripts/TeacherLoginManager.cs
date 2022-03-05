@@ -101,6 +101,7 @@ public class TeacherLoginManager : MonoBehaviour
 
             if (response == "Successfully authenticated")
             {
+                PlayerPrefs.SetString("teacherUsername", usernameInput);
                 scene.LoadTeacherWelcomeUI();
             }
 
@@ -126,6 +127,7 @@ public class TeacherLoginManager : MonoBehaviour
 
             if (response == "User successfully registered")
             {
+                PlayerPrefs.SetString("teacherUsername", usernameInput);
                 scene.LoadTeacherWelcomeUI();
             }
 

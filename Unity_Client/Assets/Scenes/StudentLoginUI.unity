@@ -2229,9 +2229,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 31272799}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: LoadStudentWelcomeUI
+      - m_Target: {fileID: 1944315710}
+        m_TargetAssemblyTypeName: StudentLoginManager, Assembly-CSharp
+        m_MethodName: RegisterAndLogin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
