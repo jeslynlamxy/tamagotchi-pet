@@ -103,6 +103,7 @@ public class StudentLoginManager : MonoBehaviour
             {
                 PlayerPrefs.SetString("username", usernameInput);
                 scene.LoadStudentWelcomeUI();
+                PlayerPrefs.SetInt("studentRegister", 0);
             }
 
         }
@@ -128,6 +129,7 @@ public class StudentLoginManager : MonoBehaviour
             if (response == "User successfully registered")
             {
                 PlayerPrefs.SetString("studentUsername", usernameInput);
+                PlayerPrefs.SetInt("studentRegister", 1);
                 scene.LoadStudentWelcomeUI();
             }
 
