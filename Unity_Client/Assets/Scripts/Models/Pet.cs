@@ -6,6 +6,14 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Pet
 {
+    public Pet(string petName, int petId, string petPowerup, int petCurrentHunger, int petCurrentThirst)
+    {
+        this.petName = petName;
+        this.petId = petId;
+        this.petPowerup = petPowerup;
+        this.petCurrentHunger = petCurrentHunger;
+        this.petCurrentThirst = petCurrentThirst;
+    }
     public string petName { get; set; }
     public int petId { get; set; }
     public string petPowerup { get; set; }
