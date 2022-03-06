@@ -27,8 +27,13 @@ EditorBuildSettings:
     path: Assets/Scenes/CreateAccountScene.unity
     guid: 827a893f50345f04289ebca74cdeecb1
   - enabled: 1
+<<<<<<< HEAD
+    path: Assets/Scenes/YK_LeaderboardScene.unity
+    guid: ed8081addc3c30c44ad4ff9c445aa9a1
+=======
     path: Assets/Scenes/WorldAndStageSelectionUI.unity
     guid: 0345ddfb48f6f9549bf5d14b7cdc5e3a
+>>>>>>> b7d29cb37d53db232b8f531b143452a1a65b3ff0
   - enabled: 1
     path: Assets/Scenes/CharacterSelectionUI.unity
     guid: 8287edf1c6e1357429ae7d0747e2fbef
