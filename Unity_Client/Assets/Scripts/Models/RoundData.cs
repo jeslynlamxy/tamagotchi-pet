@@ -7,4 +7,7 @@ public class RoundData
 {
     public string name;
     public Question[] questions;
+    public int finalScore { get; set; }
+    public int rewardedFood { get; set; }
+    public int rewardedWater { get; set; }
 }

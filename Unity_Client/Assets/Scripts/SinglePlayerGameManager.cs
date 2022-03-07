@@ -10,43 +10,92 @@ public class SinglePlayerGameManager : MonoBehaviour
     private RoundData currentRoundData;
     private Question[] questionPool;
     private Question currentQuestion;
-    private bool isGameActive;
     private float timePerQuestion;
-    private int questionIndex;
-    private int playerScore;
-    private int playerLife;
-
-    [SerializeField]
-    private Text quesText;
-
-    [SerializeField]
-    private Text ansOneText;
-
-    [SerializeField]
-    private Text ansTwoText;
-
-    [SerializeField]
-    private Text ansThreeText;
-
-    [SerializeField]
-    private Text ansFourText;
-
-    [SerializeField]
-    private Text scoreText;
-
-    [SerializeField]
-    private Text lifeText;
-
+    private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect;
     float currentTime = 0f;
-    float startingTime = 15f;
-
+    float startingTime = 20f;
+    private int timeBetweenQuestion = 2000;
     [SerializeField]
-    private float timeBetweenQuestion = 2.0f;
-
+    private Text quesText, ansOneText, ansTwoText, ansThreeText, ansFourText, scoreText, lifeText;
     [SerializeField]
     public Text countdownText;
 
-    // Start is called before the first frame update
+    // food = accuracy
+    // water = speed
+    void determineFood() {
+        float percentageAccuracy = totalCorrect/totalNumberOfQuestions;
+ 
+        if (percentageAccuracy >= 0.9f) {
+            currentRoundData.rewardedFood = 10;
+        }
+        else if (percentageAccuracy < 0.9f && percentageAccuracy >= 0.8f) {
+            currentRoundData.rewardedFood = 9;
+        }
+        else if (percentageAccuracy < 0.8f && percentageAccuracy >= 0.7f) {
+            currentRoundData.rewardedFood = 8;
+        }
+        else if (percentageAccuracy < 0.7f && percentageAccuracy >= 0.6f) {
+            currentRoundData.rewardedFood = 7;
+        }
+        else if (percentageAccuracy < 0.6f && percentageAccuracy >= 0.5f) {
+            currentRoundData.rewardedFood = 6;
+        }
+        else if (percentageAccuracy < 0.5f && percentageAccuracy >= 0.4f) {
+            currentRoundData.rewardedFood = 5;
+        }
+        else if (percentageAccuracy < 0.4f && percentageAccuracy >= 0.3f) {
+            currentRoundData.rewardedFood = 4;
+        }
+        else if (percentageAccuracy < 0.3f && percentageAccuracy >= 0.2f) {
+            currentRoundData.rewardedFood = 3;
+        }
+        else if (percentageAccuracy < 0.2f && percentageAccuracy >= 0.1f) {
+            currentRoundData.rewardedFood = 2;
+        }
+        else if (percentageAccuracy < 0.1f && percentageAccuracy >= 0f) {
+            currentRoundData.rewardedFood = 1;
+        }
+        else {
+            currentRoundData.rewardedFood = 0;
+        }
+    }
+    void determineWater() {
+        float baseLine = totalCorrect * startingTime;
+        float percentageSpeed = playerScore/baseLine;
+        if (percentageSpeed >= 0.9f) {
+            currentRoundData.rewardedWater = 10;
+        }
+        else if (percentageSpeed < 0.9f && percentageSpeed >= 0.8f) {
+            currentRoundData.rewardedWater = 9;
+        }
+        else if (percentageSpeed < 0.8f && percentageSpeed >= 0.7f) {
+            currentRoundData.rewardedWater = 8;
+        }
+        else if (percentageSpeed < 0.7f && percentageSpeed >= 0.6f) {
+            currentRoundData.rewardedWater = 7;
+        }
+        else if (percentageSpeed < 0.6f && percentageSpeed >= 0.5f) {
+            currentRoundData.rewardedWater = 6;
+        }
+        else if (percentageSpeed < 0.5f && percentageSpeed >= 0.4f) {
+            currentRoundData.rewardedWater = 5;
+        }
+        else if (percentageSpeed < 0.4f && percentageSpeed >= 0.3f) {
+            currentRoundData.rewardedWater = 4;
+        }
+        else if (percentageSpeed < 0.3f && percentageSpeed >= 0.2f) {
+            currentRoundData.rewardedWater = 3;
+        }
+        else if (percentageSpeed < 0.2f && percentageSpeed >= 0.1f) {
+            currentRoundData.rewardedWater = 2;
+        }
+        else if (percentageSpeed < 0.1f && percentageSpeed >= 0f) {
+            currentRoundData.rewardedWater = 1;
+        }
+        else {
+            currentRoundData.rewardedWater = 0;
+        }
+    }
     void Start()
     {
         dataController = FindObjectOfType<DataManager> ();
@@ -56,11 +105,13 @@ public class SinglePlayerGameManager : MonoBehaviour
         playerScore = 0;
         playerLife = 3;
         questionIndex = 0;
-        isGameActive = true;
+
+        totalNumberOfQuestions=0;
+        totalCorrect=0;
+
         SetCurrentQuestion();
         
     }
-
     void Update() {
         currentTime -= 1 *  Time.deltaTime;
         countdownText.text = currentTime.ToString("0");
@@ -75,9 +126,8 @@ public class SinglePlayerGameManager : MonoBehaviour
             ManageNext();
         }
     }
-
     void SetCurrentQuestion(){
-        // set time
+        totalNumberOfQuestions = totalNumberOfQuestions + 1;
         currentTime = startingTime;
         countdownText.color = Color.black;
         scoreText.text = playerScore.ToString();
@@ -95,14 +145,12 @@ public class SinglePlayerGameManager : MonoBehaviour
         ansTwoText.text = currentQuestion.AnswersText[1];
         ansThreeText.text = currentQuestion.AnswersText[2];
         ansFourText.text = currentQuestion.AnswersText[3];
-
     }
-
     public void addScore() {
         playerScore = playerScore + (int)System.Math.Round(currentTime);
         scoreText.text = playerScore.ToString();
+        totalCorrect = totalCorrect + 1;
     }
-
     public void loseLife() {
         playerLife = playerLife - 1;
         lifeText.text = playerLife.ToString();
@@ -111,9 +159,8 @@ public class SinglePlayerGameManager : MonoBehaviour
             EndRound();
         }
     }
-
     public async void ManageNext() {
-        await Task.Delay(2000);
+        await Task.Delay(timeBetweenQuestion);
         if (questionPool.Length > questionIndex + 1) {
             questionIndex++;
             SetCurrentQuestion();
@@ -122,13 +169,12 @@ public class SinglePlayerGameManager : MonoBehaviour
             EndRound();
         }
     }
-
     public void EndRound() {
-        isGameActive = false;
-        // set stats in round data perhaps
+        currentRoundData.finalScore = playerScore;
+        determineFood();
+        determineWater();
         SceneManager.LoadScene("SinglePlayerGameCompletionUI");
     }
-
     public void UserSelectOne (){
         if (currentQuestion.AnswerIndex == 0){
             ansOneText.color = Color.green;
@@ -140,7 +186,6 @@ public class SinglePlayerGameManager : MonoBehaviour
         }
         ManageNext();
     }
-
     public void UserSelectTwo (){
         if (currentQuestion.AnswerIndex == 1){
             ansTwoText.color = Color.green;
@@ -152,7 +197,6 @@ public class SinglePlayerGameManager : MonoBehaviour
         }
         ManageNext();
     }
-
     public void UserSelectThree (){
         if (currentQuestion.AnswerIndex == 2){
             ansThreeText.color = Color.green;
@@ -164,7 +208,6 @@ public class SinglePlayerGameManager : MonoBehaviour
         }
         ManageNext();
     }
-
     public void UserSelectFour (){
         if (currentQuestion.AnswerIndex == 3){
             ansFourText.color = Color.green;

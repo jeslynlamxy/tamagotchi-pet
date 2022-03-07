@@ -18,89 +18,89 @@ public class StudentWelcomeManager : MonoBehaviour
 
 
 
-    void Start()
-    {
-        username = PlayerPrefs.GetString("studentUsername");
-        UpdateStudentUsername(username);
-        isRegister = PlayerPrefs.GetInt("studentRegister");
-        displayPetsIndex = 0;
+    // void Start()
+    // {
+    //     username = PlayerPrefs.GetString("studentUsername");
+    //     UpdateStudentUsername(username);
+    //     isRegister = PlayerPrefs.GetInt("studentRegister");
+    //     displayPetsIndex = 0;
 
 
-        if (isRegister == 1)
-        {
-            CreateNewStudentData();
-            Debug.Log(student.username);
-        }
+    //     if (isRegister == 1)
+    //     {
+    //         CreateNewStudentData();
+    //         Debug.Log(student.username);
+    //     }
         // else
         // {
         //     GetStudentData();
         // }
-        UpdatePetDisplay();
-    }
+        // UpdatePetDisplay();
+    // }
 
     public void StartGame()
     {
         SceneManager.LoadScene("SingleMultiPlayerSelectionUI");
     }
 
-    public void UpdateStudentUsername(string s)
-    {
-        var label = "hello, " + s + "!";
-        usernameLabel.text = label;
-    }
+    // public void UpdateStudentUsername(string s)
+    // {
+    //     var label = "hello, " + s + "!";
+    //     usernameLabel.text = label;
+    // }
 
-    public void CreateNewStudentData()
-    {
-        //(string petName, int petId, string petPowerup, int petCurrentHunger, int petCurrentThirst)
-        var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
-        var defaultPet2 = new Pet("Pet2", 1, "1 Retry Question", 3, 3);
-        var petList = new List<Pet>();
-        petList.Add(defaultPet1);
-        petList.Add(defaultPet2);
+    // public void CreateNewStudentData()
+    // {
+    //     //(string petName, int petId, string petPowerup, int petCurrentHunger, int petCurrentThirst)
+    //     var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
+    //     var defaultPet2 = new Pet("Pet2", 1, "1 Retry Question", 3, 3);
+    //     var petList = new List<Pet>();
+    //     petList.Add(defaultPet1);
+    //     petList.Add(defaultPet2);
 
-        student = new Student(username, 0, petList, 3, 3);
-        // post to backend studentdata
+    //     student = new Student(username, 0, petList, 3, 3);
+    //     // post to backend studentdata
 
-    }
+    // }
 
-    public void GetStudentData()
-    {
-        http = new HttpManager();
-        var url = "http://172.21.148.165/student_data"; // add query parameter using username?
-        student = http.Get<Student>(url);
-    }
+    // public void GetStudentData()
+    // {
+    //     http = new HttpManager();
+    //     var url = "http://172.21.148.165/student_data"; // add query parameter using username?
+    //     student = http.Get<Student>(url);
+    // }
 
-    public void NextPet()
-    {
-        displayPetsIndex += 1;
-        if (displayPetsIndex >= student.petsUnlocked.Count - 1)
-        {
-            displayPetsIndex = student.petsUnlocked.Count - 1;
-        }
-        UpdatePetDisplay();
+    // public void NextPet()
+    // {
+    //     displayPetsIndex += 1;
+    //     if (displayPetsIndex >= student.petsUnlocked.Count - 1)
+    //     {
+    //         displayPetsIndex = student.petsUnlocked.Count - 1;
+    //     }
+        // UpdatePetDisplay();
 
 
-    }
+    // }
 
-    public void PrevPet()
-    {
-        displayPetsIndex -= 1;
-        if (displayPetsIndex <= 0)
-        {
-            displayPetsIndex = 0;
-        }
-        UpdatePetDisplay();
-    }
+    // public void PrevPet()
+    // {
+    //     displayPetsIndex -= 1;
+    //     if (displayPetsIndex <= 0)
+    //     {
+    //         displayPetsIndex = 0;
+    //     }
+    //     UpdatePetDisplay();
+    // }
 
-    public void UpdatePetDisplay()
-    {
-        petImage.sprite = petSprites[displayPetsIndex];
-        var petFood = student.petsUnlocked[displayPetsIndex].petCurrentFood * 10;
-        var petFoodPercent = petFood.ToString();
-        petFoodAmt.text = petFoodPercent + "%";
-        var petWater = student.petsUnlocked[displayPetsIndex].petCurrentWater * 10;
-        var petWaterPercent = petWater.ToString();
-        petWaterAmt.text = petWaterPercent + "%";
-    }
+    // public void UpdatePetDisplay()
+    // {
+        // petImage.sprite = petSprites[displayPetsIndex];
+        // var petFood = student.petsUnlocked[displayPetsIndex].petCurrentFood * 10;
+        // var petFoodPercent = petFood.ToString();
+        // petFoodAmt.text = petFoodPercent + "%";
+        // var petWater = student.petsUnlocked[displayPetsIndex].petCurrentWater * 10;
+        // var petWaterPercent = petWater.ToString();
+        // petWaterAmt.text = petWaterPercent + "%";
+    // }
 
 }

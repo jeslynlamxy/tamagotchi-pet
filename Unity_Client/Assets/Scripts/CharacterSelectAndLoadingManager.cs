@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CharacterSelectAndLoadingManager : MonoBehaviour
 {
-    // get available characters Question[] questions
+    // get available characters n Question[] questions
     private List<string> tamagotchiList = new List<string>
             {"a", "b", "c"};
     private int currentPointer = 0;
