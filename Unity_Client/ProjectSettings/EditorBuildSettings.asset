@@ -24,34 +24,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MultiPlayerGameCompletionUI.unity
     guid: 0591b1d5ba918614abd7e59100f20732
   - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/MultiPlayerGameUI.unity
-    guid: 73d4ae5b233d1b746929f9400ec1a320
-  - enabled: 1
-    path: Assets/Scenes/Persistent.unity
-    guid: 7931b554e3785de4e9486f05cc7a64a1
-  - enabled: 1
-    path: Assets/Scenes/SingleMultiPlayerSelectionUI.unity
-    guid: da9a277e3184ef744a0348958d9076c4
-  - enabled: 1
-    path: Assets/Scenes/SinglePlayerGameCompletionUI.unity
-    guid: b2973d4f4081c17499f3b35ffaf32fec
-  - enabled: 1
-    path: Assets/Scenes/SinglePlayerGameUI.unity
-    guid: 7de0a568088472547b30777756dfa5b4
-  - enabled: 1
-    path: Assets/Scenes/StudentLoginUI.unity
-    guid: a4005f7e173b0364d840ead8cfdad25e
-  - enabled: 1
-    path: Assets/Scenes/StudentWelcomeUI.unity
-    guid: afa717e7106f64540be3f16fd91a5e44
-=======
     path: Assets/Scenes/SinglePlayerGameUI.unity
     guid: 7de0a568088472547b30777756dfa5b4
   - enabled: 1
     path: Assets/Scenes/MultiPlayerGameUI.unity
     guid: 73d4ae5b233d1b746929f9400ec1a320
->>>>>>> e32ccbda86c00f72e8d00394bda39cfc5d31a76e
   - enabled: 1
     path: Assets/Scenes/TeacherLoginUI.unity
     guid: fc531327f5f89004f9ff5782bf64e546
@@ -59,60 +36,12 @@ EditorBuildSettings:
     path: Assets/Scenes/TeacherWelcomeUI.unity
     guid: 17d221ca791fd8f49ab96548fcaadd63
   - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/ViewDetailedStatisticsUI.unity
-    guid: 38dd7f9c63df7274880cea6417ee539b
-  - enabled: 1
-    path: Assets/Scenes/ViewGameHistoryUI.unity
-    guid: 6e0e9f83423e020428b48bb35ffabd35
-=======
     path: Assets/Scenes/StudentWelcomeUI.unity
     guid: afa717e7106f64540be3f16fd91a5e44
->>>>>>> e32ccbda86c00f72e8d00394bda39cfc5d31a76e
   - enabled: 1
     path: Assets/Scenes/VirtualVillageUI.unity
     guid: d2047e175a817a048994e12f40cc5741
   - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/WorldAndStageSelectionUI.unity
-    guid: 0345ddfb48f6f9549bf5d14b7cdc5e3a
-  - enabled: 1
-    path: Assets/Scenes/YK - GameHistory.unity
-    guid: 6d8cc0252a2e11b43a75aeb4a0c34d29
-  - enabled: 1
-    path: Assets/Scenes/YK Archive.unity
-    guid: 544e45b5617c2384ca04164dd0363900
-  - enabled: 1
-    path: Assets/Scenes/YK S-DesignMyGame-P1.unity
-    guid: f3350dd331698df45b84101001f48800
-  - enabled: 1
-    path: Assets/Scenes/YK S-DesignMyGame-P2.unity
-    guid: daa6f414c9c4d564f8befd008ba27b15
-  - enabled: 1
-    path: Assets/Scenes/YK S-GameHist.unity
-    guid: c7771e211e7724e4c9f106eb32e120a0
-  - enabled: 1
-    path: Assets/Scenes/YK S-Leaderboard.unity
-    guid: 5392a2b6e59ad5d4eb53d0d4c08c223a
-  - enabled: 1
-    path: Assets/Scenes/YK S-MyStats.unity
-    guid: 1ac87a4d584320142a8114424e304cf3
-  - enabled: 1
-    path: Assets/Scenes/YK T-AddQuestion.unity
-    guid: d2b9d68fe26b5bd449a73a95a465ddbb
-  - enabled: 1
-    path: Assets/Scenes/YK T-ManageQuestions.unity
-    guid: f46f933dc97d59e4aa3f5245c3b2ec3e
-  - enabled: 1
-    path: Assets/Scenes/YK T-PostAssignment-P1.unity
-    guid: 4736807c95e771449acbfcc9138f46e4
-  - enabled: 1
-    path: Assets/Scenes/YK T-PostAssignment-P2.unity
-    guid: 8baf2d0165401294db2523caaabbe409
-  - enabled: 1
-    path: Assets/Scenes/YK T-PostAssignment-P3.unity
-    guid: 858557c4c8844ff4c89c359431ad14b6
-=======
     path: Assets/Scenes/SingleMultiPlayerSelectionUI.unity
     guid: da9a277e3184ef744a0348958d9076c4
   - enabled: 1
@@ -121,5 +50,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Persistent.unity
     guid: 7931b554e3785de4e9486f05cc7a64a1
->>>>>>> e32ccbda86c00f72e8d00394bda39cfc5d31a76e
   m_configObjects: {}
