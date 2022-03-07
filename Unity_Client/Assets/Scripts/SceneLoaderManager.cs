@@ -40,6 +40,10 @@ public class SceneLoaderManager : MonoBehaviour
     {
         SceneManager.LoadScene("VirtualVillageUI");
     }
+    public void LoadChangeSkinUI()
+    {
+        SceneManager.LoadScene("ChangeSkinUI");
+    }
     public void LoadSingleMultiPlayerSelectionUI()
     {
         SceneManager.LoadScene("SingleMultiPlayerSelectionUI");
