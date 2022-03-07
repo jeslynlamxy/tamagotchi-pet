@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class SinglePlayerGameManager : MonoBehaviour
@@ -111,7 +112,8 @@ public class SinglePlayerGameManager : MonoBehaviour
         }
     }
 
-    public void ManageNext() {
+    public async void ManageNext() {
+        await Task.Delay(2000);
         if (questionPool.Length > questionIndex + 1) {
             questionIndex++;
             SetCurrentQuestion();
