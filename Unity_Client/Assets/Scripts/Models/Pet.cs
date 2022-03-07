@@ -6,16 +6,16 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Pet
 {
-    public Pet(string petName, int petId, string petPowerup, int petCurrentFood, int petCurrentWater)
+    public Pet(string petName, int petSkinId, string petPowerup, int petCurrentFood, int petCurrentWater)
     {
         this.petName = petName;
-        this.petId = petId;
+        this.petSkinId = petSkinId;
         this.petPowerup = petPowerup;
         this.petCurrentFood = petCurrentFood;
         this.petCurrentWater = petCurrentWater;
     }
     public string petName { get; set; }
-    public int petId { get; set; }
+    public int petSkinId { get; set; }
     public string petPowerup { get; set; }
     public bool isPetUnlocked { get; set; }
     public int petCurrentWater { get; set; }
