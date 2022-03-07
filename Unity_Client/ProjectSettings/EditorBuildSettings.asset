@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Persistent.unity
-    guid: 7931b554e3785de4e9486f05cc7a64a1
-  - enabled: 1
     path: Assets/Scenes/MainPageUI.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -27,34 +24,8 @@ EditorBuildSettings:
     path: Assets/Scenes/CreateAccountScene.unity
     guid: 827a893f50345f04289ebca74cdeecb1
   - enabled: 1
-<<<<<<< HEAD
     path: Assets/Scenes/YK_LeaderboardScene.unity
     guid: ed8081addc3c30c44ad4ff9c445aa9a1
-=======
-    path: Assets/Scenes/WorldAndStageSelectionUI.unity
-    guid: 0345ddfb48f6f9549bf5d14b7cdc5e3a
->>>>>>> b7d29cb37d53db232b8f531b143452a1a65b3ff0
-  - enabled: 1
-    path: Assets/Scenes/CharacterSelectionUI.unity
-    guid: 8287edf1c6e1357429ae7d0747e2fbef
-  - enabled: 1
-    path: Assets/Scenes/SinglePlayerGameUI.unity
-    guid: 7de0a568088472547b30777756dfa5b4
-  - enabled: 1
-    path: Assets/Scenes/SinglePlayerGameCompletionUI.unity
-    guid: b2973d4f4081c17499f3b35ffaf32fec
-  - enabled: 1
-    path: Assets/Scenes/MultiPlayerGameUI.unity
-    guid: 73d4ae5b233d1b746929f9400ec1a320
-  - enabled: 1
-    path: Assets/Scenes/MultiPlayerGameCompletionUI.unity
-    guid: 0591b1d5ba918614abd7e59100f20732
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/LeaderboardUI.unity
-    guid: 181e49cba5014514c81fde72728556b0
   - enabled: 1
     path: Assets/Scenes/SingleMultiPlayerSelectionUI.unity
     guid: da9a277e3184ef744a0348958d9076c4
