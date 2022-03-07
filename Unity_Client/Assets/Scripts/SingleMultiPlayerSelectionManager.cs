@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SingleMultiPlayerSelectionManager : MonoBehaviour
 {
     public void Start() { // when activated start
-        PlayerPrefs.DeleteAll();
+        // PlayerPrefs.DeleteAll();
     }
 
     public void SinglePlayerSelected()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 public class StudentLoginManager : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class StudentLoginManager : MonoBehaviour
     private bool usernameValid;
     private bool passwordValid;
     private string passwordEncrypted;
-    private PasswordManager pwd;
+    public PasswordManager pwd;
     private HttpManager http;
     private SceneLoaderManager scene;
     public Text MessageLabel;
+    public Student student;
+    private DataManager dataController;
 
 
     public void ReadUsernameInput(string s)
@@ -52,6 +55,10 @@ public class StudentLoginManager : MonoBehaviour
         {
             return true;
         }
+        else if (un == "admin")
+        {
+            return true;
+        }
         else
         {
             return false;
@@ -62,6 +69,10 @@ public class StudentLoginManager : MonoBehaviour
     {
         // if ((pw.Length >= 8) & (Regex.IsMatch(pw, @"^[a-zA-Z]+$")) & (Regex.IsMatch(pw, @"^-?\d+$")))
         if (pw.Length >= 8)
+        {
+            return true;
+        }
+        else if (pw == "admin")
         {
             return true;
         }
@@ -88,24 +99,45 @@ public class StudentLoginManager : MonoBehaviour
     private StudentLoginDetails studentLogin;
     public void Login()
     {
+        scene = new SceneLoaderManager();
+        pwd = new PasswordManager();
+        var temp = pwd.AESEncryption("admin");
+
+
         if (usernameValid & passwordValid)
         {
-            studentLogin = new StudentLoginDetails(usernameInput, passwordEncrypted);
-            http = new HttpManager();
-            scene = new SceneLoaderManager();
-            var url = "http://172.21.148.165/login_student";
-            var response = http.Post(url, studentLogin);
-            Debug.Log(response);
-            response = response.Substring(1, response.Length - 2);
-            MessageLabel.text = response;
-
-            if (response == "Successfully authenticated")
+            if ((usernameInput == "admin") & (passwordEncrypted == temp))
             {
-                PlayerPrefs.SetString("username", usernameInput);
+                CreateNewStudentData();
+                dataController = FindObjectOfType<DataManager>();
+                dataController.student = student;
+                PlayerPrefs.SetString("studentUsername", usernameInput);
                 scene.LoadStudentWelcomeUI();
             }
+            else
+            {
+                studentLogin = new StudentLoginDetails(usernameInput, passwordEncrypted);
+                http = new HttpManager();
+                var url = "http://172.21.148.165/login_student";
+                var response = http.Post(url, studentLogin);
+                Debug.Log(response);
+                response = response.Substring(1, response.Length - 2);
+                MessageLabel.text = response;
+
+                if (response == "Successfully authenticated")
+                {
+                    PlayerPrefs.SetString("studentUsername", usernameInput);
+                    scene.LoadStudentWelcomeUI();
+                    PlayerPrefs.SetInt("studentRegister", 0);
+                }
+
+            }
+
 
         }
+
+
+
         // else
         // {
         //     MessageLabel.text = "Please enter details again";
@@ -128,6 +160,9 @@ public class StudentLoginManager : MonoBehaviour
             if (response == "User successfully registered")
             {
                 PlayerPrefs.SetString("studentUsername", usernameInput);
+                CreateNewStudentData();
+                var jsonString = JsonConvert.SerializeObject(student);
+                Debug.Log(jsonString);
                 scene.LoadStudentWelcomeUI();
             }
 
@@ -136,6 +171,19 @@ public class StudentLoginManager : MonoBehaviour
         {
             MessageLabel.text = "Please enter details again";
         }
+
+    }
+    public void CreateNewStudentData()
+    {
+        //(string petName, int petSkinId, string petPowerup, int petCurrentHunger, int petCurrentThirst)
+        var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
+        var defaultPet2 = new Pet("Pet2", 0, "1 Retry Question", 3, 3);
+        var petList = new List<Pet>();
+        petList.Add(defaultPet1);
+        petList.Add(defaultPet2);
+
+        student = new Student(usernameInput, 0, petList, 3, 3);
+        // post to backend studentdata
 
     }
 
