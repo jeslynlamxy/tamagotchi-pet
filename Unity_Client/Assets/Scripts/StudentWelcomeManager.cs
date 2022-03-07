@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class StudentWelcomeManager : MonoBehaviour
 {
     public Text usernameLabel;
-    public int isRegister;
     public string username;
     public Student student;
     private HttpManager http;
@@ -22,20 +21,23 @@ public class StudentWelcomeManager : MonoBehaviour
     {
         username = PlayerPrefs.GetString("studentUsername");
         UpdateStudentUsername(username);
-        isRegister = PlayerPrefs.GetInt("studentRegister");
         displayPetsIndex = 0;
-
-
-        if (isRegister == 1)
-        {
-            CreateNewStudentData();
-            Debug.Log(student.username);
-        }
-        // else
-        // {
-        //     GetStudentData();
-        // }
+        GetStudentData();
         UpdatePetDisplay();
+    }
+
+    public void GetStudentData()
+    {
+        //(string petName, int petSkinId, string petPowerup, int petCurrentHunger, int petCurrentThirst)
+        var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
+        var defaultPet2 = new Pet("Pet2", 0, "1 Retry Question", 3, 3);
+        var petList = new List<Pet>();
+        petList.Add(defaultPet1);
+        petList.Add(defaultPet2);
+
+        student = new Student(username, 0, petList, 3, 3);
+        // post to backend studentdata
+
     }
 
     public void StartGame()
@@ -53,7 +55,7 @@ public class StudentWelcomeManager : MonoBehaviour
     {
         //(string petName, int petId, string petPowerup, int petCurrentHunger, int petCurrentThirst)
         var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
-        var defaultPet2 = new Pet("Pet2", 1, "1 Retry Question", 3, 3);
+        var defaultPet2 = new Pet("Pet2", 0, "1 Retry Question", 3, 3);
         var petList = new List<Pet>();
         petList.Add(defaultPet1);
         petList.Add(defaultPet2);
@@ -63,12 +65,12 @@ public class StudentWelcomeManager : MonoBehaviour
 
     }
 
-    public void GetStudentData()
-    {
-        http = new HttpManager();
-        var url = "http://172.21.148.165/student_data"; // add query parameter using username?
-        student = http.Get<Student>(url);
-    }
+    // public void GetStudentData()
+    // {
+    //     http = new HttpManager();
+    //     var url = "http://172.21.148.165/student_data"; // add query parameter using username?
+    //     student = http.Get<Student>(url);
+    // }
 
     public void NextPet()
     {
@@ -94,7 +96,8 @@ public class StudentWelcomeManager : MonoBehaviour
 
     public void UpdatePetDisplay()
     {
-        petImage.sprite = petSprites[displayPetsIndex];
+        var petSkinId = student.petsUnlocked[displayPetsIndex].petSkinId;
+        petImage.sprite = petSprites[displayPetsIndex * 3 + petSkinId];
         var petFood = student.petsUnlocked[displayPetsIndex].petCurrentFood * 10;
         var petFoodPercent = petFood.ToString();
         petFoodAmt.text = petFoodPercent + "%";

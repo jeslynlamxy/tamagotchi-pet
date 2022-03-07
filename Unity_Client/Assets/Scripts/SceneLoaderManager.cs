@@ -36,6 +36,10 @@ public class SceneLoaderManager : MonoBehaviour
     {
         SceneManager.LoadScene("TeacherWelcomeUI");
     }
+    public void LoadVirtualVillageUI()
+    {
+        SceneManager.LoadScene("VirtualVillageUI");
+    }
     public void LoadSingleMultiPlayerSelectionUI()
     {
         SceneManager.LoadScene("SingleMultiPlayerSelectionUI");
