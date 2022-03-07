@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 public class StudentLoginManager : MonoBehaviour
 {
@@ -131,6 +132,8 @@ public class StudentLoginManager : MonoBehaviour
             {
                 PlayerPrefs.SetString("studentUsername", usernameInput);
                 CreateNewStudentData();
+                var jsonString = JsonConvert.SerializeObject(student);
+                Debug.Log(jsonString);
                 scene.LoadStudentWelcomeUI();
             }
 
