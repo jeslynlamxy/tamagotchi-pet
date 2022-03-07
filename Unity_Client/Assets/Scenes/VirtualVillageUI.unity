@@ -2722,9 +2722,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: LoadGameUI
+      - m_Target: {fileID: 1499333004}
+        m_TargetAssemblyTypeName: SceneLoaderManager, Assembly-CSharp
+        m_MethodName: LoadChangeSkinUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
