@@ -2,28 +2,74 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class TeacherLoginManager : MonoBehaviour
 {
     private string usernameInput;
+    private bool usernameValid;
+    private bool passwordValid;
     private string passwordEncrypted;
     private PasswordManager pwd;
     private HttpManager http;
     private SceneLoaderManager scene;
     public Text MessageLabel;
 
+
     public void ReadUsernameInput(string s)
     {
-        usernameInput = s;
+
         Debug.Log(s);
+        usernameValid = IsUsernameValid(s);
+        if (usernameValid)
+        {
+            usernameInput = s;
+        }
+        else
+        {
+            MessageLabel.text = "Enter username of at least 6 chars with letters";
+        }
     }
 
     public void ReadPasswordInput(string s)
     {
         Debug.Log(s);
-        pwd = new PasswordManager();
-        passwordEncrypted = pwd.AESEncryption(s);
-        Debug.Log(passwordEncrypted);
+        passwordValid = IsPasswordValid(s);
+        if (passwordValid)
+        {
+            pwd = new PasswordManager();
+            passwordEncrypted = pwd.AESEncryption(s);
+            Debug.Log(passwordEncrypted);
+        }
+        else
+        {
+            MessageLabel.text = "Enter password of at least 8 chars";
+        }
+    }
+    public bool IsUsernameValid(string un)
+    {
+        if ((un.Length >= 6) & (Regex.IsMatch(un, @"^[a-zA-Z]+$")))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+    public bool IsPasswordValid(string pw)
+    {
+        // if ((pw.Length >= 8) & (Regex.IsMatch(pw, @"^[a-zA-Z]+$")) & (Regex.IsMatch(pw, @"^-?\d+$")))
+        if (pw.Length >= 8)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 
 
@@ -42,35 +88,55 @@ public class TeacherLoginManager : MonoBehaviour
     private TeacherLoginDetails teacherLogin;
     public void Login()
     {
-        teacherLogin = new TeacherLoginDetails(usernameInput, passwordEncrypted);
-        http = new HttpManager();
-        scene = new SceneLoaderManager();
-        var url = "http://172.21.148.165/login_teacher";
-        var response = http.Post(url, teacherLogin);
-        Debug.Log(response);
-        response = response.Substring(1, response.Length - 2);
-        MessageLabel.text = response;
-
-        if (response == "Successfully authenticated")
+        if (usernameValid & passwordValid)
         {
-            scene.LoadTeacherWelcomeUI();
+            teacherLogin = new TeacherLoginDetails(usernameInput, passwordEncrypted);
+            http = new HttpManager();
+            scene = new SceneLoaderManager();
+            var url = "http://172.21.148.165/login_teacher";
+            var response = http.Post(url, teacherLogin);
+            Debug.Log(response);
+            response = response.Substring(1, response.Length - 2);
+            MessageLabel.text = response;
+
+            if (response == "Successfully authenticated")
+            {
+                PlayerPrefs.SetString("teacherUsername", usernameInput);
+                scene.LoadTeacherWelcomeUI();
+            }
+
         }
+        // else
+        // {
+        //     MessageLabel.text = "Please enter details again";
+        // }
+
     }
     public void RegisterAndLogin()
     {
-        teacherLogin = new TeacherLoginDetails(usernameInput, passwordEncrypted);
-        http = new HttpManager();
-        scene = new SceneLoaderManager();
-        var url = "http://172.21.148.165/register_teacher";
-        var response = http.Post(url, teacherLogin);
-        Debug.Log(response);
-        response = response.Substring(1, response.Length - 2);
-        MessageLabel.text = response;
-
-        if (response == "User successfully registered")
+        if (usernameValid & passwordValid)
         {
-            scene.LoadTeacherWelcomeUI();
+            teacherLogin = new TeacherLoginDetails(usernameInput, passwordEncrypted);
+            http = new HttpManager();
+            scene = new SceneLoaderManager();
+            var url = "http://172.21.148.165/register_teacher";
+            var response = http.Post(url, teacherLogin);
+            Debug.Log(response);
+            response = response.Substring(1, response.Length - 2);
+            MessageLabel.text = response;
+
+            if (response == "User successfully registered")
+            {
+                PlayerPrefs.SetString("teacherUsername", usernameInput);
+                scene.LoadTeacherWelcomeUI();
+            }
+
         }
+        // else
+        // {
+        //     MessageLabel.text = "Please enter details again";
+        // }
+
     }
 
 
