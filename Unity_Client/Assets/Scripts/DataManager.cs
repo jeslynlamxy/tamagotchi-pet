@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement; // can load scene
 public class DataManager : MonoBehaviour
 {
-    public RoundData[] RoundDataList;
+    public RoundData RoundDataObject;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class DataManager : MonoBehaviour
     }
 
     public RoundData GetCurrentRoundData() {
-        return RoundDataList[0];
+        return RoundDataObject;
     }
 
     // Update is called once per frame
