@@ -7,8 +7,8 @@ public class SinglePlayerRoundData
 {
     public int roundId { get; set; } // tbc
     public int studentId { get; set; } // tbc
-    public string sldcWorld { get; set; }
-    public string specificSection { get; set; }
+    public string sldcWorld { get; set; } // simi sldc stage
+    public string specificSection { get; set; } // section 1, 2, 3, 4
     public string difficultyLevel { get; set; } // level 1, 2, 3, 4
 
     public Pet characterUsed { get; set; } // tbc
@@ -16,7 +16,7 @@ public class SinglePlayerRoundData
 
     // programmer's end
     public List<Question> questionList { get; set; }
-    public Stat[] statList { get; set; }
+    public List<Stat> statList { get; set; }
 
 
 

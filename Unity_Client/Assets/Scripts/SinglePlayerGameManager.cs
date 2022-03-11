@@ -102,6 +102,7 @@ public class SinglePlayerGameManager : MonoBehaviour
     {
         dataController = FindObjectOfType<DataManager> ();
         SinglePlayerInstance = dataController.GetSinglePlayerInstance();
+        Debug.Log(SinglePlayerInstance.statList);
 
         if (SinglePlayerInstance.difficultyLevel == "1") {
             difficulty = 1;
@@ -162,12 +163,14 @@ public class SinglePlayerGameManager : MonoBehaviour
         ansThreeText.text = currentQuestion.answersText[2];
         ansFourText.text = currentQuestion.answersText[3];
     }
-    public void addScore() {
+    public void addScore() { // correct
+        SinglePlayerInstance.statList.Add(1, currentQuestion.questionId, (int)System.Math.Round(currentTime), true);
         playerScore = playerScore + (int)System.Math.Round(currentTime);
         scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
     }
-    public void loseLife() {
+    public void loseLife() { // wrong
+        SinglePlayerInstance.statList.Add(1, currentQuestion.questionId, (int)System.Math.Round(currentTime), false);
         playerLife = playerLife - 1;
         lifeText.text = playerLife.ToString();
         if (playerLife <= 0) {
