@@ -19,6 +19,19 @@ public class SinglePlayerGameManager : MonoBehaviour
     private Text quesText, ansOneText, ansTwoText, ansThreeText, ansFourText, scoreText, lifeText;
     [SerializeField]
     public Text countdownText;
+    public Button AnsOne, AnsTwo, AnsThree, AnsFour;
+    public int difficulty;
+    // add get question difficultly function
+    void getDifficulty() {
+        Debug.Log("lol");
+        // base = 0;
+        // for question in list of questions:
+        //      difficultyLevel = getQnsDifficulty;
+        //      if is easy base + 1
+        //      if is medium base + 2
+        //      if is hard base + 3
+        // difficulty = 
+    }
 
     // food = accuracy
     // water = speed
@@ -26,41 +39,41 @@ public class SinglePlayerGameManager : MonoBehaviour
         float percentageAccuracy = totalCorrect/totalNumberOfQuestions;
  
         if (percentageAccuracy >= 0.9f) {
-            currentRoundData.rewardedFood = 10;
+            currentRoundData.rewardedFood = 10 * difficulty;
         }
         else if (percentageAccuracy < 0.9f && percentageAccuracy >= 0.8f) {
-            currentRoundData.rewardedFood = 9;
+            currentRoundData.rewardedFood = 9 * difficulty;
         }
         else if (percentageAccuracy < 0.8f && percentageAccuracy >= 0.7f) {
-            currentRoundData.rewardedFood = 8;
+            currentRoundData.rewardedFood = 8 * difficulty;
         }
         else if (percentageAccuracy < 0.7f && percentageAccuracy >= 0.6f) {
-            currentRoundData.rewardedFood = 7;
+            currentRoundData.rewardedFood = 7 * difficulty;
         }
         else if (percentageAccuracy < 0.6f && percentageAccuracy >= 0.5f) {
-            currentRoundData.rewardedFood = 6;
+            currentRoundData.rewardedFood = 6 * difficulty;
         }
         else if (percentageAccuracy < 0.5f && percentageAccuracy >= 0.4f) {
-            currentRoundData.rewardedFood = 5;
+            currentRoundData.rewardedFood = 5 * difficulty;
         }
         else if (percentageAccuracy < 0.4f && percentageAccuracy >= 0.3f) {
-            currentRoundData.rewardedFood = 4;
+            currentRoundData.rewardedFood = 4 * difficulty;
         }
         else if (percentageAccuracy < 0.3f && percentageAccuracy >= 0.2f) {
-            currentRoundData.rewardedFood = 3;
+            currentRoundData.rewardedFood = 3 * difficulty;
         }
         else if (percentageAccuracy < 0.2f && percentageAccuracy >= 0.1f) {
-            currentRoundData.rewardedFood = 2;
+            currentRoundData.rewardedFood = 2 * difficulty;
         }
         else if (percentageAccuracy < 0.1f && percentageAccuracy >= 0f) {
-            currentRoundData.rewardedFood = 1;
+            currentRoundData.rewardedFood = 1 * difficulty;
         }
         else {
             currentRoundData.rewardedFood = 0;
         }
     }
     void determineWater() {
-        float baseLine = totalCorrect * startingTime;
+        float baseLine = totalNumberOfQuestions * startingTime;
         float percentageSpeed = playerScore/baseLine;
         if (percentageSpeed >= 0.9f) {
             currentRoundData.rewardedWater = 10;
@@ -160,6 +173,7 @@ public class SinglePlayerGameManager : MonoBehaviour
         }
     }
     public async void ManageNext() {
+        allDisable();
         await Task.Delay(timeBetweenQuestion);
         if (questionPool.Length > questionIndex + 1) {
             questionIndex++;
@@ -168,6 +182,7 @@ public class SinglePlayerGameManager : MonoBehaviour
         else {
             EndRound();
         }
+        allEnable();
     }
     public void EndRound() {
         currentRoundData.finalScore = playerScore;
@@ -218,5 +233,17 @@ public class SinglePlayerGameManager : MonoBehaviour
             loseLife();
         }
         ManageNext();
+    }
+    public void allDisable(){
+        AnsOne.interactable = false;
+        AnsTwo.interactable = false;
+        AnsThree.interactable = false;
+        AnsFour.interactable = false;
+    }
+    public void allEnable(){
+        AnsOne.interactable = true;
+        AnsTwo.interactable = true;
+        AnsThree.interactable = true;
+        AnsFour.interactable = true;
     }
 }
