@@ -78,8 +78,6 @@ public class StudentWelcomeManager : MonoBehaviour
             displayPetsIndex = student.petsUnlocked.Count - 1;
         }
         UpdatePetDisplay();
-
-
     }
 
     public void PrevPet()

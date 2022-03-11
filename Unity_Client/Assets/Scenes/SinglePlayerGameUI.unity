@@ -1521,8 +1521,11 @@ MonoBehaviour:
   ansFourText: {fileID: 1031646365}
   scoreText: {fileID: 276499121}
   lifeText: {fileID: 677090899}
-  timeBetweenQuestion: 3
   countdownText: {fileID: 770567255}
+  AnsOne: {fileID: 405250170}
+  AnsTwo: {fileID: 2035958410}
+  AnsThree: {fileID: 794861800}
+  AnsFour: {fileID: 612017891}
 --- !u!4 &794372426
 Transform:
   m_ObjectHideFlags: 0

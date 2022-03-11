@@ -8,136 +8,98 @@ using TMPro;
 public class WorldAndStageSelectionManager : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI srsText, umlText;
-
+    private TextMeshProUGUI requirementButton, designButton, implementationButton;
     [SerializeField]
-    private TextMeshProUGUI stage1, stage2, stage3, stage4, stage5, stage6, stage7, stage8;
-
-
-    public void WorldSRSSelected()
+    private TextMeshProUGUI section1, section2, section3, section4, level1, level2, level3, level4;
+    public void requirementButtonSelected()
     {
-        PlayerPrefs.SetString("worldSelected", "SRS");
-        srsText.color = Color.red;
-        umlText.color = Color.black;
-
+        PlayerPrefs.SetString("worldSelected", "requirement");
+        requirementButton.color = Color.red;
+        designButton.color = Color.black;
+        implementationButton.color = Color.black;
     }
-
-    public void WorldUMLSelected()
+    public void designButtonSelected()
     {
-        PlayerPrefs.SetString("worldSelected", "UML");
-        srsText.color = Color.black;
-        umlText.color = Color.red;
+        PlayerPrefs.SetString("worldSelected", "design");
+        requirementButton.color = Color.black;
+        designButton.color = Color.red;
+        implementationButton.color = Color.black;
     }
-
-    public void stage1Selected()
+    public void implementationButtonSelected()
     {
-        PlayerPrefs.SetString("stageSelected", "1");
-        stage1.color = Color.red;
-        stage2.color = Color.black;
-        stage3.color = Color.black;
-        stage4.color = Color.black;
-        stage5.color = Color.black;
-        stage6.color = Color.black;
-        stage7.color = Color.black;
-        stage8.color = Color.black;
+        PlayerPrefs.SetString("worldSelected", "implementation");
+        requirementButton.color = Color.black;
+        designButton.color = Color.black;
+        implementationButton.color = Color.red;
     }
-
-    public void stage2Selected()
+    public void section1Selected()
     {
-        PlayerPrefs.SetString("stageSelected", "2");
-        stage1.color = Color.black;
-        stage2.color = Color.red;
-        stage3.color = Color.black;
-        stage4.color = Color.black;
-        stage5.color = Color.black;
-        stage6.color = Color.black;
-        stage7.color = Color.black;
-        stage8.color = Color.black;
+        PlayerPrefs.SetString("sectionSelected", "1");
+        section1.color = Color.red;
+        section2.color = Color.black;
+        section3.color = Color.black;
+        section4.color = Color.black;
     }
-
-    public void stage3Selected()
+        public void section2Selected()
     {
-        PlayerPrefs.SetString("stageSelected", "3");
-        stage1.color = Color.black;
-        stage2.color = Color.black;
-        stage3.color = Color.red;
-        stage4.color = Color.black;
-        stage5.color = Color.black;
-        stage6.color = Color.black;
-        stage7.color = Color.black;
-        stage8.color = Color.black;
+        PlayerPrefs.SetString("sectionSelected", "2");
+        section1.color = Color.black;
+        section2.color = Color.red;
+        section3.color = Color.black;
+        section4.color = Color.black;
     }
-
-    public void stage4Selected()
+        public void section3Selected()
     {
-        PlayerPrefs.SetString("stageSelected", "4");
-        stage1.color = Color.black;
-        stage2.color = Color.black;
-        stage3.color = Color.black;
-        stage4.color = Color.red;
-        stage5.color = Color.black;
-        stage6.color = Color.black;
-        stage7.color = Color.black;
-        stage8.color = Color.black;
+        PlayerPrefs.SetString("sectionSelected", "3");
+        section1.color = Color.black;
+        section2.color = Color.black;
+        section3.color = Color.red;
+        section4.color = Color.black;
     }
-
-    public void stage5Selected()
+        public void section4Selected()
     {
-        PlayerPrefs.SetString("stageSelected", "5");
-        stage1.color = Color.black;
-        stage2.color = Color.black;
-        stage3.color = Color.black;
-        stage4.color = Color.black;
-        stage5.color = Color.red;
-        stage6.color = Color.black;
-        stage7.color = Color.black;
-        stage8.color = Color.black;
+        PlayerPrefs.SetString("sectionSelected", "4");
+        section1.color = Color.black;
+        section2.color = Color.black;
+        section3.color = Color.black;
+        section4.color = Color.red;
     }
-
-    public void stage6Selected()
+        public void level1Selected()
     {
-        PlayerPrefs.SetString("stageSelected", "6");
-        stage1.color = Color.black;
-        stage2.color = Color.black;
-        stage3.color = Color.black;
-        stage4.color = Color.black;
-        stage5.color = Color.black;
-        stage6.color = Color.red;
-        stage7.color = Color.black;
-        stage8.color = Color.black;
+        PlayerPrefs.SetString("levelSelected", "1");
+        level1.color = Color.red;
+        level2.color = Color.black;
+        level3.color = Color.black;
+        level4.color = Color.black;
     }
-
-    public void stage7Selected()
+        public void level2Selected()
     {
-        PlayerPrefs.SetString("stageSelected", "7");
-        stage1.color = Color.black;
-        stage2.color = Color.black;
-        stage3.color = Color.black;
-        stage4.color = Color.black;
-        stage5.color = Color.black;
-        stage6.color = Color.black;
-        stage7.color = Color.red;
-        stage8.color = Color.black;
+        PlayerPrefs.SetString("levelSelected", "2");
+        level1.color = Color.black;
+        level2.color = Color.red;
+        level3.color = Color.black;
+        level4.color = Color.black;
     }
-
-    public void stage8Selected()
+        public void level3Selected()
     {
-        PlayerPrefs.SetString("stageSelected", "8");
-        stage1.color = Color.black;
-        stage2.color = Color.black;
-        stage3.color = Color.black;
-        stage4.color = Color.black;
-        stage5.color = Color.black;
-        stage6.color = Color.black;
-        stage7.color = Color.black;
-        stage8.color = Color.red;
+        PlayerPrefs.SetString("levelSelected", "3");
+        level1.color = Color.black;
+        level2.color = Color.black;
+        level3.color = Color.red;
+        level4.color = Color.black;
     }
-
+        public void level4Selected()
+    {
+        PlayerPrefs.SetString("levelSelected", "4");
+        level1.color = Color.black;
+        level2.color = Color.black;
+        level3.color = Color.black;
+        level4.color = Color.red;
+    }
     public void ComfirmButtonClicked() {
-        // check both playerpref steady then continue ?
-        if (PlayerPrefs.HasKey("worldSelected") && PlayerPrefs.HasKey("stageSelected")) {
+        // check both playerpref steady then continue
+        if (PlayerPrefs.HasKey("worldSelected") && PlayerPrefs.HasKey("sectionSelected") && PlayerPrefs.HasKey("levelSelected")) {
             SceneManager.LoadScene("CharacterSelectionUI");
         }
     }
-
 }

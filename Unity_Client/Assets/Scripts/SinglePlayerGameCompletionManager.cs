@@ -8,13 +8,13 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText, foodText, waterText;
      private DataManager dataController;
-    private RoundData currentRoundData;
+    private SinglePlayerRoundData currentRoundData;
 
     // Start is called before the first frame update
     void Start()
     {
         dataController = FindObjectOfType<DataManager> ();
-        currentRoundData = dataController.GetCurrentRoundData();
+        currentRoundData = dataController.GetSinglePlayerInstance();
         int score = currentRoundData.finalScore;
         int food = currentRoundData.rewardedFood;
         int water = currentRoundData.rewardedWater;
