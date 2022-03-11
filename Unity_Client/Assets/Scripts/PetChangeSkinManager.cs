@@ -17,7 +17,6 @@ public class PetChangeSkinManager : MonoBehaviour
     {
         username = PlayerPrefs.GetString("studentUsername", "student");
         displayPetsIndex = PlayerPrefs.GetInt("currentPetsIndex", 0);
-        // displayPetsIndex = 0;
         GetStudentData();
         UpdateChangeSkinDisplay();
 

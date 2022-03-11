@@ -17,6 +17,11 @@ public class VirtualVillageManager : MonoBehaviour
     public Text petSkill;
     public Text currentWater;
     public Text currentFood;
+    public Text petStatusLabel;
+    public Button changeSkinButton;
+    public Button provideFoodButton;
+    public Button provideWaterButton;
+
     void Start()
     {
         username = PlayerPrefs.GetString("studentUsername", "student");
@@ -34,8 +39,8 @@ public class VirtualVillageManager : MonoBehaviour
     public void GetStudentData()
     {
         //(string petName, int petSkinId, string petPowerup, int petCurrentHunger, int petCurrentThirst)
-        var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
-        var defaultPet2 = new Pet("Pet2", 0, "1 Retry Question", 3, 3);
+        var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 8, 5);
+        var defaultPet2 = new Pet("Pet2", 0, "Add 1 Health", 3, 3);
         var petList = new List<Pet>();
         petList.Add(defaultPet1);
         petList.Add(defaultPet2);
@@ -44,18 +49,15 @@ public class VirtualVillageManager : MonoBehaviour
         // post to backend studentdata
 
     }
-
     public void NextPet()
     {
         displayPetsIndex += 1;
-        if (displayPetsIndex >= student.petsUnlocked.Count - 1)
+        if (displayPetsIndex >= student.petsUnlocked.Count)
         {
-            displayPetsIndex = student.petsUnlocked.Count - 1;
+            displayPetsIndex = student.petsUnlocked.Count;
         }
         PlayerPrefs.SetInt("currentPetsIndex", displayPetsIndex);
         UpdatePetDisplay();
-
-
     }
 
     public void PrevPet()
@@ -65,20 +67,41 @@ public class VirtualVillageManager : MonoBehaviour
         {
             displayPetsIndex = 0;
         }
-        UpdatePetDisplay();
         PlayerPrefs.SetInt("currentPetsIndex", displayPetsIndex);
+        UpdatePetDisplay();
     }
     public void UpdatePetDisplay()
     {
-        var petSkinId = student.petsUnlocked[displayPetsIndex].petSkinId;
-        petImage.sprite = petSprites[displayPetsIndex * 3 + petSkinId];
-        var petFood = student.petsUnlocked[displayPetsIndex].petCurrentFood * 10;
-        var petFoodPercent = petFood.ToString();
-        petFoodAmt.text = petFoodPercent + "%";
-        var petWater = student.petsUnlocked[displayPetsIndex].petCurrentWater * 10;
-        var petWaterPercent = petWater.ToString();
-        petWaterAmt.text = petWaterPercent + "%";
-        petSkill.text = student.petsUnlocked[displayPetsIndex].petPowerup;
+        if (displayPetsIndex < student.petsUnlocked.Count)
+        {
+            var petSkinId = student.petsUnlocked[displayPetsIndex].petSkinId;
+            petImage.sprite = petSprites[displayPetsIndex * 3 + petSkinId];
+            var petFood = student.petsUnlocked[displayPetsIndex].petCurrentFood * 10;
+            var petFoodPercent = petFood.ToString();
+            petFoodAmt.text = petFoodPercent + "%";
+            var petWater = student.petsUnlocked[displayPetsIndex].petCurrentWater * 10;
+            var petWaterPercent = petWater.ToString();
+            petWaterAmt.text = petWaterPercent + "%";
+            petSkill.text = student.petsUnlocked[displayPetsIndex].petPowerup;
+            petStatusLabel.text = "";
+            changeSkinButton.interactable = true;
+            provideWaterButton.interactable = true;
+            provideFoodButton.interactable = true;
+
+        }
+        else if (displayPetsIndex == student.petsUnlocked.Count)
+        {
+            petStatusLabel.text = "locked";
+            petImage.sprite = petSprites[displayPetsIndex * 3];
+            petFoodAmt.text = "locked";
+            petWaterAmt.text = "locked";
+            petSkill.text = "Add 10 seconds";
+            changeSkinButton.interactable = false;
+            provideWaterButton.interactable = false;
+            provideFoodButton.interactable = false;
+        }
+
+
     }
 
     public void UpdateSupplyDisplay()
@@ -89,7 +112,7 @@ public class VirtualVillageManager : MonoBehaviour
 
     public void ProvideWater()
     {
-        if (student.currentWater > 0)
+        if ((displayPetsIndex < student.petsUnlocked.Count) & (student.currentWater > 0) & (student.petsUnlocked[displayPetsIndex].petCurrentWater < 10))
         {
             student.currentWater -= 1;
             student.petsUnlocked[displayPetsIndex].petCurrentWater += 1;
@@ -99,7 +122,7 @@ public class VirtualVillageManager : MonoBehaviour
     }
     public void ProvideFood()
     {
-        if (student.currentFood > 0)
+        if ((displayPetsIndex < student.petsUnlocked.Count) & (student.currentFood > 0) & (student.petsUnlocked[displayPetsIndex].petCurrentFood < 10))
         {
             student.currentFood -= 1;
             student.petsUnlocked[displayPetsIndex].petCurrentFood += 1;
