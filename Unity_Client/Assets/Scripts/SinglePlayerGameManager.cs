@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class SinglePlayerGameManager : MonoBehaviour
 {
     private DataManager dataController;
-    private RoundData currentRoundData;
-    private Question[] questionPool;
+    private SinglePlayerRoundData SinglePlayerInstance;
+    private List<Question> questionPool;
     private Question currentQuestion;
     private float timePerQuestion;
     private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect;
@@ -21,99 +21,102 @@ public class SinglePlayerGameManager : MonoBehaviour
     public Text countdownText;
     public Button AnsOne, AnsTwo, AnsThree, AnsFour;
     public int difficulty;
-    // add get question difficultly function
-    void getDifficulty() {
-        Debug.Log("lol");
-        // base = 0;
-        // for question in list of questions:
-        //      difficultyLevel = getQnsDifficulty;
-        //      if is easy base + 1
-        //      if is medium base + 2
-        //      if is hard base + 3
-        // difficulty = 
-    }
 
-    // food = accuracy
-    // water = speed
+    // food = accuracy * level chosen
+    // water = speed * level chosen
     void determineFood() {
         float percentageAccuracy = totalCorrect/totalNumberOfQuestions;
  
         if (percentageAccuracy >= 0.9f) {
-            currentRoundData.rewardedFood = 10 * difficulty;
+            SinglePlayerInstance.rewardedFood = 10 * difficulty;
         }
         else if (percentageAccuracy < 0.9f && percentageAccuracy >= 0.8f) {
-            currentRoundData.rewardedFood = 9 * difficulty;
+            SinglePlayerInstance.rewardedFood = 9 * difficulty;
         }
         else if (percentageAccuracy < 0.8f && percentageAccuracy >= 0.7f) {
-            currentRoundData.rewardedFood = 8 * difficulty;
+            SinglePlayerInstance.rewardedFood = 8 * difficulty;
         }
         else if (percentageAccuracy < 0.7f && percentageAccuracy >= 0.6f) {
-            currentRoundData.rewardedFood = 7 * difficulty;
+            SinglePlayerInstance.rewardedFood = 7 * difficulty;
         }
         else if (percentageAccuracy < 0.6f && percentageAccuracy >= 0.5f) {
-            currentRoundData.rewardedFood = 6 * difficulty;
+            SinglePlayerInstance.rewardedFood = 6 * difficulty;
         }
         else if (percentageAccuracy < 0.5f && percentageAccuracy >= 0.4f) {
-            currentRoundData.rewardedFood = 5 * difficulty;
+            SinglePlayerInstance.rewardedFood = 5 * difficulty;
         }
         else if (percentageAccuracy < 0.4f && percentageAccuracy >= 0.3f) {
-            currentRoundData.rewardedFood = 4 * difficulty;
+            SinglePlayerInstance.rewardedFood = 4 * difficulty;
         }
         else if (percentageAccuracy < 0.3f && percentageAccuracy >= 0.2f) {
-            currentRoundData.rewardedFood = 3 * difficulty;
+            SinglePlayerInstance.rewardedFood = 3 * difficulty;
         }
         else if (percentageAccuracy < 0.2f && percentageAccuracy >= 0.1f) {
-            currentRoundData.rewardedFood = 2 * difficulty;
+            SinglePlayerInstance.rewardedFood = 2 * difficulty;
         }
         else if (percentageAccuracy < 0.1f && percentageAccuracy >= 0f) {
-            currentRoundData.rewardedFood = 1 * difficulty;
+            SinglePlayerInstance.rewardedFood = 1 * difficulty;
         }
         else {
-            currentRoundData.rewardedFood = 0;
+            SinglePlayerInstance.rewardedFood = 0;
         }
     }
     void determineWater() {
         float baseLine = totalNumberOfQuestions * startingTime;
         float percentageSpeed = playerScore/baseLine;
         if (percentageSpeed >= 0.9f) {
-            currentRoundData.rewardedWater = 10;
+            SinglePlayerInstance.rewardedWater = 10 * difficulty;
         }
         else if (percentageSpeed < 0.9f && percentageSpeed >= 0.8f) {
-            currentRoundData.rewardedWater = 9;
+            SinglePlayerInstance.rewardedWater = 9 * difficulty;
         }
         else if (percentageSpeed < 0.8f && percentageSpeed >= 0.7f) {
-            currentRoundData.rewardedWater = 8;
+            SinglePlayerInstance.rewardedWater = 8 * difficulty;
         }
         else if (percentageSpeed < 0.7f && percentageSpeed >= 0.6f) {
-            currentRoundData.rewardedWater = 7;
+            SinglePlayerInstance.rewardedWater = 7 * difficulty;
         }
         else if (percentageSpeed < 0.6f && percentageSpeed >= 0.5f) {
-            currentRoundData.rewardedWater = 6;
+            SinglePlayerInstance.rewardedWater = 6 * difficulty;
         }
         else if (percentageSpeed < 0.5f && percentageSpeed >= 0.4f) {
-            currentRoundData.rewardedWater = 5;
+            SinglePlayerInstance.rewardedWater = 5 * difficulty;
         }
         else if (percentageSpeed < 0.4f && percentageSpeed >= 0.3f) {
-            currentRoundData.rewardedWater = 4;
+            SinglePlayerInstance.rewardedWater = 4 * difficulty;
         }
         else if (percentageSpeed < 0.3f && percentageSpeed >= 0.2f) {
-            currentRoundData.rewardedWater = 3;
+            SinglePlayerInstance.rewardedWater = 3 * difficulty;
         }
         else if (percentageSpeed < 0.2f && percentageSpeed >= 0.1f) {
-            currentRoundData.rewardedWater = 2;
+            SinglePlayerInstance.rewardedWater = 2 * difficulty;
         }
         else if (percentageSpeed < 0.1f && percentageSpeed >= 0f) {
-            currentRoundData.rewardedWater = 1;
+            SinglePlayerInstance.rewardedWater = 1 * difficulty;
         }
         else {
-            currentRoundData.rewardedWater = 0;
+            SinglePlayerInstance.rewardedWater = 0;
         }
     }
     void Start()
     {
         dataController = FindObjectOfType<DataManager> ();
-        currentRoundData = dataController.GetCurrentRoundData();
-        questionPool = currentRoundData.questions;
+        SinglePlayerInstance = dataController.GetSinglePlayerInstance();
+
+        if (SinglePlayerInstance.difficultyLevel == "1") {
+            difficulty = 1;
+        }
+        else if (SinglePlayerInstance.difficultyLevel == "2") {
+            difficulty = 2;
+        }
+        else if (SinglePlayerInstance.difficultyLevel == "3") {
+            difficulty = 3;
+        }
+        else if (SinglePlayerInstance.difficultyLevel == "4") {
+            difficulty = 4;
+        }
+
+        questionPool = SinglePlayerInstance.questionList;
         
         playerScore = 0;
         playerLife = 3;
@@ -153,11 +156,11 @@ public class SinglePlayerGameManager : MonoBehaviour
         ansThreeText.color = Color.black;
         ansFourText.color = Color.black;
 
-        quesText.text = currentQuestion.QuestionText;
-        ansOneText.text = currentQuestion.AnswersText[0];
-        ansTwoText.text = currentQuestion.AnswersText[1];
-        ansThreeText.text = currentQuestion.AnswersText[2];
-        ansFourText.text = currentQuestion.AnswersText[3];
+        quesText.text = currentQuestion.questionText;
+        ansOneText.text = currentQuestion.answersText[0];
+        ansTwoText.text = currentQuestion.answersText[1];
+        ansThreeText.text = currentQuestion.answersText[2];
+        ansFourText.text = currentQuestion.answersText[3];
     }
     public void addScore() {
         playerScore = playerScore + (int)System.Math.Round(currentTime);
@@ -175,7 +178,7 @@ public class SinglePlayerGameManager : MonoBehaviour
     public async void ManageNext() {
         allDisable();
         await Task.Delay(timeBetweenQuestion);
-        if (questionPool.Length > questionIndex + 1) {
+        if (questionPool.Count > questionIndex + 1) {
             questionIndex++;
             SetCurrentQuestion();
         }
@@ -185,13 +188,13 @@ public class SinglePlayerGameManager : MonoBehaviour
         allEnable();
     }
     public void EndRound() {
-        currentRoundData.finalScore = playerScore;
+        SinglePlayerInstance.finalScore = playerScore;
         determineFood();
         determineWater();
         SceneManager.LoadScene("SinglePlayerGameCompletionUI");
     }
     public void UserSelectOne (){
-        if (currentQuestion.AnswerIndex == 0){
+        if (currentQuestion.answerIndex == 0){
             ansOneText.color = Color.green;
             addScore();
         }
@@ -202,7 +205,7 @@ public class SinglePlayerGameManager : MonoBehaviour
         ManageNext();
     }
     public void UserSelectTwo (){
-        if (currentQuestion.AnswerIndex == 1){
+        if (currentQuestion.answerIndex == 1){
             ansTwoText.color = Color.green;
             addScore();
         }
@@ -213,7 +216,7 @@ public class SinglePlayerGameManager : MonoBehaviour
         ManageNext();
     }
     public void UserSelectThree (){
-        if (currentQuestion.AnswerIndex == 2){
+        if (currentQuestion.answerIndex == 2){
             ansThreeText.color = Color.green;
             addScore();
         }
@@ -224,7 +227,7 @@ public class SinglePlayerGameManager : MonoBehaviour
         ManageNext();
     }
     public void UserSelectFour (){
-        if (currentQuestion.AnswerIndex == 3){
+        if (currentQuestion.answerIndex == 3){
             ansFourText.color = Color.green;
             addScore();
         }

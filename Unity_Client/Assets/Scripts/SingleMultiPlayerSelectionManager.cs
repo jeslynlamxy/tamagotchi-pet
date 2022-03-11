@@ -23,4 +23,10 @@ public class SingleMultiPlayerSelectionManager : MonoBehaviour
 
     }
 
+    public void CustomGameSelected()
+    {
+        PlayerPrefs.SetString("gameTypeSelected", "Custom");
+        // SceneManager.LoadScene("");
+    }
+
 }

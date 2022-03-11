@@ -15,8 +15,6 @@ public class StudentWelcomeManager : MonoBehaviour
     public Text petFoodAmt;
     public Text petWaterAmt;
 
-
-
     void Start()
     {
         username = PlayerPrefs.GetString("studentUsername");
@@ -37,7 +35,6 @@ public class StudentWelcomeManager : MonoBehaviour
 
         student = new Student(username, 0, petList, 3, 3);
         // post to backend studentdata
-
     }
 
     public void StartGame()
@@ -80,8 +77,6 @@ public class StudentWelcomeManager : MonoBehaviour
             displayPetsIndex = student.petsUnlocked.Count - 1;
         }
         UpdatePetDisplay();
-
-
     }
 
     public void PrevPet()

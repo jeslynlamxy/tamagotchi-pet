@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement; // can load scene
 public class DataManager : MonoBehaviour
 {
-    public RoundData RoundDataObject;
+    public SinglePlayerRoundData SinglePlayerInstance;
 
     public Student student { get; set; }
 
@@ -19,9 +19,11 @@ public class DataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public RoundData GetCurrentRoundData()
+
+
+    public SinglePlayerRoundData GetSinglePlayerInstance()
     {
-        return RoundDataObject;
+        return SinglePlayerInstance;
     }
 
     // Update is called once per frame

@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Stat
 {
+    public int statId { get; set; }
     public int questionId { get; set; }
     public int timing { get; set; }
     public string isCorrect { get; set; }
