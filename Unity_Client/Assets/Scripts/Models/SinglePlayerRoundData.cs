@@ -15,14 +15,14 @@ public class SinglePlayerRoundData
 
 
     // programmer's end
-    public List<Question> questionList { get; set; }
-    public List<Stat> statList { get; set; }
+    public List<Question> questionList { get; set; } // get from backend
+    public List<Stat> statList { get; set; } // for data analysis
 
 
 
 
     // student's world
-    public int finalScore { get; set; }
+    public int finalScore { get; set; } 
     public int rewardedFood { get; set; }
     public int rewardedWater { get; set; }
 

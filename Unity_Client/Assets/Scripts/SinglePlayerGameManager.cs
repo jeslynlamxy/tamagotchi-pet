@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class SinglePlayerGameManager : MonoBehaviour
 {
     private DataManager dataController;
-    private SinglePlayerRoundData SinglePlayerInstance;
+    private SinglePlayerRoundData singlePlayerInstance;
     private List<Question> questionPool;
     private Question currentQuestion;
     private float timePerQuestion;
@@ -19,105 +19,29 @@ public class SinglePlayerGameManager : MonoBehaviour
     private Text quesText, ansOneText, ansTwoText, ansThreeText, ansFourText, scoreText, lifeText;
     [SerializeField]
     public Text countdownText;
-    public Button AnsOne, AnsTwo, AnsThree, AnsFour;
+    public Button ansOne, ansTwo, ansThree, ansFour;
     public int difficulty;
-
-    // food = accuracy * level chosen
-    // water = speed * level chosen
-    void determineFood() {
-        float percentageAccuracy = totalCorrect/totalNumberOfQuestions;
- 
-        if (percentageAccuracy >= 0.9f) {
-            SinglePlayerInstance.rewardedFood = 10 * difficulty;
-        }
-        else if (percentageAccuracy < 0.9f && percentageAccuracy >= 0.8f) {
-            SinglePlayerInstance.rewardedFood = 9 * difficulty;
-        }
-        else if (percentageAccuracy < 0.8f && percentageAccuracy >= 0.7f) {
-            SinglePlayerInstance.rewardedFood = 8 * difficulty;
-        }
-        else if (percentageAccuracy < 0.7f && percentageAccuracy >= 0.6f) {
-            SinglePlayerInstance.rewardedFood = 7 * difficulty;
-        }
-        else if (percentageAccuracy < 0.6f && percentageAccuracy >= 0.5f) {
-            SinglePlayerInstance.rewardedFood = 6 * difficulty;
-        }
-        else if (percentageAccuracy < 0.5f && percentageAccuracy >= 0.4f) {
-            SinglePlayerInstance.rewardedFood = 5 * difficulty;
-        }
-        else if (percentageAccuracy < 0.4f && percentageAccuracy >= 0.3f) {
-            SinglePlayerInstance.rewardedFood = 4 * difficulty;
-        }
-        else if (percentageAccuracy < 0.3f && percentageAccuracy >= 0.2f) {
-            SinglePlayerInstance.rewardedFood = 3 * difficulty;
-        }
-        else if (percentageAccuracy < 0.2f && percentageAccuracy >= 0.1f) {
-            SinglePlayerInstance.rewardedFood = 2 * difficulty;
-        }
-        else if (percentageAccuracy < 0.1f && percentageAccuracy >= 0f) {
-            SinglePlayerInstance.rewardedFood = 1 * difficulty;
-        }
-        else {
-            SinglePlayerInstance.rewardedFood = 0;
-        }
-    }
-    void determineWater() {
-        float baseLine = totalNumberOfQuestions * startingTime;
-        float percentageSpeed = playerScore/baseLine;
-        if (percentageSpeed >= 0.9f) {
-            SinglePlayerInstance.rewardedWater = 10 * difficulty;
-        }
-        else if (percentageSpeed < 0.9f && percentageSpeed >= 0.8f) {
-            SinglePlayerInstance.rewardedWater = 9 * difficulty;
-        }
-        else if (percentageSpeed < 0.8f && percentageSpeed >= 0.7f) {
-            SinglePlayerInstance.rewardedWater = 8 * difficulty;
-        }
-        else if (percentageSpeed < 0.7f && percentageSpeed >= 0.6f) {
-            SinglePlayerInstance.rewardedWater = 7 * difficulty;
-        }
-        else if (percentageSpeed < 0.6f && percentageSpeed >= 0.5f) {
-            SinglePlayerInstance.rewardedWater = 6 * difficulty;
-        }
-        else if (percentageSpeed < 0.5f && percentageSpeed >= 0.4f) {
-            SinglePlayerInstance.rewardedWater = 5 * difficulty;
-        }
-        else if (percentageSpeed < 0.4f && percentageSpeed >= 0.3f) {
-            SinglePlayerInstance.rewardedWater = 4 * difficulty;
-        }
-        else if (percentageSpeed < 0.3f && percentageSpeed >= 0.2f) {
-            SinglePlayerInstance.rewardedWater = 3 * difficulty;
-        }
-        else if (percentageSpeed < 0.2f && percentageSpeed >= 0.1f) {
-            SinglePlayerInstance.rewardedWater = 2 * difficulty;
-        }
-        else if (percentageSpeed < 0.1f && percentageSpeed >= 0f) {
-            SinglePlayerInstance.rewardedWater = 1 * difficulty;
-        }
-        else {
-            SinglePlayerInstance.rewardedWater = 0;
-        }
-    }
     void Start()
     {
-        dataController = FindObjectOfType<DataManager> ();
-        SinglePlayerInstance = dataController.GetSinglePlayerInstance();
-        Debug.Log(SinglePlayerInstance.statList);
 
-        if (SinglePlayerInstance.difficultyLevel == "1") {
+        dataController = FindObjectOfType<DataManager> ();
+        singlePlayerInstance = dataController.GetSinglePlayerInstance();
+        singlePlayerInstance.statList = new List<Stat>();
+        Debug.Log(singlePlayerInstance.statList);
+        if (singlePlayerInstance.difficultyLevel == "1") {
             difficulty = 1;
         }
-        else if (SinglePlayerInstance.difficultyLevel == "2") {
+        else if (singlePlayerInstance.difficultyLevel == "2") {
             difficulty = 2;
         }
-        else if (SinglePlayerInstance.difficultyLevel == "3") {
+        else if (singlePlayerInstance.difficultyLevel == "3") {
             difficulty = 3;
         }
-        else if (SinglePlayerInstance.difficultyLevel == "4") {
+        else if (singlePlayerInstance.difficultyLevel == "4") {
             difficulty = 4;
         }
 
-        questionPool = SinglePlayerInstance.questionList;
+        questionPool = singlePlayerInstance.questionList;
         
         playerScore = 0;
         playerLife = 3;
@@ -143,6 +67,82 @@ public class SinglePlayerGameManager : MonoBehaviour
             ManageNext();
         }
     }
+    // food = accuracy * level chosen
+    // water = speed * level chosen
+    void determineFood() {
+        float percentageAccuracy = totalCorrect/totalNumberOfQuestions;
+ 
+        if (percentageAccuracy >= 0.9f) {
+            singlePlayerInstance.rewardedFood = 10 * difficulty;
+        }
+        else if (percentageAccuracy < 0.9f && percentageAccuracy >= 0.8f) {
+            singlePlayerInstance.rewardedFood = 9 * difficulty;
+        }
+        else if (percentageAccuracy < 0.8f && percentageAccuracy >= 0.7f) {
+            singlePlayerInstance.rewardedFood = 8 * difficulty;
+        }
+        else if (percentageAccuracy < 0.7f && percentageAccuracy >= 0.6f) {
+            singlePlayerInstance.rewardedFood = 7 * difficulty;
+        }
+        else if (percentageAccuracy < 0.6f && percentageAccuracy >= 0.5f) {
+            singlePlayerInstance.rewardedFood = 6 * difficulty;
+        }
+        else if (percentageAccuracy < 0.5f && percentageAccuracy >= 0.4f) {
+            singlePlayerInstance.rewardedFood = 5 * difficulty;
+        }
+        else if (percentageAccuracy < 0.4f && percentageAccuracy >= 0.3f) {
+            singlePlayerInstance.rewardedFood = 4 * difficulty;
+        }
+        else if (percentageAccuracy < 0.3f && percentageAccuracy >= 0.2f) {
+            singlePlayerInstance.rewardedFood = 3 * difficulty;
+        }
+        else if (percentageAccuracy < 0.2f && percentageAccuracy >= 0.1f) {
+            singlePlayerInstance.rewardedFood = 2 * difficulty;
+        }
+        else if (percentageAccuracy < 0.1f && percentageAccuracy >= 0f) {
+            singlePlayerInstance.rewardedFood = 1 * difficulty;
+        }
+        else {
+            singlePlayerInstance.rewardedFood = 0;
+        }
+    }
+    void determineWater() {
+        float baseLine = totalNumberOfQuestions * startingTime;
+        float percentageSpeed = playerScore/baseLine;
+        if (percentageSpeed >= 0.9f) {
+            singlePlayerInstance.rewardedWater = 10 * difficulty;
+        }
+        else if (percentageSpeed < 0.9f && percentageSpeed >= 0.8f) {
+            singlePlayerInstance.rewardedWater = 9 * difficulty;
+        }
+        else if (percentageSpeed < 0.8f && percentageSpeed >= 0.7f) {
+            singlePlayerInstance.rewardedWater = 8 * difficulty;
+        }
+        else if (percentageSpeed < 0.7f && percentageSpeed >= 0.6f) {
+            singlePlayerInstance.rewardedWater = 7 * difficulty;
+        }
+        else if (percentageSpeed < 0.6f && percentageSpeed >= 0.5f) {
+            singlePlayerInstance.rewardedWater = 6 * difficulty;
+        }
+        else if (percentageSpeed < 0.5f && percentageSpeed >= 0.4f) {
+            singlePlayerInstance.rewardedWater = 5 * difficulty;
+        }
+        else if (percentageSpeed < 0.4f && percentageSpeed >= 0.3f) {
+            singlePlayerInstance.rewardedWater = 4 * difficulty;
+        }
+        else if (percentageSpeed < 0.3f && percentageSpeed >= 0.2f) {
+            singlePlayerInstance.rewardedWater = 3 * difficulty;
+        }
+        else if (percentageSpeed < 0.2f && percentageSpeed >= 0.1f) {
+            singlePlayerInstance.rewardedWater = 2 * difficulty;
+        }
+        else if (percentageSpeed < 0.1f && percentageSpeed >= 0f) {
+            singlePlayerInstance.rewardedWater = 1 * difficulty;
+        }
+        else {
+            singlePlayerInstance.rewardedWater = 0;
+        }
+    }
     void SetCurrentQuestion(){
         totalNumberOfQuestions = totalNumberOfQuestions + 1;
         currentTime = startingTime;
@@ -163,14 +163,20 @@ public class SinglePlayerGameManager : MonoBehaviour
         ansThreeText.text = currentQuestion.answersText[2];
         ansFourText.text = currentQuestion.answersText[3];
     }
-    public void addScore() { // correct
-        SinglePlayerInstance.statList.Add(1, currentQuestion.questionId, (int)System.Math.Round(currentTime), true);
+    public void addScore() {
+        // stupid bug here
+        var lol = new Stat(1, currentQuestion.questionId, (int)System.Math.Round(currentTime), true);
+        singlePlayerInstance.statList.Add(lol);
+        Debug.Log(singlePlayerInstance.statList.Count);
         playerScore = playerScore + (int)System.Math.Round(currentTime);
         scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
     }
-    public void loseLife() { // wrong
-        SinglePlayerInstance.statList.Add(1, currentQuestion.questionId, (int)System.Math.Round(currentTime), false);
+    public void loseLife() {
+        // stupid bug here
+        var lol = new Stat(1, currentQuestion.questionId, (int)System.Math.Round(currentTime), false);
+        singlePlayerInstance.statList.Add(lol);
+        Debug.Log(singlePlayerInstance.statList.Count);
         playerLife = playerLife - 1;
         lifeText.text = playerLife.ToString();
         if (playerLife <= 0) {
@@ -191,7 +197,7 @@ public class SinglePlayerGameManager : MonoBehaviour
         allEnable();
     }
     public void EndRound() {
-        SinglePlayerInstance.finalScore = playerScore;
+        singlePlayerInstance.finalScore = playerScore;
         determineFood();
         determineWater();
         SceneManager.LoadScene("SinglePlayerGameCompletionUI");
@@ -241,15 +247,15 @@ public class SinglePlayerGameManager : MonoBehaviour
         ManageNext();
     }
     public void allDisable(){
-        AnsOne.interactable = false;
-        AnsTwo.interactable = false;
-        AnsThree.interactable = false;
-        AnsFour.interactable = false;
+        ansOne.interactable = false;
+        ansTwo.interactable = false;
+        ansThree.interactable = false;
+        ansFour.interactable = false;
     }
     public void allEnable(){
-        AnsOne.interactable = true;
-        AnsTwo.interactable = true;
-        AnsThree.interactable = true;
-        AnsFour.interactable = true;
+        ansOne.interactable = true;
+        ansTwo.interactable = true;
+        ansThree.interactable = true;
+        ansFour.interactable = true;
     }
 }
