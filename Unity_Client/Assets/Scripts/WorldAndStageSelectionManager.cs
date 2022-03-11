@@ -134,10 +134,14 @@ public class WorldAndStageSelectionManager : MonoBehaviour
     }
 
     public void ComfirmButtonClicked() {
-        // check both playerpref steady then continue ?
+        // check both playerpref steady then continue
         if (PlayerPrefs.HasKey("worldSelected") && PlayerPrefs.HasKey("stageSelected")) {
             SceneManager.LoadScene("CharacterSelectionUI");
         }
+    }
+
+    public void BackButtonClicked() {
+        SceneManager.LoadScene("CharacterSelectionUI");
     }
 
 }
