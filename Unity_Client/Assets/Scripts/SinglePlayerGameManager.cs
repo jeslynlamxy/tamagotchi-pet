@@ -165,7 +165,7 @@ public class SinglePlayerGameManager : MonoBehaviour
     }
     public void addScore() {
         // stupid bug here
-        var lol = new Stat(1, currentQuestion.questionId, (int)System.Math.Round(currentTime), true);
+        var lol = new Stat(1, 1, currentQuestion.questionId, (int)System.Math.Round(currentTime), true);
         singlePlayerInstance.statList.Add(lol);
         Debug.Log(singlePlayerInstance.statList.Count);
         playerScore = playerScore + (int)System.Math.Round(currentTime);
@@ -174,7 +174,7 @@ public class SinglePlayerGameManager : MonoBehaviour
     }
     public void loseLife() {
         // stupid bug here
-        var lol = new Stat(1, currentQuestion.questionId, (int)System.Math.Round(currentTime), false);
+        var lol = new Stat(1, 1, currentQuestion.questionId, (int)System.Math.Round(currentTime), false);
         singlePlayerInstance.statList.Add(lol);
         Debug.Log(singlePlayerInstance.statList.Count);
         playerLife = playerLife - 1;
