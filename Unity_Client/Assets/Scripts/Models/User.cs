@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class User
 {
-    public string username { get; set; } // why no password
+    public string username { get; set; }
     public int Id { get; set; }
 
 
