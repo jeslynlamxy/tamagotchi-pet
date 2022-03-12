@@ -10,13 +10,15 @@ public class SinglePlayerGameManager : MonoBehaviour
     private SinglePlayerRoundData singlePlayerInstance;
     private List<Question> questionPool;
     private Question currentQuestion;
+    private Pet chosenPet;
     private float timePerQuestion;
-    private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect;
+    private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect, skillLeft;
+    private string skillType; // "add 5 seconds", "recover 1 life"
     float currentTime = 0f;
     float startingTime = 20f;
     private int timeBetweenQuestion = 2000;
     [SerializeField]
-    private Text quesText, ansOneText, ansTwoText, ansThreeText, ansFourText, scoreText, lifeText;
+    private Text quesText, ansOneText, ansTwoText, ansThreeText, ansFourText, scoreText, lifeText, skillLeftText, skillExplainText;
     [SerializeField]
     public Text countdownText;
     public Button ansOne, ansTwo, ansThree, ansFour;
@@ -45,6 +47,7 @@ public class SinglePlayerGameManager : MonoBehaviour
         
         playerScore = 0;
         playerLife = 3;
+        skillLeft = 1;
         questionIndex = 0;
 
         totalNumberOfQuestions=0;
@@ -164,21 +167,18 @@ public class SinglePlayerGameManager : MonoBehaviour
         ansFourText.text = currentQuestion.answersText[3];
     }
     public void addScore() {
-        // stupid bug here
-        var lol = new Stat(1, 1, currentQuestion.questionId, (int)System.Math.Round(currentTime), true);
-        singlePlayerInstance.statList.Add(lol);
-        Debug.Log(singlePlayerInstance.statList.Count);
         playerScore = playerScore + (int)System.Math.Round(currentTime);
         scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
+        // Stat(int statId, int roundId, int questionId, int timing, int currentHealth, bool isCorrect)
+        var newStat = new Stat(1, 1, currentQuestion.questionId, (int)System.Math.Round(currentTime), playerLife, true);
+        singlePlayerInstance.statList.Add(newStat);
     }
     public void loseLife() {
-        // stupid bug here
-        var lol = new Stat(1, 1, currentQuestion.questionId, (int)System.Math.Round(currentTime), false);
-        singlePlayerInstance.statList.Add(lol);
-        Debug.Log(singlePlayerInstance.statList.Count);
         playerLife = playerLife - 1;
         lifeText.text = playerLife.ToString();
+        var newStat = new Stat(1, 1, currentQuestion.questionId, (int)System.Math.Round(currentTime), playerLife, false);
+        singlePlayerInstance.statList.Add(newStat);
         if (playerLife <= 0) {
             lifeText.color = Color.red;
             EndRound();
