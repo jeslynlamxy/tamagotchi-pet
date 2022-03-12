@@ -157,8 +157,8 @@ public class MultiPlayerGameManager : MonoBehaviour
         totalNumberOfQuestions = totalNumberOfQuestions + 1;
         currentTime = startingTime;
         countdownText.color = Color.black;
-        // scoreText.text = playerScore.ToString();
-        // lifeText.text = playerLife.ToString();
+        scoreText.text = playerScore.ToString();
+        lifeText.text = playerLife.ToString();
 
         currentQuestion = questionPool[questionIndex];
 
@@ -212,7 +212,7 @@ public class MultiPlayerGameManager : MonoBehaviour
             winText.text = winPoint.ToString();
         }
         playerScore = playerScore + (int)System.Math.Round(currentTime);
-        // scoreText.text = playerScore.ToString();
+        scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
         // Stat(int statId, int roundId, int questionId, int timing, int currentHealth, bool isCorrect)
         var newStat = new Stat(1, 1, currentQuestion.questionId, (int)System.Math.Round(currentTime), playerLife, true);
@@ -220,7 +220,7 @@ public class MultiPlayerGameManager : MonoBehaviour
     }
     public void loseLife() {
         playerLife = playerLife - 1;
-        // lifeText.text = playerLife.ToString();
+        lifeText.text = playerLife.ToString();
         if (playerLife <= 0) {
             lifeText.color = Color.red;
             EndRound();
