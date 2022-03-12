@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class SinglePlayerGameCompletionManager : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI scoreText, foodText, waterText;
+    private TextMeshProUGUI victoryOrDefeat, scoreText, winText, foodText, waterText;
      private DataManager dataController;
     private SinglePlayerRoundData currentRoundData;
 

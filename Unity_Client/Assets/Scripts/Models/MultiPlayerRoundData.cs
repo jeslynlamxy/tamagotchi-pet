@@ -24,6 +24,7 @@ public class MultiPlayerRoundData
     public List<Stat> playerStatList { get; set; } // for data analysis
 
     // student's world
+    public int winPoint { get; set; }
     public int finalScore { get; set; } 
     public int rewardedFood { get; set; }
     public int rewardedWater { get; set; }
