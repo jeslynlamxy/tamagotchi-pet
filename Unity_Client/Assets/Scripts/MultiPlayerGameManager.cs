@@ -77,6 +77,82 @@ public class MultiPlayerGameManager : MonoBehaviour
             ManageNext();
         }
     }
+    // food = accuracy * level chosen + bonus win point
+    // water = speed * level chosen + bonus win point
+    void determineFood() {
+        float percentageAccuracy = totalCorrect/totalNumberOfQuestions;
+ 
+        if (percentageAccuracy >= 0.9f) {
+            multiPlayerInstance.rewardedFood = 10 * difficulty + winPoint;
+        }
+        else if (percentageAccuracy < 0.9f && percentageAccuracy >= 0.8f) {
+            multiPlayerInstance.rewardedFood = 9 * difficulty + winPoint;
+        }
+        else if (percentageAccuracy < 0.8f && percentageAccuracy >= 0.7f) {
+            multiPlayerInstance.rewardedFood = 8 * difficulty + winPoint;
+        }
+        else if (percentageAccuracy < 0.7f && percentageAccuracy >= 0.6f) {
+            multiPlayerInstance.rewardedFood = 7 * difficulty + winPoint;
+        }
+        else if (percentageAccuracy < 0.6f && percentageAccuracy >= 0.5f) {
+            multiPlayerInstance.rewardedFood = 6 * difficulty + winPoint;
+        }
+        else if (percentageAccuracy < 0.5f && percentageAccuracy >= 0.4f) {
+            multiPlayerInstance.rewardedFood = 5 * difficulty + winPoint;
+        }
+        else if (percentageAccuracy < 0.4f && percentageAccuracy >= 0.3f) {
+            multiPlayerInstance.rewardedFood = 4 * difficulty + winPoint;
+        }
+        else if (percentageAccuracy < 0.3f && percentageAccuracy >= 0.2f) {
+            multiPlayerInstance.rewardedFood = 3 * difficulty + winPoint;
+        }
+        else if (percentageAccuracy < 0.2f && percentageAccuracy >= 0.1f) {
+            multiPlayerInstance.rewardedFood = 2 * difficulty + winPoint;
+        }
+        else if (percentageAccuracy < 0.1f && percentageAccuracy >= 0f) {
+            multiPlayerInstance.rewardedFood = 1 * difficulty + winPoint;
+        }
+        else {
+            multiPlayerInstance.rewardedFood = 0;
+        }
+    }
+    void determineWater() {
+        float baseLine = totalNumberOfQuestions * startingTime;
+        float percentageSpeed = playerScore/baseLine;
+        if (percentageSpeed >= 0.9f) {
+            multiPlayerInstance.rewardedWater = 10 * difficulty;
+        }
+        else if (percentageSpeed < 0.9f && percentageSpeed >= 0.8f) {
+            multiPlayerInstance.rewardedWater = 9 * difficulty + winPoint;
+        }
+        else if (percentageSpeed < 0.8f && percentageSpeed >= 0.7f) {
+            multiPlayerInstance.rewardedWater = 8 * difficulty + winPoint;
+        }
+        else if (percentageSpeed < 0.7f && percentageSpeed >= 0.6f) {
+            multiPlayerInstance.rewardedWater = 7 * difficulty + winPoint;
+        }
+        else if (percentageSpeed < 0.6f && percentageSpeed >= 0.5f) {
+            multiPlayerInstance.rewardedWater = 6 * difficulty + winPoint;
+        }
+        else if (percentageSpeed < 0.5f && percentageSpeed >= 0.4f) {
+            multiPlayerInstance.rewardedWater = 5 * difficulty + winPoint;
+        }
+        else if (percentageSpeed < 0.4f && percentageSpeed >= 0.3f) {
+            multiPlayerInstance.rewardedWater = 4 * difficulty + winPoint;
+        }
+        else if (percentageSpeed < 0.3f && percentageSpeed >= 0.2f) {
+            multiPlayerInstance.rewardedWater = 3 * difficulty + winPoint;
+        }
+        else if (percentageSpeed < 0.2f && percentageSpeed >= 0.1f) {
+            multiPlayerInstance.rewardedWater = 2 * difficulty + winPoint;
+        }
+        else if (percentageSpeed < 0.1f && percentageSpeed >= 0f) {
+            multiPlayerInstance.rewardedWater = 1 * difficulty + winPoint;
+        }
+        else {
+            multiPlayerInstance.rewardedWater = 0;
+        }
+    }
     void SetCurrentQuestion(){
         totalNumberOfQuestions = totalNumberOfQuestions + 1;
         currentTime = startingTime;
@@ -112,8 +188,8 @@ public class MultiPlayerGameManager : MonoBehaviour
     }
     public void EndRound() {
         multiPlayerInstance.finalScore = playerScore;
-        // determineFood();
-        // determineWater();
+        determineFood();
+        determineWater();
         SceneManager.LoadScene("MultiPlayerGameCompletionUI");
     }
     public int getOpponentTiming(int questionId) {
