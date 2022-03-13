@@ -15,7 +15,7 @@ public class MultiPlayerGameManager : MonoBehaviour
     private List<Stat> opponentStatPool;//
     private Question currentQuestion;
     private Pet playerChosenPet, opponentChosenPet;
-    private string multiRoundId, playerStudentId, skillExplained, playerUsername, roundId; // "add 5 seconds", "recover 1 life";
+    private string multiRoundId, playerStudentId, skillExplained, playerUsername, roundId, studentId; // "add 5 seconds", "recover 1 life";
     private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect, winPoint, currentTiming, opponentTiming;
     private bool skillLeft;
     float currentTime = 0f;
@@ -223,7 +223,7 @@ public class MultiPlayerGameManager : MonoBehaviour
         await Task.Delay(timeBetweenQuestion);
         SceneManager.LoadScene("MultiPlayerGameCompletionUI");
     }
-    public int getOpponentTiming(int questionId) {
+    public int getOpponentTiming(string questionId) {
         var listItem = opponentStatPool.FirstOrDefault(x => x.questionId == questionId);
         if (listItem != null)
         {

@@ -68,8 +68,8 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         answersText.Add("2");
         answersText.Add("1");
 
-        var question1 = new Question(1, "2+2", 0, answersText, "requirements", "1", "simple");
-        var question2 = new Question(2, "3*1", 1, answersText, "requirements", "1", "complex");
+        var question1 = new Question(dataController.generateUID(), "2+2", 0, answersText, "requirements", "1", "simple");
+        var question2 = new Question(dataController.generateUID(), "3*1", 1, answersText, "requirements", "1", "complex");
 
         var questionList = new List<Question>();
         questionList.Add(question1);
@@ -91,16 +91,16 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         answersText.Add("2");
         answersText.Add("1");
 
-        var question1 = new Question(1, "2+2", 0, answersText, "requirements", "1", "simple");
-        var question2 = new Question(2, "3*1", 1, answersText, "requirements", "1", "complex");
+        var question1 = new Question(dataController.generateUID(), "2+2", 0, answersText, "requirements", "1", "simple");
+        var question2 = new Question(dataController.generateUID(), "3*1", 1, answersText, "requirements", "1", "complex");
 
         var questionList = new List<Question>();
         questionList.Add(question1);
         questionList.Add(question2); 
 
         MultiPlayerInstance.questionList = questionList;
-        var stat1 = new Stat(1, 1, 1, "meowmeow", 15, 2, true);
-        var stat2 = new Stat(2, 1, 2, "meowmeow", 20, 2, true);
+        var stat1 = new Stat(dataController.generateUID(), dataController.generateUID(), dataController.generateUID(), "meowmeow", 15, 2, true);
+        var stat2 = new Stat(dataController.generateUID(), dataController.generateUID(), dataController.generateUID(), "meowmeow", 20, 2, true);
 
         var opponentStatList = new List<Stat>();
         opponentStatList.Add(stat1);
