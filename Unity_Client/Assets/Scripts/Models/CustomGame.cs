@@ -10,4 +10,5 @@ public class CustomGame : MonoBehaviour
    public string customGameDescription { get; set; }
 
    public List<Student> shareStudentList { get; set; }
+   public List<Question> questionList { get; set; }
 }
