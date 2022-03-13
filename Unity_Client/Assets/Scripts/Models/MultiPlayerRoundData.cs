@@ -5,10 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class MultiPlayerRoundData
 {
-    public int multiRoundId { get; set; }
-    public int playerStudentId { get; set; }
-    public int opponentRoundId { get; set; }
-    public int opponentStudentId { get; set; }
+    public string multiRoundId { get; set; }
+    public string playerStudentId { get; set; }
+    public string opponentRoundId { get; set; }
     public string sldcWorld { get; set; } // different sldc stages
     public string specificSection { get; set; } // section 1, 2, 3, 4
     public string difficultyLevel { get; set; } // level 1, 2, 3, 4
@@ -18,7 +17,6 @@ public class MultiPlayerRoundData
     public List<Question> questionList { get; set; }
     public List<Stat> opponentStatList { get; set; } 
     public List<Stat> playerStatList { get; set; }
-    public Pet characterUsed { get; set; }
     // student's world
     public int winPoint { get; set; }
     public int finalScore { get; set; } 

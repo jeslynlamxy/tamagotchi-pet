@@ -1163,7 +1163,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: true
+  m_Text: 1
 --- !u!222 &655282757
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1450,6 +1450,7 @@ MonoBehaviour:
   ansTwo: {fileID: 2035958410}
   ansThree: {fileID: 794861800}
   ansFour: {fileID: 612017891}
+  useSkill: {fileID: 1928927075}
   difficulty: 0
 --- !u!4 &794372426
 Transform:
@@ -2373,7 +2374,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1928927076}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 794372425}
+        m_TargetAssemblyTypeName: SinglePlayerGameManager, Assembly-CSharp
+        m_MethodName: whenSkillButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1928927076
 MonoBehaviour:
   m_ObjectHideFlags: 0

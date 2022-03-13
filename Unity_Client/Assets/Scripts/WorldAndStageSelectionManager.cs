@@ -11,6 +11,22 @@ public class WorldAndStageSelectionManager : MonoBehaviour
     private TextMeshProUGUI requirementButton, designButton, implementationButton;
     [SerializeField]
     private TextMeshProUGUI section1, section2, section3, section4, level1, level2, level3, level4;
+    [SerializeField]
+    private Button design, implement, sec2, sec3, sec4, lvl2, lvl3, lvl4;
+    void Start () {
+        design.interactable = false;
+        implement.interactable = false;
+        sec2.interactable = false;
+        sec3.interactable = false;
+        sec4.interactable = false;
+        lvl2.interactable = false;
+        lvl3.interactable = false;
+        lvl4.interactable = false;
+        checkAndUnlock();
+    }
+    void checkAndUnlock() {
+        // get shit and unlock stages from user lmao
+    }
     public void requirementButtonSelected()
     {
         PlayerPrefs.SetString("worldSelected", "requirement");

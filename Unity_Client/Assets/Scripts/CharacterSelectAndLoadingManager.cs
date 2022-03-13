@@ -68,8 +68,8 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         answersText.Add("2");
         answersText.Add("1");
 
-        var question1 = new Question(1, "2+2", 0, answersText, "requirements", "1", "simple");
-        var question2 = new Question(2, "4-1", 1, answersText, "requirements", "1", "complex");
+        var question1 = new Question(dataController.generateUID(), "2+2", 0, answersText, "requirements", "1", "simple");
+        var question2 = new Question(dataController.generateUID(), "3*1", 1, answersText, "requirements", "1", "complex");
 
         var questionList = new List<Question>();
         questionList.Add(question1);
@@ -82,6 +82,7 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         // considering the world section level do the item below
         // get single player game in data base with same world section level
         // get the stat data as well
+        // MultiPlayerInstance.opponentRoundId = 
 
         // sample only, need to replace with backend stuffs above
         var answersText = new List<string>();
@@ -90,19 +91,16 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         answersText.Add("2");
         answersText.Add("1");
 
-        // Question(int questionId, string questionText, int answerIndex, List<string> answersText, string worldTopic, string specificSection, string questionStandard)
-        var question1 = new Question(1, "2+2", 0, answersText, "requirements", "1", "simple");
-        var question2 = new Question(2, "4-1", 1, answersText, "requirements", "1", "complex");
+        var question1 = new Question(dataController.generateUID(), "2+2", 0, answersText, "requirements", "1", "simple");
+        var question2 = new Question(dataController.generateUID(), "3*1", 1, answersText, "requirements", "1", "complex");
 
         var questionList = new List<Question>();
         questionList.Add(question1);
         questionList.Add(question2); 
 
         MultiPlayerInstance.questionList = questionList;
-
-        // public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool skillLeft, bool isCorrect)
-        var stat1 = new Stat(1, 1, 1, "meowmeow", 15, 2, true, true);
-        var stat2 = new Stat(2, 1, 2, "meowmeow", 20, 2, true, true);
+        var stat1 = new Stat(dataController.generateUID(), dataController.generateUID(), dataController.generateUID(), "meowmeow", 15, 2, true);
+        var stat2 = new Stat(dataController.generateUID(), dataController.generateUID(), dataController.generateUID(), "meowmeow", 20, 2, true);
 
         var opponentStatList = new List<Stat>();
         opponentStatList.Add(stat1);

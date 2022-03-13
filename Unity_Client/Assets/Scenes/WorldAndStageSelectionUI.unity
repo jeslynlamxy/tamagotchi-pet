@@ -163,6 +163,14 @@ MonoBehaviour:
   level2: {fileID: 1840267821}
   level3: {fileID: 2097142233}
   level4: {fileID: 1344519294}
+  design: {fileID: 341635836}
+  implement: {fileID: 1093850351}
+  sec2: {fileID: 1365792238}
+  sec3: {fileID: 1345820694}
+  sec4: {fileID: 847149258}
+  lvl2: {fileID: 1891500316}
+  lvl3: {fileID: 1288495416}
+  lvl4: {fileID: 669111749}
 --- !u!4 &84568042
 Transform:
   m_ObjectHideFlags: 0
