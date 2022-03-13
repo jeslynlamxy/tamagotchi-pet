@@ -12,7 +12,7 @@ public class SinglePlayerGameManager : MonoBehaviour
     private Question currentQuestion;
     private Pet chosenPet;
     private bool skillLeft;
-    private string skillType; // "add 5 seconds", "recover 1 life"
+    private string skillType, playerUsername, studentId, roundId; // "add 5 seconds", "recover 1 life"
     private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect;
     float currentTime = 0f;
     float startingTime = 20f;
@@ -44,8 +44,18 @@ public class SinglePlayerGameManager : MonoBehaviour
         questionPool = singlePlayerInstance.questionList;
         playerScore = 0;
         playerLife = 3;
-        skillLeft = true;
+
+        // chosenPet = // get from server/object
+        // singlePlayerInstance.characterUsed = somepet; // get from server/object
+        studentId = "7070"; // get from server/object
         skillType = "add 5 seconds"; // get from server/object
+        playerUsername = "meowmeow"; // get from server/object
+        
+        roundId = dataController.generateUID();
+        singlePlayerInstance.roundId = roundId;
+        singlePlayerInstance.studentId = studentId;
+
+        skillLeft = true;
         skillLeftText.text = "1";
         skillExplainText.text = skillType;
         questionIndex = 0;
@@ -174,17 +184,18 @@ public class SinglePlayerGameManager : MonoBehaviour
         ansThreeText.text = currentQuestion.answersText[2];
         ansFourText.text = currentQuestion.answersText[3];
     }
+    // gen own stat id
     public void addScore() {
         playerScore = playerScore + (int)System.Math.Round(currentTime);
         scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
-        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft);
+        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, (int)System.Math.Round(currentTime), playerLife, skillLeft);
         singlePlayerInstance.statList.Add(newStat);
     }
     public void loseLife() {
         playerLife = playerLife - 1;
         lifeText.text = playerLife.ToString();
-        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", 0, playerLife, skillLeft);
+        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, 0, playerLife, skillLeft);
         singlePlayerInstance.statList.Add(newStat);
         if (playerLife <= 0) {
             lifeText.color = Color.red;
@@ -207,6 +218,7 @@ public class SinglePlayerGameManager : MonoBehaviour
         singlePlayerInstance.finalScore = playerScore;
         determineFood();
         determineWater();
+        // post to server round data
         await Task.Delay(timeBetweenQuestion);
         SceneManager.LoadScene("SinglePlayerGameCompletionUI");
     }

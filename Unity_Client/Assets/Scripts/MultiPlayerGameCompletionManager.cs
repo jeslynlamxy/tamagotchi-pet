@@ -12,7 +12,6 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
     private TextMeshProUGUI scoreText, foodText, waterText, winText, victoryOrDefeatText;
      private DataManager dataController;
     private MultiPlayerRoundData currentRoundData;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -36,12 +35,7 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
         else {
             victoryOrDefeatText.text = "defeat";
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // update user data in server
     }
 
     public void BackToMenuButtonClick() {

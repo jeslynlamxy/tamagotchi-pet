@@ -12,27 +12,23 @@ public class MultiPlayerGameManager : MonoBehaviour
  private DataManager dataController;
     private MultiPlayerRoundData multiPlayerInstance;
     private List<Question> questionPool;
-    private List<Stat> opponentStatPool;
+    private List<Stat> opponentStatPool;//
     private Question currentQuestion;
-    private float timePerQuestion;
+    private Pet playerChosenPet, opponentChosenPet;
+    private string multiRoundId, playerStudentId, skillExplained, playerUsername, roundId; // "add 5 seconds", "recover 1 life";
     private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect, winPoint, currentTiming, opponentTiming;
     private bool skillLeft;
-    private string skillExplained; // "add 5 seconds", "recover 1 life"
     float currentTime = 0f;
     float startingTime = 20f;
     private int timeBetweenQuestion = 2000;
     public Button ansOne, ansTwo, ansThree, ansFour, usedSkill;
     public int difficulty;
-
     [SerializeField]
     private TextMeshProUGUI quesText, ansOneText, ansTwoText, ansThreeText, ansFourText;
-
     [SerializeField]
     public Text countdownText, scoreText, lifeText, winText, skillLeftText, skillExplainText;
-    
     void Start()
     {
-
         dataController = FindObjectOfType<DataManager> ();
         multiPlayerInstance = dataController.GetMultiPlayerInstance();
         multiPlayerInstance.playerStatList = new List<Stat>();
@@ -52,24 +48,34 @@ public class MultiPlayerGameManager : MonoBehaviour
 
         questionPool = multiPlayerInstance.questionList;
         opponentStatPool = multiPlayerInstance.opponentStatList;
+
         
         playerScore = 0;
         playerLife = 3;
         questionIndex = 0;
         winPoint = 0;
 
-        skillLeft = true;
+        multiPlayerInstance.multiRoundId = dataController.generateUID();
+
+
+        // playerChosenPet = // get from server/object
+        // opponentChosenPet = // get from server/object
+        studentId = "7070"; // get from server/object
         skillExplained = "add 5 seconds"; // get from server
+        playerUsername = "meowmeow";  // get from server
+
+        multiPlayerInstance.playerStudentId = studentId;
+        // multiPlayerInstance.playerCharacterUsed = 
+        // multiPlayerInstance.opponentCharacterUsed =
+        
+        skillLeft = true;
+        roundId = dataController.generateUID();
         skillLeftText.text = "1";
         skillExplainText.text = skillExplained;
-
         usedSkill.interactable = true;
-
         totalNumberOfQuestions=0;
         totalCorrect=0;
-
         SetCurrentQuestion();
-        
     }
     void Update() {
         currentTime -= 1 *  Time.deltaTime;
@@ -208,11 +214,13 @@ public class MultiPlayerGameManager : MonoBehaviour
         }
         allEnable();
     }
-    public void EndRound() {
+    public async void EndRound() {
         multiPlayerInstance.finalScore = playerScore;
         multiPlayerInstance.winPoint = winPoint;
         determineFood();
         determineWater();
+        // post to server round data
+        await Task.Delay(timeBetweenQuestion);
         SceneManager.LoadScene("MultiPlayerGameCompletionUI");
     }
     public int getOpponentTiming(int questionId) {
@@ -236,8 +244,7 @@ public class MultiPlayerGameManager : MonoBehaviour
         playerScore = playerScore + (int)System.Math.Round(currentTime);
         scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
-        // public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool isSkillLeft)
-        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft);
+        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, (int)System.Math.Round(currentTime), playerLife, skillLeft);
         multiPlayerInstance.playerStatList.Add(newStat);
     }
     public void loseLife() {
@@ -247,8 +254,7 @@ public class MultiPlayerGameManager : MonoBehaviour
             lifeText.color = Color.red;
             EndRound();
         }
-        // public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool isSkillLeft)
-        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", 0, playerLife, skillLeft);
+        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, 0, playerLife, skillLeft);
         multiPlayerInstance.playerStatList.Add(newStat);
     }
     public void UserSelectOne (){

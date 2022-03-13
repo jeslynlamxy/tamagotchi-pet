@@ -23,6 +23,7 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
         scoreText.text = score.ToString();
         foodText.text = food.ToString();
         waterText.text = water.ToString();
+        // update user data in server
     }
 
     // Update is called once per frame
