@@ -21,7 +21,4 @@ public class Student : User
     public int currentWater { get; set; }
     public int NumOfGamesCompleted { get; set; }
     public List<string> levelsUnlocked { get; set; }
-    // sum of all highest score: totalScore
-    // update curr food and curr water
-    // num of games completed
 }

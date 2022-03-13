@@ -18,7 +18,6 @@ public class MultiPlayerRoundData
     public List<Question> questionList { get; set; }
     public List<Stat> opponentStatList { get; set; } 
     public List<Stat> playerStatList { get; set; }
-    public Pet characterUsed { get; set; }
     // student's world
     public int winPoint { get; set; }
     public int finalScore { get; set; } 

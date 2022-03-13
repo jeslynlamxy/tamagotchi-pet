@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Stat
 {
-    public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool skillLeft, bool isCorrect)
+    public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool isSkillLeft)
     {
         this.statId = statId;
         this.roundId = roundId;
@@ -13,8 +13,7 @@ public class Stat
         this.studentUsername = studentUsername;
         this.timing = timing;
         this.currentHealth = currentHealth;
-        this.skillLeft = skillLeft;
-        this.isCorrect = isCorrect;
+        this.isSkillLeft = isSkillLeft;
     }
     public int statId { get; set; }
     public int roundId { get; set; }
@@ -22,6 +21,5 @@ public class Stat
     public string studentUsername { get; set; }
     public int timing { get; set; }
     public int currentHealth { get; set; }
-    public bool skillLeft { get; set; }
-    public bool isCorrect { get; set; }
+    public bool isSkillLeft { get; set; }
 }

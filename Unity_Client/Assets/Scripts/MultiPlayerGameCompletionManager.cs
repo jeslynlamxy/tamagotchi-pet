@@ -4,11 +4,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class MultiPlayerGameCompletionManager : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI scoreText, foodText, waterText, winText;
+    private TextMeshProUGUI scoreText, foodText, waterText, winText, victoryOrDefeatText;
      private DataManager dataController;
     private MultiPlayerRoundData currentRoundData;
 
@@ -17,14 +18,24 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
     {
         dataController = FindObjectOfType<DataManager> ();
         currentRoundData = dataController.GetMultiPlayerInstance();
-        int score = currentRoundData.finalScore;
+
         int food = currentRoundData.rewardedFood;
         int water = currentRoundData.rewardedWater;
         int win = currentRoundData.winPoint;
-        scoreText.text = score.ToString();
+        int playerScore = currentRoundData.finalScore;
+        int opponentScore = currentRoundData.opponentStatList.Sum(item => item.timing);
+
+        scoreText.text = playerScore.ToString();
         winText.text = win.ToString();
         foodText.text = food.ToString();
         waterText.text = water.ToString();
+
+        if (playerScore >= opponentScore) {
+            victoryOrDefeatText.text = "victory";
+        }
+        else {
+            victoryOrDefeatText.text = "defeat";
+        }
     }
 
     // Update is called once per frame

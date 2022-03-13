@@ -11,10 +11,9 @@ public class SinglePlayerGameManager : MonoBehaviour
     private List<Question> questionPool;
     private Question currentQuestion;
     private Pet chosenPet;
-    private float timePerQuestion;
-    private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect;
     private bool skillLeft;
     private string skillType; // "add 5 seconds", "recover 1 life"
+    private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect;
     float currentTime = 0f;
     float startingTime = 20f;
     private int timeBetweenQuestion = 2000;
@@ -22,7 +21,7 @@ public class SinglePlayerGameManager : MonoBehaviour
     private Text quesText, ansOneText, ansTwoText, ansThreeText, ansFourText, scoreText, lifeText, skillLeftText, skillExplainText;
     [SerializeField]
     public Text countdownText;
-    public Button ansOne, ansTwo, ansThree, ansFour;
+    public Button ansOne, ansTwo, ansThree, ansFour, useSkill;
     public int difficulty;
     void Start()
     {
@@ -30,7 +29,6 @@ public class SinglePlayerGameManager : MonoBehaviour
         dataController = FindObjectOfType<DataManager> ();
         singlePlayerInstance = dataController.GetSinglePlayerInstance();
         singlePlayerInstance.statList = new List<Stat>();
-        Debug.Log(singlePlayerInstance.statList);
         if (singlePlayerInstance.difficultyLevel == "1") {
             difficulty = 1;
         }
@@ -43,39 +41,49 @@ public class SinglePlayerGameManager : MonoBehaviour
         else if (singlePlayerInstance.difficultyLevel == "4") {
             difficulty = 4;
         }
-
         questionPool = singlePlayerInstance.questionList;
-        
         playerScore = 0;
         playerLife = 3;
         skillLeft = true;
+        skillType = "add 5 seconds"; // get from server/object
+        skillLeftText.text = "1";
+        skillExplainText.text = skillType;
         questionIndex = 0;
-
         totalNumberOfQuestions=0;
         totalCorrect=0;
-
+        useSkill.interactable = true;
         SetCurrentQuestion();
-        
     }
     void Update() {
         currentTime -= 1 *  Time.deltaTime;
         countdownText.text = currentTime.ToString("0");
-
         if (currentTime < 10f) {
             countdownText.color = Color.red;
         }
-
         if (currentTime <= 0) {
             currentTime = 0;
             loseLife();
             ManageNext();
         }
     }
+    public void whenSkillButtonPressed () {
+        if (skillLeft == true) {
+            skillLeft = false;
+            skillLeftText.text = "0";
+            if (skillType == "add 5 seconds") {
+            currentTime = currentTime + 5f;
+            }
+            else if (skillType == "recover 1 life") {
+                playerLife = playerLife + 1;
+                lifeText.text = playerLife.ToString();
+            }
+            useSkill.interactable = false;
+        }
+    }
     // food = accuracy * level chosen
     // water = speed * level chosen
     void determineFood() {
         float percentageAccuracy = totalCorrect/totalNumberOfQuestions;
- 
         if (percentageAccuracy >= 0.9f) {
             singlePlayerInstance.rewardedFood = 10 * difficulty;
         }
@@ -153,7 +161,6 @@ public class SinglePlayerGameManager : MonoBehaviour
         countdownText.color = Color.black;
         scoreText.text = playerScore.ToString();
         lifeText.text = playerLife.ToString();
-
         currentQuestion = questionPool[questionIndex];
 
         ansOneText.color = Color.black;
@@ -171,14 +178,13 @@ public class SinglePlayerGameManager : MonoBehaviour
         playerScore = playerScore + (int)System.Math.Round(currentTime);
         scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
-        // public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool skillLeft, bool isCorrect)
-        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft, true);
+        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft);
         singlePlayerInstance.statList.Add(newStat);
     }
     public void loseLife() {
         playerLife = playerLife - 1;
         lifeText.text = playerLife.ToString();
-        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft, false);
+        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", 0, playerLife, skillLeft);
         singlePlayerInstance.statList.Add(newStat);
         if (playerLife <= 0) {
             lifeText.color = Color.red;
@@ -197,10 +203,11 @@ public class SinglePlayerGameManager : MonoBehaviour
         }
         allEnable();
     }
-    public void EndRound() {
+    public async void EndRound() {
         singlePlayerInstance.finalScore = playerScore;
         determineFood();
         determineWater();
+        await Task.Delay(timeBetweenQuestion);
         SceneManager.LoadScene("SinglePlayerGameCompletionUI");
     }
     public void UserSelectOne (){

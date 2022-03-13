@@ -17,11 +17,11 @@ public class MultiPlayerGameManager : MonoBehaviour
     private float timePerQuestion;
     private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect, winPoint, currentTiming, opponentTiming;
     private bool skillLeft;
-    private string skillExplained = "add 5 seconds";
+    private string skillExplained; // "add 5 seconds", "recover 1 life"
     float currentTime = 0f;
     float startingTime = 20f;
     private int timeBetweenQuestion = 2000;
-    public Button ansOne, ansTwo, ansThree, ansFour;
+    public Button ansOne, ansTwo, ansThree, ansFour, usedSkill;
     public int difficulty;
 
     [SerializeField]
@@ -58,6 +58,13 @@ public class MultiPlayerGameManager : MonoBehaviour
         questionIndex = 0;
         winPoint = 0;
 
+        skillLeft = true;
+        skillExplained = "add 5 seconds"; // get from server
+        skillLeftText.text = "1";
+        skillExplainText.text = skillExplained;
+
+        usedSkill.interactable = true;
+
         totalNumberOfQuestions=0;
         totalCorrect=0;
 
@@ -76,6 +83,20 @@ public class MultiPlayerGameManager : MonoBehaviour
             currentTime = 0;
             loseLife();
             ManageNext();
+        }
+    }
+     public void whenSkillButtonPressed () {
+        if (skillLeft == true) {
+            skillLeft = false;
+            skillLeftText.text = "0";
+            if (skillExplained == "add 5 seconds") {
+            currentTime = currentTime + 5f;
+            }
+            else if (skillExplained == "recover 1 life") {
+                playerLife = playerLife + 1;
+                lifeText.text = playerLife.ToString();
+            }
+            usedSkill.interactable = false;
         }
     }
     // food = accuracy * level chosen + bonus win point
@@ -215,8 +236,8 @@ public class MultiPlayerGameManager : MonoBehaviour
         playerScore = playerScore + (int)System.Math.Round(currentTime);
         scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
-        // // public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool skillLeft, bool isCorrect)
-        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft, true);
+        // public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool isSkillLeft)
+        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft);
         multiPlayerInstance.playerStatList.Add(newStat);
     }
     public void loseLife() {
@@ -226,8 +247,8 @@ public class MultiPlayerGameManager : MonoBehaviour
             lifeText.color = Color.red;
             EndRound();
         }
-        // Stat(int statId, int roundId, int questionId, int timing, int currentHealth, bool isCorrect)
-        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft, false);
+        // public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool isSkillLeft)
+        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", 0, playerLife, skillLeft);
         multiPlayerInstance.playerStatList.Add(newStat);
     }
     public void UserSelectOne (){

@@ -1120,6 +1120,7 @@ MonoBehaviour:
   foodText: {fileID: 256367480}
   waterText: {fileID: 1658146768}
   winText: {fileID: 1541454874}
+  victoryOrDefeatText: {fileID: 1272375084}
 --- !u!4 &932890649
 Transform:
   m_ObjectHideFlags: 0
