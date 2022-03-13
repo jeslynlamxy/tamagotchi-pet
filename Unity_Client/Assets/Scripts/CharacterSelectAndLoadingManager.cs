@@ -100,9 +100,9 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
 
         MultiPlayerInstance.questionList = questionList;
 
-        // Stat(int statId, int roundId, int questionId, int timing, int currentHealth, bool isCorrect)
-        var stat1 = new Stat(1, 1, 1, 15, 3, true);
-        var stat2 = new Stat(2, 1, 2, 20, 3, true);
+        // public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool skillLeft, bool isCorrect)
+        var stat1 = new Stat(1, 1, 1, "meowmeow", 15, 2, true, true);
+        var stat2 = new Stat(2, 1, 2, "meowmeow", 20, 2, true, true);
 
         var opponentStatList = new List<Stat>();
         opponentStatList.Add(stat1);

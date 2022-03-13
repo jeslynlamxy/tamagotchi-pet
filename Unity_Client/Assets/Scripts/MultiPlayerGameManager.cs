@@ -15,7 +15,8 @@ public class MultiPlayerGameManager : MonoBehaviour
     private List<Stat> opponentStatPool;
     private Question currentQuestion;
     private float timePerQuestion;
-    private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect, winPoint, currentTiming, opponentTiming, skillLeft;
+    private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect, winPoint, currentTiming, opponentTiming;
+    private bool skillLeft;
     private string skillExplained = "add 5 seconds";
     float currentTime = 0f;
     float startingTime = 20f;
@@ -120,7 +121,7 @@ public class MultiPlayerGameManager : MonoBehaviour
         float baseLine = totalNumberOfQuestions * startingTime;
         float percentageSpeed = playerScore/baseLine;
         if (percentageSpeed >= 0.9f) {
-            multiPlayerInstance.rewardedWater = 10 * difficulty;
+            multiPlayerInstance.rewardedWater = 10 * difficulty + winPoint;
         }
         else if (percentageSpeed < 0.9f && percentageSpeed >= 0.8f) {
             multiPlayerInstance.rewardedWater = 9 * difficulty + winPoint;
@@ -157,8 +158,8 @@ public class MultiPlayerGameManager : MonoBehaviour
         totalNumberOfQuestions = totalNumberOfQuestions + 1;
         currentTime = startingTime;
         countdownText.color = Color.black;
-        // scoreText.text = playerScore.ToString();
-        // lifeText.text = playerLife.ToString();
+        scoreText.text = playerScore.ToString();
+        lifeText.text = playerLife.ToString();
 
         currentQuestion = questionPool[questionIndex];
 
@@ -188,6 +189,7 @@ public class MultiPlayerGameManager : MonoBehaviour
     }
     public void EndRound() {
         multiPlayerInstance.finalScore = playerScore;
+        multiPlayerInstance.winPoint = winPoint;
         determineFood();
         determineWater();
         SceneManager.LoadScene("MultiPlayerGameCompletionUI");
@@ -203,7 +205,6 @@ public class MultiPlayerGameManager : MonoBehaviour
             return 0;
         }
     }
-    // Stat(int statId, int roundId, int questionId, int timing, int currentHealth, bool isCorrect)
     public void compareScore() {
         currentTiming = (int)System.Math.Round(currentTime);
         opponentTiming = getOpponentTiming(currentQuestion.questionId);
@@ -212,21 +213,21 @@ public class MultiPlayerGameManager : MonoBehaviour
             winText.text = winPoint.ToString();
         }
         playerScore = playerScore + (int)System.Math.Round(currentTime);
-        // scoreText.text = playerScore.ToString();
+        scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
-        // Stat(int statId, int roundId, int questionId, int timing, int currentHealth, bool isCorrect)
-        var newStat = new Stat(1, 1, currentQuestion.questionId, (int)System.Math.Round(currentTime), playerLife, true);
+        // // public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool skillLeft, bool isCorrect)
+        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft, true);
         multiPlayerInstance.playerStatList.Add(newStat);
     }
     public void loseLife() {
         playerLife = playerLife - 1;
-        // lifeText.text = playerLife.ToString();
+        lifeText.text = playerLife.ToString();
         if (playerLife <= 0) {
             lifeText.color = Color.red;
             EndRound();
         }
         // Stat(int statId, int roundId, int questionId, int timing, int currentHealth, bool isCorrect)
-        var newStat = new Stat(1, 1, currentQuestion.questionId, (int)System.Math.Round(currentTime), playerLife, true);
+        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft, false);
         multiPlayerInstance.playerStatList.Add(newStat);
     }
     public void UserSelectOne (){

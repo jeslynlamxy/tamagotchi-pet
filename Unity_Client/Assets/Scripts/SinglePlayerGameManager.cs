@@ -12,7 +12,8 @@ public class SinglePlayerGameManager : MonoBehaviour
     private Question currentQuestion;
     private Pet chosenPet;
     private float timePerQuestion;
-    private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect, skillLeft;
+    private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect;
+    private bool skillLeft;
     private string skillType; // "add 5 seconds", "recover 1 life"
     float currentTime = 0f;
     float startingTime = 20f;
@@ -47,7 +48,7 @@ public class SinglePlayerGameManager : MonoBehaviour
         
         playerScore = 0;
         playerLife = 3;
-        skillLeft = 1;
+        skillLeft = true;
         questionIndex = 0;
 
         totalNumberOfQuestions=0;
@@ -170,14 +171,14 @@ public class SinglePlayerGameManager : MonoBehaviour
         playerScore = playerScore + (int)System.Math.Round(currentTime);
         scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
-        // Stat(int statId, int roundId, int questionId, int timing, int currentHealth, bool isCorrect)
-        var newStat = new Stat(1, 1, currentQuestion.questionId, (int)System.Math.Round(currentTime), playerLife, true);
+        // public Stat(int statId, int roundId, int questionId, string studentUsername, int timing, int currentHealth, bool skillLeft, bool isCorrect)
+        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft, true);
         singlePlayerInstance.statList.Add(newStat);
     }
     public void loseLife() {
         playerLife = playerLife - 1;
         lifeText.text = playerLife.ToString();
-        var newStat = new Stat(1, 1, currentQuestion.questionId, (int)System.Math.Round(currentTime), playerLife, false);
+        var newStat = new Stat(1, 1, currentQuestion.questionId, "meowmeow", (int)System.Math.Round(currentTime), playerLife, skillLeft, false);
         singlePlayerInstance.statList.Add(newStat);
         if (playerLife <= 0) {
             lifeText.color = Color.red;

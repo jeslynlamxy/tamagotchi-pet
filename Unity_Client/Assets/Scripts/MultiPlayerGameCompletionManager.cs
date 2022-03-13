@@ -5,22 +5,24 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SinglePlayerGameCompletionManager : MonoBehaviour
+public class MultiPlayerGameCompletionManager : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI victoryOrDefeat, scoreText, winText, foodText, waterText;
+    private TextMeshProUGUI scoreText, foodText, waterText, winText;
      private DataManager dataController;
-    private SinglePlayerRoundData currentRoundData;
+    private MultiPlayerRoundData currentRoundData;
 
     // Start is called before the first frame update
     void Start()
     {
         dataController = FindObjectOfType<DataManager> ();
-        currentRoundData = dataController.GetSinglePlayerInstance();
+        currentRoundData = dataController.GetMultiPlayerInstance();
         int score = currentRoundData.finalScore;
         int food = currentRoundData.rewardedFood;
         int water = currentRoundData.rewardedWater;
+        int win = currentRoundData.winPoint;
         scoreText.text = score.ToString();
+        winText.text = win.ToString();
         foodText.text = food.ToString();
         waterText.text = water.ToString();
     }
