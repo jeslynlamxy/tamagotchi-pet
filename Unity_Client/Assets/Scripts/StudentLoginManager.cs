@@ -109,9 +109,7 @@ public class StudentLoginManager : MonoBehaviour
             if ((usernameInput == "admin") & (passwordEncrypted == temp))
             {
                 CreateNewStudentData();
-                dataController = FindObjectOfType<DataManager>();
-                dataController.student = student;
-                PlayerPrefs.SetString("studentUsername", usernameInput);
+                SaveUsername();
                 scene.LoadStudentWelcomeUI();
             }
             else
@@ -126,24 +124,16 @@ public class StudentLoginManager : MonoBehaviour
 
                 if (response == "Successfully authenticated")
                 {
-                    PlayerPrefs.SetString("studentUsername", usernameInput);
+                    SaveUsername();
                     scene.LoadStudentWelcomeUI();
-                    PlayerPrefs.SetInt("studentRegister", 0);
                 }
 
             }
 
 
         }
-
-
-
-        // else
-        // {
-        //     MessageLabel.text = "Please enter details again";
-        // }
-
     }
+
     public void RegisterAndLogin()
     {
         if (usernameValid & passwordValid)
@@ -159,7 +149,7 @@ public class StudentLoginManager : MonoBehaviour
 
             if (response == "User successfully registered")
             {
-                PlayerPrefs.SetString("studentUsername", usernameInput);
+                SaveUsername();
                 CreateNewStudentData();
                 var jsonString = JsonConvert.SerializeObject(student);
                 Debug.Log(jsonString);
@@ -167,24 +157,32 @@ public class StudentLoginManager : MonoBehaviour
             }
 
         }
-        else
-        {
-            MessageLabel.text = "Please enter details again";
-        }
+        // else
+        // {
+        //     MessageLabel.text = "Please enter details again";
+        // }
 
     }
     public void CreateNewStudentData()
     {
-        //(string petName, int petSkinId, string petPowerup, int petCurrentHunger, int petCurrentThirst)
         var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
-        var defaultPet2 = new Pet("Pet2", 0, "1 Retry Question", 3, 3);
+        var defaultPet2 = new Pet("Pet2", 0, "Add 1 Health", 3, 3);
         var petList = new List<Pet>();
         petList.Add(defaultPet1);
         petList.Add(defaultPet2);
+        var levelsUnlockedList = new List<int> { 0, 1 };
+        http = new HttpManager();
+        var url = "http://172.21.148.165/add_userData";
+        student = new Student(usernameInput, 0, petList, 3, 3, 0, levelsUnlockedList);
+        var response = http.Post(url, student); // post to backend studentdata
+        Debug.Log("post " + response);
 
-        student = new Student(usernameInput, 0, petList, 3, 3);
-        // post to backend studentdata
+    }
 
+    public void SaveUsername()
+    {
+        dataController = FindObjectOfType<DataManager>();
+        dataController.username = usernameInput;
     }
 
 

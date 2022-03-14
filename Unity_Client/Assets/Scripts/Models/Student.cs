@@ -7,18 +7,20 @@ using static User;
 [System.Serializable]
 public class Student : User
 {
-    public Student(string username, int highestScore, List<Pet> petsUnlocked, int currentFood, int currentWater)
+    public Student(string username, int highestScore, List<Pet> petsUnlocked, int currentFood, int currentWater, int numOfGamesCompleted, List<int> levelsUnlocked)
     {
         this.username = username;
         this.highestScore = highestScore;
         this.petsUnlocked = petsUnlocked;
         this.currentFood = currentFood;
         this.currentWater = currentWater;
+        this.numOfGamesCompleted = numOfGamesCompleted;
+        this.levelsUnlocked = levelsUnlocked;
     }
     public int highestScore { get; set; } // for leaderboard ?
     public List<Pet> petsUnlocked { get; set; }
     public int currentFood { get; set; }
     public int currentWater { get; set; }
-    public int NumOfGamesCompleted { get; set; }
-    public List<string> levelsUnlocked { get; set; }
+    public int numOfGamesCompleted { get; set; }
+    public List<int> levelsUnlocked { get; set; }
 }

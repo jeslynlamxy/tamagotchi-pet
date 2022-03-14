@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Newtonsoft.Json;
 
 public class PetChangeSkinManager : MonoBehaviour
 {
@@ -11,11 +12,14 @@ public class PetChangeSkinManager : MonoBehaviour
     public Image[] petSkinChoices;
     public Sprite[] petSkinSprites;
     public Text header;
+    private DataManager dataController;
+    private HttpManager http;
 
     // Start is called before the first frame update
     void Start()
     {
-        username = PlayerPrefs.GetString("studentUsername", "student");
+        dataController = FindObjectOfType<DataManager>();
+        username = dataController.username;
         displayPetsIndex = PlayerPrefs.GetInt("currentPetsIndex", 0);
         GetStudentData();
         UpdateChangeSkinDisplay();
@@ -23,17 +27,20 @@ public class PetChangeSkinManager : MonoBehaviour
     }
     public void GetStudentData()
     {
-        //(string petName, int petId, string petPowerup, int petCurrentHunger, int petCurrentThirst)
-        var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
-        var defaultPet2 = new Pet("Pet2", 1, "1 Retry Question", 3, 3);
-        var petList = new List<Pet>();
-        petList.Add(defaultPet1);
-        petList.Add(defaultPet2);
-
-        student = new Student(username, 0, petList, 3, 3);
-        // post to backend studentdata
-
+        http = new HttpManager();
+        var url = "http://172.21.148.165/get_userData?username=" + username; // add query parameter using username?
+        var responseStr = http.Post(url, "");
+        student = JsonConvert.DeserializeObject<Student>(responseStr);
     }
+
+    public void UpdateStudentData()
+    {
+        http = new HttpManager();
+        var url = "http://172.21.148.165/update_userData?username=" + username; // add query parameter using username?
+        var responseStr = http.Post(url, student);
+        Debug.Log(responseStr);
+    }
+
     public void NextPet()
     {
         displayPetsIndex += 1;
@@ -68,14 +75,18 @@ public class PetChangeSkinManager : MonoBehaviour
     public void SkinOneSelected()
     {
         student.petsUnlocked[displayPetsIndex].petSkinId = 0;
+        UpdateStudentData();
+
     }
     public void SkinTwoSelected()
     {
         student.petsUnlocked[displayPetsIndex].petSkinId = 1;
+        UpdateStudentData();
     }
     public void SkinThreeSelected()
     {
         student.petsUnlocked[displayPetsIndex].petSkinId = 2;
+        UpdateStudentData();
     }
 
 
