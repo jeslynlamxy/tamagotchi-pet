@@ -5,11 +5,13 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SinglePlayerGameCompletionManager : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI scoreText, foodText, waterText;
+    private TextMeshProUGUI victoryOrDefeat, scoreText, winText, foodText, waterText;
      private DataManager dataController;
     private SinglePlayerRoundData currentRoundData;
     private SceneLoaderManager scene;
@@ -26,6 +28,7 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
         scoreText.text = score.ToString();
         foodText.text = food.ToString();
         waterText.text = water.ToString();
+        // update user data in server
     }
 
     public void LeaderBoard() {
@@ -42,5 +45,15 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void BackToMenuButtonClick() {
+        SceneManager.LoadScene("StudentWelcomeUI");
+    }
+    public void LeaderboardButtonClick() {
+        //
+    }
+    public void SocialsButtonClick() {
+        //
     }
 }

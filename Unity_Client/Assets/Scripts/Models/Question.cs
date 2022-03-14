@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Question
 {
-    public Question(int questionId, string questionText, int answerIndex, List<string> answersText, string worldTopic, string specificSection, string questionStandard)
+    public Question(string questionId, string questionText, int answerIndex, List<string> answersText, string worldTopic, string specificSection, string questionStandard)
     {
         this.questionId = questionId;
         this.questionText = questionText;
@@ -17,7 +17,7 @@ public class Question
         this.questionStandard = questionStandard;
 
     }
-    public int questionId { get; set; }
+    public string questionId { get; set; }
     public string questionText { get; set; }
     public int answerIndex { get; set; }
     public List<string> answersText { get; set; }

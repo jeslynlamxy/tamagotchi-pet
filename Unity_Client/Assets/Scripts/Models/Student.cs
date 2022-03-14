@@ -15,15 +15,10 @@ public class Student : User
         this.currentFood = currentFood;
         this.currentWater = currentWater;
     }
-
     public int highestScore { get; set; } // for leaderboard ?
     public List<Pet> petsUnlocked { get; set; }
     public int currentFood { get; set; }
     public int currentWater { get; set; }
     public int NumOfGamesCompleted { get; set; }
     public List<string> levelsUnlocked { get; set; }
-
-
-
-
 }

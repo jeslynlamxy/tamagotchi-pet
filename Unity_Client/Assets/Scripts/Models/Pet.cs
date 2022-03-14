@@ -20,7 +20,5 @@ public class Pet
     public bool isPetUnlocked { get; set; }
     public int petCurrentWater { get; set; }
     public int petCurrentFood { get; set; }
-    public int petNumOfGamesToUnlock { get; set; }
-
-
+    public List<int> petNumOfGamesToUnlock { get; set; }
 }
