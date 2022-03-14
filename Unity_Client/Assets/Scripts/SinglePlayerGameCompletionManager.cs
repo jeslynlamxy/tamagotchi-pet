@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 using TMPro;
 
 public class SinglePlayerGameCompletionManager : MonoBehaviour
@@ -9,6 +12,8 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
     private TextMeshProUGUI scoreText, foodText, waterText;
      private DataManager dataController;
     private SinglePlayerRoundData currentRoundData;
+    private SceneLoaderManager scene;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +26,16 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
         scoreText.text = score.ToString();
         foodText.text = food.ToString();
         waterText.text = water.ToString();
+    }
+
+    public void LeaderBoard() {
+        scene = new SceneLoaderManager();
+        scene.LoadLeaderboardUI();
+    }
+
+    public void MainMenu() {
+        scene = new SceneLoaderManager();
+        scene.LoadStudentWelcomeUI();
     }
 
     // Update is called once per frame
