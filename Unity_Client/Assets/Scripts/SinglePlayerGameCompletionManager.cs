@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using TMPro;
@@ -12,7 +11,7 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI victoryOrDefeat, scoreText, winText, foodText, waterText;
-     private DataManager dataController;
+    private DataManager dataController;
     private SinglePlayerRoundData currentRoundData;
     private SceneLoaderManager scene;
     
@@ -31,15 +30,6 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
         // update user data in server
     }
 
-    public void LeaderBoard() {
-        scene = new SceneLoaderManager();
-        scene.LoadLeaderboardUI();
-    }
-
-    public void MainMenu() {
-        scene = new SceneLoaderManager();
-        scene.LoadStudentWelcomeUI();
-    }
 
     // Update is called once per frame
     void Update()
@@ -51,7 +41,7 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
         SceneManager.LoadScene("StudentWelcomeUI");
     }
     public void LeaderboardButtonClick() {
-        //
+        SceneManager.LoadScene("LeaderBoardUI");
     }
     public void SocialsButtonClick() {
         //
