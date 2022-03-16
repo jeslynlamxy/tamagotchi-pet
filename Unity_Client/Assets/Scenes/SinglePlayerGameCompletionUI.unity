@@ -707,7 +707,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e69758ae1e8a1943b584ccf0c26e51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  victoryOrDefeat: {fileID: 0}
   scoreText: {fileID: 488218366}
+  winText: {fileID: 0}
   foodText: {fileID: 1514406014}
   waterText: {fileID: 801829403}
 --- !u!4 &564072927
@@ -2254,7 +2256,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 564072926}
         m_TargetAssemblyTypeName: SinglePlayerGameCompletionManager, Assembly-CSharp
-        m_MethodName: LeaderBoard
+        m_MethodName: LeaderboardButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
