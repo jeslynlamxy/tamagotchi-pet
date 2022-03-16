@@ -57,6 +57,11 @@ public class SceneLoaderManager : MonoBehaviour
         SceneManager.LoadScene("CharacterSelectionUI");
     }
 
+    public void LoadViewStatsUI()
+    {
+        SceneManager.LoadScene("ViewStatsUI");
+    }
+
     public void LoadGameUI()
     {
         var pref = PlayerPrefs.GetString("gameTypeSelected");
