@@ -20,7 +20,6 @@ public class Assignment : MonoBehaviour
     public string assignmentName {get; set; }
     public string assignmentTopic { get; set; }
     public string assignmentDescriptions {get; set;}    
-    public 
     
     public List<Question> questionList { get; set; } // get from backend
     public List<Student> targetStudentList { get; set; } // get from backend
