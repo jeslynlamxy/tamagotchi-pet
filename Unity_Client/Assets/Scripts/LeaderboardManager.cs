@@ -14,11 +14,13 @@ public class LeaderboardManager : MonoBehaviour
     private List<ScoreList> userList;
     int MaxScores = 5; // Number of scores to be shown on one page
     public RowUi rowUi;
+    private int currLeaderboardIndex = 0;
 
     void Start()
     {
+        //currLeaderboardIndex = 0;
         GetScoreData();
-        LoadLeaderboard();
+        LoadLeaderboard(0);
     }
 
     public class ScoreList
@@ -44,20 +46,60 @@ public class LeaderboardManager : MonoBehaviour
     }
 
     // TODO messed up pretty ui - think of how to fix,,
-    public async void LoadLeaderboard()
+    public async void LoadLeaderboard(int currLeaderboardIndex)
     {
-        for (int i = 0; i < Mathf.Min(MaxScores, userList.Count); i++)
+        if (currLeaderboardIndex == 0)
         {
+            for (int i = 0; i < Mathf.Min(MaxScores, userList.Count); i++)
+            {
             Debug.Log(userList[i].username);
             Debug.Log(userList[i].score);
-            if ((userList[i] != null ) && (userList[i].score != 0))
-            {
-                var row = Instantiate(rowUi, transform).GetComponent<RowUi>();
-                row.gameObject.name = "Row" + (i + 1).ToString();
-                row.rank.text = (i + 1).ToString();
-                row.name.text = userList[i].username;
-                row.score.text = userList[i].score.ToString(); 
+                //if ((userList[i] != null ) && (userList[i].score != 0))
+                if ((userList[i] != null ))
+                {
+                    var row = Instantiate(rowUi, transform).GetComponent<RowUi>();
+                    row.gameObject.name = "Row" + (i + 1).ToString();
+                    row.rank.text = (i + 1).ToString();
+                    row.name.text = userList[i].username;
+                    row.score.text = userList[i].score.ToString(); 
+                }
             }
         }
+        else
+        {
+            for (int i = 5; i < Mathf.Min(2*MaxScores, userList.Count); i++)
+            {
+            Debug.Log(userList[i].username);
+            Debug.Log(userList[i].score);
+                //if ((userList[i] != null ) && (userList[i].score != 0))
+                if ((userList[i] != null ))
+                {
+                    var row = Instantiate(rowUi, transform).GetComponent<RowUi>();
+                    row.gameObject.name = "Row" + (i + 1).ToString();
+                    row.rank.text = (i + 1).ToString();
+                    row.name.text = userList[i].username;
+                    row.score.text = userList[i].score.ToString(); 
+                }
+            }
+        }
+        
+    }
+
+    public void NextPage()
+    {
+        currLeaderboardIndex = 1;
+        foreach (Transform child in transform) {
+            Destroy(child.gameObject);
+        }
+        LoadLeaderboard(currLeaderboardIndex);
+    }
+
+    public void PrevPage()
+    {
+        currLeaderboardIndex = 0;
+        foreach (Transform child in transform) {
+            Destroy(child.gameObject);
+        }
+        LoadLeaderboard(currLeaderboardIndex);
     }
 }
