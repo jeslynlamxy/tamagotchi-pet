@@ -29,18 +29,17 @@ public class SinglePlayerGameManager : MonoBehaviour
         dataController = FindObjectOfType<DataManager> ();
         singlePlayerInstance = dataController.GetSinglePlayerInstance();
         singlePlayerInstance.statList = new List<Stat>();
-        if (singlePlayerInstance.difficultyLevel == "1") {
+
+        if (singlePlayerInstance.difficultyLevel == "easy") {
             difficulty = 1;
         }
-        else if (singlePlayerInstance.difficultyLevel == "2") {
+        else if (singlePlayerInstance.difficultyLevel == "medium") {
             difficulty = 2;
         }
-        else if (singlePlayerInstance.difficultyLevel == "3") {
+        else if (singlePlayerInstance.difficultyLevel == "hard") {
             difficulty = 3;
         }
-        else if (singlePlayerInstance.difficultyLevel == "4") {
-            difficulty = 4;
-        }
+
         questionPool = singlePlayerInstance.questionList;
         playerScore = 0;
         playerLife = 3;
@@ -185,17 +184,17 @@ public class SinglePlayerGameManager : MonoBehaviour
         ansFourText.text = currentQuestion.answersText[3];
     }
     // gen own stat id
-    public void addScore() {
+    public async void addScore() {
         playerScore = playerScore + (int)System.Math.Round(currentTime);
         scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
-        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, (int)System.Math.Round(currentTime), playerLife, skillLeft);
+        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, (int)System.Math.Round(currentTime), true, playerLife, skillLeft);
         singlePlayerInstance.statList.Add(newStat);
     }
     public void loseLife() {
         playerLife = playerLife - 1;
         lifeText.text = playerLife.ToString();
-        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, 0, playerLife, skillLeft);
+        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, 0, false, playerLife, skillLeft);
         singlePlayerInstance.statList.Add(newStat);
         if (playerLife <= 0) {
             lifeText.color = Color.red;

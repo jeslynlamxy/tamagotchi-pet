@@ -44,21 +44,17 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
     }
     public void SetSinglePlayerQuestions(string world, string section, string level){
         // considering the world section level do the item below
-        if (level == "1") {
-            // get 8 simple questions from server
+        if (level == "easy") {
+            // get 6 simple questions from server
             // get 2 complex questions from server
         }
-        else if (level == "2") {
-            // get 6 simple questions from server
+        else if (level == "medium") {
+            // get 4 simple questions from server
             // get 4 complex questions from server
         }
-        else if (level == "3") {
-            // get 4 simple questions from server
-            // get 6 complex questions from server
-        }
-        else if (level == "4") {
+        else if (level == "hard") {
             // get 2 simple questions from server
-            // get 8 complex questions from server
+            // get 6 complex questions from server
         }
         
         // sample only, need to replace with backend stuffs above
@@ -78,10 +74,11 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         SinglePlayerInstance.questionList = questionList;
     }
 
-    public void SetMultiPlayerQuestions(string world, string section, string level){
+    public async void SetMultiPlayerQuestions(string world, string section, string level){
         // considering the world section level do the item below
         // get single player game in data base with same world section level
         // get the stat data as well
+
         // MultiPlayerInstance.opponentRoundId = 
 
         // sample only, need to replace with backend stuffs above
@@ -99,8 +96,8 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         questionList.Add(question2); 
 
         MultiPlayerInstance.questionList = questionList;
-        var stat1 = new Stat(dataController.generateUID(), dataController.generateUID(), dataController.generateUID(), "meowmeow", 15, 2, true);
-        var stat2 = new Stat(dataController.generateUID(), dataController.generateUID(), dataController.generateUID(), "meowmeow", 20, 2, true);
+        var stat1 = new Stat(dataController.generateUID(), dataController.generateUID(), dataController.generateUID(), "meowmeow", 15, true, 2, true);
+        var stat2 = new Stat(dataController.generateUID(), dataController.generateUID(), dataController.generateUID(), "meowmeow", 20, true, 2, true);
 
         var opponentStatList = new List<Stat>();
         opponentStatList.Add(stat1);

@@ -33,30 +33,25 @@ public class MultiPlayerGameManager : MonoBehaviour
         multiPlayerInstance = dataController.GetMultiPlayerInstance();
         multiPlayerInstance.playerStatList = new List<Stat>();
 
-        if (multiPlayerInstance.difficultyLevel == "1") {
+        if (multiPlayerInstance.difficultyLevel == "easy") {
             difficulty = 1;
         }
-        else if (multiPlayerInstance.difficultyLevel == "2") {
+        else if (multiPlayerInstance.difficultyLevel == "medium") {
             difficulty = 2;
         }
-        else if (multiPlayerInstance.difficultyLevel == "3") {
+        else if (multiPlayerInstance.difficultyLevel == "hard") {
             difficulty = 3;
-        }
-        else if (multiPlayerInstance.difficultyLevel == "4") {
-            difficulty = 4;
         }
 
         questionPool = multiPlayerInstance.questionList;
         opponentStatPool = multiPlayerInstance.opponentStatList;
 
-        
         playerScore = 0;
         playerLife = 3;
         questionIndex = 0;
         winPoint = 0;
 
         multiPlayerInstance.multiRoundId = dataController.generateUID();
-
 
         // playerChosenPet = // get from server/object
         // opponentChosenPet = // get from server/object
@@ -244,7 +239,7 @@ public class MultiPlayerGameManager : MonoBehaviour
         playerScore = playerScore + (int)System.Math.Round(currentTime);
         scoreText.text = playerScore.ToString();
         totalCorrect = totalCorrect + 1;
-        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, (int)System.Math.Round(currentTime), playerLife, skillLeft);
+        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, (int)System.Math.Round(currentTime), true, playerLife, skillLeft);
         multiPlayerInstance.playerStatList.Add(newStat);
     }
     public void loseLife() {
@@ -254,7 +249,7 @@ public class MultiPlayerGameManager : MonoBehaviour
             lifeText.color = Color.red;
             EndRound();
         }
-        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, 0, playerLife, skillLeft);
+        var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, playerUsername, 0, false, playerLife, skillLeft);
         multiPlayerInstance.playerStatList.Add(newStat);
     }
     public void UserSelectOne (){
