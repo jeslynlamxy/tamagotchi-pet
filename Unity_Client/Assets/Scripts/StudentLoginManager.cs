@@ -166,7 +166,7 @@ public class StudentLoginManager : MonoBehaviour
     public void CreateNewStudentData()
     {
         var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
-        var defaultPet2 = new Pet("Pet2", 0, "Add 1 Health", 3, 3);
+        var defaultPet2 = new Pet("Pet2", 0, "Add 1 Life", 3, 3);
         var petList = new List<Pet>();
         petList.Add(defaultPet1);
         petList.Add(defaultPet2);

@@ -3180,6 +3180,16 @@ MonoBehaviour:
   winText: {fileID: 1262551448}
   skillLeftText: {fileID: 2110449760}
   skillExplainText: {fileID: 1802113475}
+  username: 
+  petSelectedIndex: 0
+  petImage: {fileID: 699139481}
+  petSprites:
+  - {fileID: 21300000, guid: 72de0c64f2c6a498096698322c976a67, type: 3}
+  - {fileID: 21300000, guid: 8afd73b29f8e34c70b0db80184b8cc7f, type: 3}
+  - {fileID: 21300000, guid: e2976d09b53264ffbbb9210a1ae1dcc0, type: 3}
+  - {fileID: 21300000, guid: 522d916af9f7944fc9739fa8abcde570, type: 3}
+  - {fileID: 21300000, guid: 2594a7d7126c04e0786f0de669bab9b0, type: 3}
+  - {fileID: 21300000, guid: 1b1491dd8c2cf4c53865ea93f0b1f176, type: 3}
 --- !u!1 &2110449758
 GameObject:
   m_ObjectHideFlags: 0
