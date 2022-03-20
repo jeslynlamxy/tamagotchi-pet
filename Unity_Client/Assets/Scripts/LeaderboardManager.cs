@@ -46,6 +46,7 @@ public class LeaderboardManager : MonoBehaviour
     }
 
     // TODO messed up pretty ui - think of how to fix,,
+    // public async void, the async is not needed here - jeslyn
     public async void LoadLeaderboard(int currLeaderboardIndex)
     {
         if (currLeaderboardIndex == 0)
