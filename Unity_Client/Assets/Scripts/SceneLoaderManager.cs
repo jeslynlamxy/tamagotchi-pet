@@ -70,6 +70,11 @@ public class SceneLoaderManager : MonoBehaviour
         SceneManager.LoadScene("ViewStatsUI");
     }
 
+    public void LoadQuestionBankAddScene()
+    {
+    	SceneManager.LoadScene("Question_Bank_Add");
+    }
+
     public void LoadGameUI()
     {
         var pref = PlayerPrefs.GetString("gameTypeSelected");
@@ -104,6 +109,10 @@ public class SceneLoaderManager : MonoBehaviour
     public void LoadLeaderboardUI()
     {
         SceneManager.LoadScene("LeaderboardUI");
+    }
+    public void LoadQuestionBankUI()
+    {
+        SceneManager.LoadScene("QuestionBank");
     }
     public void QuitGame()
     {
