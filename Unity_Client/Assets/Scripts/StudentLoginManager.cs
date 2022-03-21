@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using System;
 
 public class StudentLoginManager : MonoBehaviour
 {
@@ -166,14 +167,14 @@ public class StudentLoginManager : MonoBehaviour
     public void CreateNewStudentData()
     {
         var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
-        var defaultPet2 = new Pet("Pet2", 0, "Add 1 Health", 3, 3);
+        var defaultPet2 = new Pet("Pet2", 0, "Add 1 Life", 3, 3);
         var petList = new List<Pet>();
         petList.Add(defaultPet1);
         petList.Add(defaultPet2);
         var levelsUnlockedList = new List<int> { 0, 1 };
         http = new HttpManager();
         var url = "http://172.21.148.165/add_userData";
-        student = new Student(usernameInput, 0, petList, 3, 3, 0, levelsUnlockedList);
+        student = new Student(usernameInput, 0, petList, 3, 3, 0, levelsUnlockedList, DateTime.Now.ToString());
         var response = http.Post(url, student); // post to backend studentdata
         Debug.Log("post " + response);
 

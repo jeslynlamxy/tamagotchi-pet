@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using System;
+
 public class StudentWelcomeManager : MonoBehaviour
 {
     public Text usernameLabel;
@@ -25,6 +27,7 @@ public class StudentWelcomeManager : MonoBehaviour
         UpdateStudentUsername(username);
         displayPetsIndex = 0;
         GetStudentData();
+        // UpdatePetsFoodAndWater();
         UpdatePetDisplay();
     }
 
@@ -47,6 +50,30 @@ public class StudentWelcomeManager : MonoBehaviour
         var url = "http://172.21.148.165/get_userData?username=" + username; // add query parameter using username?
         var responseStr = http.Post(url, "");
         student = JsonConvert.DeserializeObject<Student>(responseStr);
+    }
+    public void UpdateStudentData()
+    {
+        http = new HttpManager();
+        var url = "http://172.21.148.165/update_userData?username=" + username; // add query parameter using username
+        var responseStr = http.Post(url, student);
+        Debug.Log(responseStr);
+    }
+
+    public void UpdatePetsFoodAndWater()
+    {
+        var lastLoginDay = DateTime.Parse(student.lastLoginDay);
+        int daysDiff = (int)Math.Round((DateTime.Now - lastLoginDay).TotalDays);
+        student.currentFood -= daysDiff * 4;
+        student.currentWater -= daysDiff * 4;
+        if (student.currentFood < 0)
+        {
+            student.currentFood = 0;
+        }
+        if (student.currentWater < 0)
+        {
+            student.currentWater = 0;
+        }
+        UpdateStudentData();
     }
 
     public void StartGame()
