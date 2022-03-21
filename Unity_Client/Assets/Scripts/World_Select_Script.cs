@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -94,4 +93,3 @@ public class World_Select_Script : MonoBehaviour
 
 
 }
->>>>>>> be9f200214fab31642f5cbf9e3c8c8a37ab3dcda
