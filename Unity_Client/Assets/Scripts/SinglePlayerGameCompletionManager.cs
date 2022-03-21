@@ -14,12 +14,15 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
     private DataManager dataController;
     private SinglePlayerRoundData currentRoundData;
     private SceneLoaderManager scene;
-    
+    public string username;
+    public Student student;
+    private HttpManager http;
 
     // Start is called before the first frame update
     void Start()
     {
-        dataController = FindObjectOfType<DataManager> ();
+        dataController = FindObjectOfType<DataManager>();
+        username = dataController.username;
         currentRoundData = dataController.GetSinglePlayerInstance();
         int score = currentRoundData.finalScore;
         int food = currentRoundData.rewardedFood;
@@ -27,23 +30,52 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
         scoreText.text = score.ToString();
         foodText.text = food.ToString();
         waterText.text = water.ToString();
-        // update user data in server
+        GetStudentData();
+        student.currentFood += food;
+        student.currentWater += water;
+        student.highestScore += score;
+        UpdateStudentData();
+        AddSinglePlayerRoundData();
+    }
+    public void GetStudentData()
+    {
+        http = new HttpManager();
+        var url = "http://172.21.148.165/get_userData?username=" + username; // add query parameter using username
+        var responseStr = http.Post(url, "");
+        student = JsonConvert.DeserializeObject<Student>(responseStr);
+    }
+
+    public void UpdateStudentData()
+    {
+        var url = "http://172.21.148.165/update_userData?username=" + username; // add query parameter using username
+        var responseStr = http.Post(url, student);
+        Debug.Log(responseStr);
+    }
+
+    public void AddSinglePlayerRoundData()
+    {
+        var url = "http://172.21.148.165/add_SinglePlayerRoundData";
+        var responseStr = http.Post(url, currentRoundData);
+        Debug.Log(responseStr);
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void BackToMenuButtonClick() {
+    public void BackToMenuButtonClick()
+    {
         SceneManager.LoadScene("StudentWelcomeUI");
     }
-    public void LeaderboardButtonClick() {
+    public void LeaderboardButtonClick()
+    {
         SceneManager.LoadScene("LeaderBoardUI");
     }
-    public void SocialsButtonClick() {
+    public void SocialsButtonClick()
+    {
         //
     }
 }
