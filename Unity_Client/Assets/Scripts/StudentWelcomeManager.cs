@@ -74,6 +74,7 @@ public class StudentWelcomeManager : MonoBehaviour
         {
             student.currentWater = 0;
         }
+        student.lastLoginDay = DateTime.Now.ToString();
         UpdateStudentData();
     }
 

@@ -119,7 +119,8 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         // }
 
         string worldUri = System.Web.HttpUtility.UrlPathEncode(world);
-        var url = "http://172.21.148.165/get_question_filtered?world=" + worldUri + "&section=1&limit=8";
+        // var url = "http://172.21.148.165/get_question_filtered?world=" + worldUri + "&section=1&limit=8";
+        var url = "http://172.21.148.165/get_question_filtered?world=REQUIREMENT%20ANALYSIS&section=1&limit=8";
         var responseStr = http.Post(url, "");
         Debug.Log(url);
         Debug.Log(responseStr);
