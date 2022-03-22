@@ -58,14 +58,6 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
         var responseStr = http.Post(url, currentRoundData);
         Debug.Log(responseStr);
     }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void BackToMenuButtonClick()
     {
         SceneManager.LoadScene("StudentWelcomeUI");
