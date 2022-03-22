@@ -464,11 +464,9 @@ PlayerSettings:
   switchPlayerConnectionEnabled: 1
   switchUseNewStyleFilepaths: 0
   switchUseMicroSleepForYield: 1
-  switchEnableRamDiskSupport: 0
-  switchMicroSleepForYieldTime: 25
-  switchRamDiskSpaceSize: 12
+
   ps4NPAgeRating: 12
-  ps4NPTitleSecret: 
+
   ps4NPTrophyPackPath: 
   ps4ParentalLevel: 11
   ps4ContentID: ED1633-NPXX51362_00-0000000000000000
