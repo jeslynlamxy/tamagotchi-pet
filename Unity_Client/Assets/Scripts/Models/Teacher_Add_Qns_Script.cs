@@ -18,7 +18,7 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
     private GameObject popUp;
     private Dropdown dropdownAnswer;
     private Dropdown dropdownLevel;
-    private API_Question conn;
+    private QuestionManager conn;
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
         dropdownAnswer = entryContainer.Find("Dropdown_Answer").GetComponent<Dropdown>();
         dropdownLevel = entryContainer.Find("Dropdown_Level").GetComponent<Dropdown>();
         popUp.SetActive(false);
-        conn = (API_Question)transform.GetComponent(typeof(API_Question));
+        conn = (QuestionManager)transform.GetComponent(typeof(QuestionManager));
 
         // button events
         panelObject.transform.Find("Button_Return").GetComponent<Button>().onClick.AddListener(ClickReturn);
@@ -46,7 +46,7 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
     {
         if (validateFields())
         {
-            StartCoroutine(conn.addQ(current_question));
+            conn.addQ(current_question);
             SceneManager.LoadScene("QuestionBank");
         }
         else

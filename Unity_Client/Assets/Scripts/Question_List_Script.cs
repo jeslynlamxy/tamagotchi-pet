@@ -51,7 +51,7 @@ public class Question_List_Script : MonoBehaviour
         yield return questionInfoRequest.SendWebRequest();
         if (questionInfoRequest.isNetworkError || questionInfoRequest.isHttpError)
         {
-            //Debug.LogError(questionInfoRequest.error);
+            Debug.LogError(questionInfoRequest.error);
             yield break;
         }
         JSONNode questionInfo = JSON.Parse(questionInfoRequest.downloadHandler.text);
@@ -59,7 +59,7 @@ public class Question_List_Script : MonoBehaviour
         {
             questionContentTextArray.Add(questionInfo[i]["questionText"]);
             questionStandardArray.Add(questionInfo[i]["questionStandard"]);
-            questionIdArray.Add(questionInfo[i]["QuestionId"]);
+            questionIdArray.Add(questionInfo[i]["questionId"]);
         }
 
 
