@@ -75,6 +75,12 @@ public class SceneLoaderManager : MonoBehaviour
     	SceneManager.LoadScene("Question_Bank_Add");
     }
 
+        public void LoadQuestionBankWorldScene()
+    {
+    	SceneManager.LoadScene("QuestionBankWorldUI");
+    }
+
+
     public void LoadGameUI()
     {
         var pref = PlayerPrefs.GetString("gameTypeSelected");
