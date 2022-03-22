@@ -30,7 +30,8 @@ public class Question
     public string specificSection { get; set; }
     public string questionStandard { get; set; } // simple and complex
 
-    public Question(string questionId){
+    public Question(string questionId)
+    {
         this.questionId = questionId;
     }
     public Question(JSONNode jsonQ)
@@ -48,7 +49,8 @@ public class Question
         }
     }
 
-    public Question(string worldTopic, string specificSection){
+    public Question(string worldTopic, string specificSection)
+    {
         this.worldTopic = worldTopic;
         this.specificSection = specificSection;
         answersText = new List<string>();
@@ -57,4 +59,7 @@ public class Question
         questionText = "";
         questionStandard = "easy";
     }
+
+
+    public Question() { }
 }
