@@ -31,19 +31,6 @@ public class StudentWelcomeManager : MonoBehaviour
         UpdatePetDisplay();
     }
 
-    // public void GetStudentData()
-    // {
-    //     //(string petName, int petSkinId, string petPowerup, int petCurrentHunger, int petCurrentThirst)
-    //     var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
-    //     var defaultPet2 = new Pet("Pet2", 0, "1 Retry Question", 3, 3);
-    //     var petList = new List<Pet>();
-    //     petList.Add(defaultPet1);
-    //     petList.Add(defaultPet2);
-
-    //     student = new Student(username, 0, petList, 3, 3);
-    //     // post to backend studentdata
-    // }
-
     public void GetStudentData()
     {
         http = new HttpManager();
@@ -74,6 +61,7 @@ public class StudentWelcomeManager : MonoBehaviour
         {
             student.currentWater = 0;
         }
+        student.lastLoginDay = DateTime.Now.ToString();
         UpdateStudentData();
     }
 

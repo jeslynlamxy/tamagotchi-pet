@@ -68,7 +68,6 @@ public class StudentLoginManager : MonoBehaviour
     }
     public bool IsPasswordValid(string pw)
     {
-        // if ((pw.Length >= 8) & (Regex.IsMatch(pw, @"^[a-zA-Z]+$")) & (Regex.IsMatch(pw, @"^-?\d+$")))
         if (pw.Length >= 8)
         {
             return true;
@@ -130,8 +129,6 @@ public class StudentLoginManager : MonoBehaviour
                 }
 
             }
-
-
         }
     }
 
@@ -158,11 +155,6 @@ public class StudentLoginManager : MonoBehaviour
             }
 
         }
-        // else
-        // {
-        //     MessageLabel.text = "Please enter details again";
-        // }
-
     }
     public void CreateNewStudentData()
     {

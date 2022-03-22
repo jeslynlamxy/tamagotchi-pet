@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Newtonsoft.Json;
-
+using static Question;
 public class CharacterSelectAndLoadingManager : MonoBehaviour
 {
     public Student student;
@@ -15,6 +15,8 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
     public Sprite[] petSprites;
     public Text petSkill;
     private DataManager dataController;
+
+    private List<Question> questionListData;
 
     private SinglePlayerRoundData SinglePlayerInstance;
     private MultiPlayerRoundData MultiPlayerInstance;
@@ -116,28 +118,31 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         //     // get 6 complex questions from server
         // }
 
-        var url = "http://172.21.148.165/get_question_filtered?world=" + world + "&section=" + section + "&limit=8";
+        string worldUri = System.Web.HttpUtility.UrlPathEncode(world);
+        // var url = "http://172.21.148.165/get_question_filtered?world=" + worldUri + "&section=1&limit=8";
+        var url = "http://172.21.148.165/get_question_filtered?world=REQUIREMENT%20ANALYSIS&section=1&limit=8";
         var responseStr = http.Post(url, "");
         Debug.Log(url);
         Debug.Log(responseStr);
 
-        var tempQuestionList = JsonConvert.DeserializeObject<List<Question>>(responseStr);
+        var questionList = JsonConvert.DeserializeObject<List<Question>>(responseStr);
+        SinglePlayerInstance.questionList = questionList;
 
         // sample only, need to replace with backend stuffs above
-        var answersText = new List<string>();
-        answersText.Add("4");
-        answersText.Add("3");
-        answersText.Add("2");
-        answersText.Add("1");
+        // var answersText = new List<string>();
+        // answersText.Add("4");
+        // answersText.Add("3");
+        // answersText.Add("2");
+        // answersText.Add("1");
 
-        var question1 = new Question("0", "2+2", 0, answersText, "requirements", "1", "simple");
-        var question2 = new Question("0", "3x1", 1, answersText, "requirements", "1", "complex");
+        // var question1 = new Question("0", "2+2", 0, answersText, "requirements", "1", "simple");
+        // var question2 = new Question("0", "3x1", 1, answersText, "requirements", "1", "complex");
 
-        var questionList = new List<Question>();
-        questionList.Add(question1);
-        questionList.Add(question2);
+        // var questionList = new List<Question>();
+        // questionList.Add(question1);
+        // questionList.Add(question2);
 
-        SinglePlayerInstance.questionList = questionList;
+
     }
 
     public async void SetMultiPlayerQuestions(string world, string section, string level)

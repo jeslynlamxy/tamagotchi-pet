@@ -125,11 +125,6 @@ public class TeacherLoginManager : MonoBehaviour
             }
         }
 
-        // else
-        // {
-        //     MessageLabel.text = "Please enter details again";
-        // }
-
     }
     public void RegisterAndLogin()
     {
@@ -151,10 +146,6 @@ public class TeacherLoginManager : MonoBehaviour
             }
 
         }
-        // else
-        // {
-        //     MessageLabel.text = "Please enter details again";
-        // }
 
     }
 

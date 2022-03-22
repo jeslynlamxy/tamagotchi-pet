@@ -35,7 +35,8 @@ public class Question
     public string difficultyStandard { get; set; }
     public string questionId { get; set; }
 
-    public Question(string questionId){
+    public Question(string questionId)
+    {
         this.questionId = questionId;
     }
     [field:NonSerialized]
@@ -54,7 +55,8 @@ public class Question
         }
     }
 
-    public Question(string worldTopic, string specificSection){
+    public Question(string worldTopic, string specificSection)
+    {
         this.worldTopic = worldTopic;
         this.specificSection = specificSection;
         answersText = new List<string>();
@@ -64,4 +66,7 @@ public class Question
         questionStandard = "simple";
         difficultyStandard = "easy";
     }
+
+
+    public Question() { }
 }

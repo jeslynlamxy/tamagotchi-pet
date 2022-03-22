@@ -36,6 +36,7 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
         student.highestScore += score;
         UpdateStudentData();
         AddSinglePlayerRoundData();
+        AddStatsList();
     }
     public void GetStudentData()
     {
@@ -58,14 +59,12 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
         var responseStr = http.Post(url, currentRoundData);
         Debug.Log(responseStr);
     }
-
-
-    // Update is called once per frame
-    void Update()
+    public void AddStatsList()
     {
-
+        var url = "http://172.21.148.165/add_stats_array";
+        var responseStr = http.Post(url, currentRoundData.statList);
+        Debug.Log(responseStr);
     }
-
     public void BackToMenuButtonClick()
     {
         SceneManager.LoadScene("StudentWelcomeUI");
