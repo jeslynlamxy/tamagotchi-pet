@@ -44,6 +44,14 @@ public class SceneLoaderManager : MonoBehaviour
     {
         SceneManager.LoadScene("ChangeSkinUI");
     }
+    public void LoadGameHistoryUI()
+    {
+        SceneManager.LoadScene("GameHistoryUI");
+    }
+    public void LoadViewDetailedStatisticsUI()
+    {
+        SceneManager.LoadScene("ViewDetailedStatisticsUI");
+    }
     public void LoadSingleMultiPlayerSelectionUI()
     {
         SceneManager.LoadScene("SingleMultiPlayerSelectionUI");

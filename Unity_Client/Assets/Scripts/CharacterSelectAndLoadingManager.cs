@@ -96,24 +96,32 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
     //     currentPointer -= 1;
     //     LoadCharacterInPanel(currentPointer);
     // }
+
     public void SetSinglePlayerQuestions(string world, string section, string level)
     {
         // considering the world section level do the item below
-        if (level == "easy")
-        {
-            // get 6 simple questions from server
-            // get 2 complex questions from server
-        }
-        else if (level == "medium")
-        {
-            // get 4 simple questions from server
-            // get 4 complex questions from server
-        }
-        else if (level == "hard")
-        {
-            // get 2 simple questions from server
-            // get 6 complex questions from server
-        }
+        // if (level == "easy")
+        // {
+        //     // get 6 simple questions from server
+        //     // get 2 complex questions from server
+        // }
+        // else if (level == "medium")
+        // {
+        //     // get 4 simple questions from server
+        //     // get 4 complex questions from server
+        // }
+        // else if (level == "hard")
+        // {
+        //     // get 2 simple questions from server
+        //     // get 6 complex questions from server
+        // }
+
+        var url = "http://172.21.148.165/get_question_filtered?world=" + world + "&section=" + section + "&limit=8";
+        var responseStr = http.Post(url, "");
+        Debug.Log(url);
+        Debug.Log(responseStr);
+
+        var tempQuestionList = JsonConvert.DeserializeObject<List<Question>>(responseStr);
 
         // sample only, need to replace with backend stuffs above
         var answersText = new List<string>();

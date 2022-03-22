@@ -27,7 +27,7 @@ public class StudentWelcomeManager : MonoBehaviour
         UpdateStudentUsername(username);
         displayPetsIndex = 0;
         GetStudentData();
-        // UpdatePetsFoodAndWater();
+        UpdatePetsFoodAndWater();
         UpdatePetDisplay();
     }
 
@@ -63,6 +63,7 @@ public class StudentWelcomeManager : MonoBehaviour
     {
         var lastLoginDay = DateTime.Parse(student.lastLoginDay);
         int daysDiff = (int)Math.Round((DateTime.Now - lastLoginDay).TotalDays);
+        Debug.Log(daysDiff);
         student.currentFood -= daysDiff * 4;
         student.currentWater -= daysDiff * 4;
         if (student.currentFood < 0)
