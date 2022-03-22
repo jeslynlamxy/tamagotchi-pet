@@ -8,44 +8,50 @@ using SimpleJSON;
 using System.Linq;
 
 
-[System.Serializable]
+[Serializable]
 public class Question
 {
-    public Question(string questionId, string questionText, int answerIndex, List<string> answersText, string worldTopic, string specificSection, string questionStandard)
+    public Question(string questionId, string questionText, int answerIndex, List<string> answersText, string worldTopic, string specificSection, string questionStandard, string difficultyStandard)
     {
-        this.questionId = questionId;
+        
         this.questionText = questionText;
         this.answerIndex = answerIndex;
         this.answersText = answersText;
         this.worldTopic = worldTopic;
         this.specificSection = specificSection;
         this.questionStandard = questionStandard;
+        this.difficultyStandard = difficultyStandard;
+        this.questionId = questionId;
+
 
     }
-    public string questionId { get; set; }
+    
     public string questionText { get; set; }
     public int answerIndex { get; set; }
     public List<string> answersText { get; set; }
     public string worldTopic { get; set; }
     public string specificSection { get; set; }
     public string questionStandard { get; set; } // simple and complex
+    public string difficultyStandard { get; set; }
+    public string questionId { get; set; }
 
     public Question(string questionId)
     {
         this.questionId = questionId;
     }
-    public Question(JSONNode jsonQ)
+    [field:NonSerialized]
+    public Question(JSONNode jsonStoryQ)
     {
         answersText = new List<string>();
-        specificSection = jsonQ["specificSection"];
-        questionText = jsonQ["questionText"];
-        questionStandard = jsonQ["questionStandard"];
-        worldTopic = jsonQ["worldTopic"];
-        questionId = jsonQ["questionId"];
-        answerIndex = int.Parse(jsonQ["answerId"]);
-        for (int i = 0; i < jsonQ["answersText"].Count; i++)
+        specificSection = jsonStoryQ["specificSection"];
+        questionText = jsonStoryQ["questionText"];
+        questionStandard = jsonStoryQ["questionStandard"];
+        worldTopic = jsonStoryQ["worldTopic"];
+        questionId = jsonStoryQ["questionId"];
+        answerIndex = int.Parse(jsonStoryQ["answerIndex"]);
+        for (int i = 0; i < jsonStoryQ["answersText"].Count; i++)
         {
-            answersText.Add(jsonQ["answersText"][i]);
+            answersText.Add(jsonStoryQ["answersText"][i]);
         }
     }
 
@@ -55,9 +61,10 @@ public class Question
         this.specificSection = specificSection;
         answersText = new List<string>();
         answerIndex = 0;
-        questionId = "";
+        questionId = "30";
         questionText = "";
-        questionStandard = "easy";
+        questionStandard = "simple";
+        difficultyStandard = "easy";
     }
 
 

@@ -93,7 +93,7 @@ public class Question_List_Script : MonoBehaviour
 
                 playerTextPanel.transform.Find("Text_Difficulty").transform.Find("Button_Manage").GetComponent<Button>().onClick.AddListener(() => {
                     editQ.questionId = playerTextPanel.transform.Find("Text_Id").GetComponent<Text>().text;
-                    SceneManager.LoadScene("EditQuestion");
+                    SceneManager.LoadScene("Question_Bank_Edit");
                 });
             }
         }

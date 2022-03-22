@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// For Question_Bank_Add Scene
-public class Teacher_Add_Qns_Script : MonoBehaviour
+public class Teacher_Edit_Qns_Script : MonoBehaviour
 {
     // variables
     private Question current_question;
@@ -31,14 +30,35 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
         dropdownStandard = entryContainer.Find("Dropdown_Level").GetComponent<Dropdown>();
         popUp.SetActive(false);
         conn = (QuestionManager)transform.GetComponent(typeof(QuestionManager));
+        panelObject.gameObject.SetActive(false);
 
         // button events
         panelObject.transform.Find("Button_Return").GetComponent<Button>().onClick.AddListener(ClickReturn);
         panelObject.transform.Find("Button_Save").GetComponent<Button>().onClick.AddListener(ClickSave);
         panelObject.transform.Find("Button_Clear").GetComponent<Button>().onClick.AddListener(ClickClear);
+        panelObject.transform.Find("Button_Delete").GetComponent<Button>().onClick.AddListener(ClickDelete);
         popUp.transform.Find("Popup_Incomplete").Find("Button_Confirm").GetComponent<Button>().onClick.AddListener(popupQuestionIncompleteAcknowledge);
         popUp.transform.Find("Popup_Info").Find("Button_Confirm").GetComponent<Button>().onClick.AddListener(popupQuestionInfoAcknowledge);
-        current_question = new Question(World_Select_Script.worldChoice, Section_Select_Script.sectionChoice);
+        popUp.transform.Find("Popup_Delete").Find("Button_Cancel").GetComponent<Button>().onClick.AddListener(exitDelete);
+        popUp.transform.Find("Popup_Delete").Find("Button_Confirm").GetComponent<Button>().onClick.AddListener(confirmDelete);
+
+        fetchQuestions();
+    }
+    void Update()
+    {
+        if (QuestionManager.getStoryQDone)
+        {
+            QuestionManager.getStoryQDone = false;
+            current_question = new Question(QuestionManager.jsonNodeStoryQ);
+            populateFields();
+            panelObject.gameObject.SetActive(true);
+        }
+    }
+    // Fetches the question from the backend
+    private void fetchQuestions()
+    {
+        QuestionManager.getStoryQDone = false;
+        StartCoroutine(conn.getStoryQ(Question_List_Script.editQ.questionId));
     }
     public void ClickReturn()
     {
@@ -48,15 +68,13 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
     {
         if (validateFields())
         {
-            conn.addStoryQ(current_question);
-            SceneManager.LoadScene("QuestionBank");
+            conn.updateStoryQ(current_question);
         }
         else
         {
             popupQuestionIncomplete();
         }
     }
-    // Clear all fields
     public void ClickClear()
     {
         entryContainer.Find("InputField_Question").GetComponent<InputField>().text = "";
@@ -65,6 +83,11 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
         entryContainer.Find("InputField_C").GetComponent<InputField>().text = "";
         entryContainer.Find("InputField_D").GetComponent<InputField>().text = "";
         dropdownAnswer.value = 0;
+    }
+    public void ClickDelete()
+    {
+        popUp.SetActive(true);
+        popUp.transform.Find("Popup_Delete").gameObject.SetActive(true);
     }
     public void popupQuestionIncompleteAcknowledge()
     {
@@ -76,12 +99,22 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
         popUp.transform.Find("Popup_Info").gameObject.SetActive(false);
         popUp.gameObject.SetActive(false);
     }
+    public void confirmDelete()
+    {
+        StartCoroutine(conn.deleteStoryQ(current_question));
+        SceneManager.LoadScene("QuestionBank");
+    }
+    public void exitDelete()
+    {
+        popUp.transform.Find("Popup_Delete").gameObject.SetActive(false);
+        popUp.gameObject.SetActive(false);
+    }
+    // Other functions can set up pop up messages to be displayed. This allows customisation of error messages
     private void setPopupInfoMessage(string message)
     {   // helper function to set popup's message easily
         popUp.transform.Find("Popup_Incomplete").Find("Text").GetComponent<Text>().text = message;
     }
-
-    // Validate if the data are valid
+    // Validate if data are valid
     private bool validateFields()
     {
         string ans;
@@ -162,8 +195,7 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
         }
         return true;
     }
-
-    // UI instructions to populate the input fields and dropdowns
+    // Populate fields on the screen
     private void populateFields()
     {
         ClickClear();
@@ -175,8 +207,32 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
             entryContainer.Find("InputField_C").GetComponent<InputField>().text = current_question.answersText[2];
             entryContainer.Find("InputField_D").GetComponent<InputField>().text = current_question.answersText[3];
         }
-        catch (ArgumentOutOfRangeException) { }
+        catch (ArgumentOutOfRangeException)
+        {
+
+        }
         dropdownAnswer.value = current_question.answerIndex + 1;
+        switch (current_question.difficultyStandard)
+        {
+            case "Easy":
+                dropdownLevel.value = 0;
+                break;
+            case "Medium":
+                dropdownLevel.value = 1;
+                break;
+            case "Hard":
+                dropdownLevel.value = 2;
+                break;
+        }
+        switch (current_question.questionStandard)
+        {
+            case "simple":
+                dropdownLevel.value = 0;
+                break;
+            case "complex":
+                dropdownLevel.value = 1;
+                break;
+        }
     }
     private void popupQuestionIncomplete()
     {
