@@ -24,21 +24,24 @@ public class StudentLoginManager : MonoBehaviour
     {
 
         Debug.Log(s);
-        usernameValid = IsUsernameValid(s);
+        usernameInput = s;
+        IsUsernameValid();
         if (usernameValid)
         {
             usernameInput = s;
         }
         else
         {
-            MessageLabel.text = "Enter username of at least 6 chars with letters";
+            usernameInput = "";
+            MessageLabel.text = "Enter username of at least 6 letters";
         }
     }
 
     public void ReadPasswordInput(string s)
     {
         Debug.Log(s);
-        passwordValid = IsPasswordValid(s);
+        passwordEncrypted = s;
+        IsPasswordValid();
         if (passwordValid)
         {
             pwd = new PasswordManager();
@@ -47,38 +50,39 @@ public class StudentLoginManager : MonoBehaviour
         }
         else
         {
+            passwordEncrypted = "";
             MessageLabel.text = "Enter password of at least 8 chars";
         }
     }
-    public bool IsUsernameValid(string un)
+    public void IsUsernameValid()
     {
-        if ((un.Length >= 6) & (Regex.IsMatch(un, @"^[a-zA-Z]+$")))
+        if ((usernameInput.Length >= 6) & (Regex.IsMatch(usernameInput, @"^[a-zA-Z]+$")))
         {
-            return true;
+            usernameValid = true;
         }
-        else if (un == "admin")
+        else if (usernameInput == "admin")
         {
-            return true;
+            usernameValid = true;
         }
         else
         {
-            return false;
+            usernameValid = false;
         }
 
     }
-    public bool IsPasswordValid(string pw)
+    public void IsPasswordValid()
     {
-        if (pw.Length >= 8)
+        if (passwordEncrypted.Length >= 8)
         {
-            return true;
+            passwordValid = true;
         }
-        else if (pw == "admin")
+        else if (passwordEncrypted == "admin")
         {
-            return true;
+            passwordValid = true;
         }
         else
         {
-            return false;
+            passwordValid = false;
         }
 
     }
@@ -103,6 +107,18 @@ public class StudentLoginManager : MonoBehaviour
         pwd = new PasswordManager();
         var temp = pwd.AESEncryption("admin");
 
+        if (usernameInput == null & passwordEncrypted == null)
+        {
+            MessageLabel.text = "Enter login details";
+        }
+        else if (usernameInput == null & passwordValid)
+        {
+            MessageLabel.text = "Enter username";
+        }
+        else if (passwordEncrypted == null & usernameValid)
+        {
+            MessageLabel.text = "Enter password";
+        }
 
         if (usernameValid & passwordValid)
         {
@@ -134,6 +150,19 @@ public class StudentLoginManager : MonoBehaviour
 
     public void RegisterAndLogin()
     {
+        if (usernameInput == null & passwordEncrypted == null)
+        {
+            MessageLabel.text = "Enter registration details";
+        }
+        else if (usernameInput == null)
+        {
+            MessageLabel.text = "Enter username";
+        }
+        else if (passwordEncrypted == null)
+        {
+            MessageLabel.text = "Enter password";
+        }
+
         if (usernameValid & passwordValid)
         {
             studentLogin = new StudentLoginDetails(usernameInput, passwordEncrypted);
