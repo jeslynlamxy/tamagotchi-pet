@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using System;
+
 public class StudentWelcomeManager : MonoBehaviour
 {
     public Text usernameLabel;
@@ -25,21 +27,9 @@ public class StudentWelcomeManager : MonoBehaviour
         UpdateStudentUsername(username);
         displayPetsIndex = 0;
         GetStudentData();
+        UpdatePetsFoodAndWater();
         UpdatePetDisplay();
     }
-
-    // public void GetStudentData()
-    // {
-    //     //(string petName, int petSkinId, string petPowerup, int petCurrentHunger, int petCurrentThirst)
-    //     var defaultPet1 = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
-    //     var defaultPet2 = new Pet("Pet2", 0, "1 Retry Question", 3, 3);
-    //     var petList = new List<Pet>();
-    //     petList.Add(defaultPet1);
-    //     petList.Add(defaultPet2);
-
-    //     student = new Student(username, 0, petList, 3, 3);
-    //     // post to backend studentdata
-    // }
 
     public void GetStudentData()
     {
@@ -47,6 +37,32 @@ public class StudentWelcomeManager : MonoBehaviour
         var url = "http://172.21.148.165/get_userData?username=" + username; // add query parameter using username?
         var responseStr = http.Post(url, "");
         student = JsonConvert.DeserializeObject<Student>(responseStr);
+    }
+    public void UpdateStudentData()
+    {
+        http = new HttpManager();
+        var url = "http://172.21.148.165/update_userData?username=" + username; // add query parameter using username
+        var responseStr = http.Post(url, student);
+        Debug.Log(responseStr);
+    }
+
+    public void UpdatePetsFoodAndWater()
+    {
+        var lastLoginDay = DateTime.Parse(student.lastLoginDay);
+        int daysDiff = (int)Math.Round((DateTime.Now - lastLoginDay).TotalDays);
+        Debug.Log(daysDiff);
+        student.currentFood -= daysDiff * 4;
+        student.currentWater -= daysDiff * 4;
+        if (student.currentFood < 0)
+        {
+            student.currentFood = 0;
+        }
+        if (student.currentWater < 0)
+        {
+            student.currentWater = 0;
+        }
+        student.lastLoginDay = DateTime.Now.ToString();
+        UpdateStudentData();
     }
 
     public void StartGame()

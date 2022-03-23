@@ -15,31 +15,31 @@ public class World_Select_Script : MonoBehaviour
     public void onPlanningSelect()
     {
         worldChoice = "Planning" ;
-        SceneManager.LoadScene("Question_Bank_Section");
+        SceneManager.LoadScene("QuestionBankSection");
     }
 
     public void onDesignSelect()
     {
         worldChoice = "Design";
-        SceneManager.LoadScene("Question_Bank_Section");
+        SceneManager.LoadScene("QuestionBankSection");
     }
 
     public void onImplementationSelect()
     {
         worldChoice = "Implementation";
-        SceneManager.LoadScene("Question_Bank_Section");
+        SceneManager.LoadScene("QuestionBankSection");
     }
 
     public void onTestingSelect()
     {
         worldChoice = "Testing";
-        SceneManager.LoadScene("Question_Bank_Section");
+        SceneManager.LoadScene("QuestionBankSection");
     }
 
     public void onMaintenanceSelect()
     {
         worldChoice = "Maintenance";
-        SceneManager.LoadScene("Question_Bank_Section");
+        SceneManager.LoadScene("QuestionBankSection");
     }
 
 

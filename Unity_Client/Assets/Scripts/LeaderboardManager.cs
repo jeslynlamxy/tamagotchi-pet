@@ -45,8 +45,7 @@ public class LeaderboardManager : MonoBehaviour
         userList = userList.OrderByDescending(o=>o.score).ToList();
     }
 
-    // TODO messed up pretty ui - think of how to fix,,
-    public async void LoadLeaderboard(int currLeaderboardIndex)
+    public void LoadLeaderboard(int currLeaderboardIndex)
     {
         if (currLeaderboardIndex == 0)
         {

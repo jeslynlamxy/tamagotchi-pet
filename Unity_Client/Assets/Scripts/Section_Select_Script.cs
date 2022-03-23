@@ -58,6 +58,4 @@ public class Section_Select_Script : MonoBehaviour
     {
         SceneManager.LoadScene("QuestionBank");
     }
-
-
 }

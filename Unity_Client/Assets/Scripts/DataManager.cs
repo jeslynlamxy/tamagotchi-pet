@@ -9,6 +9,7 @@ public class DataManager : MonoBehaviour
     public MultiPlayerRoundData MultiPlayerInstance;
     // public Student student { get; set; }
     public string username { get; set; }
+    public int selectedPetIndex { get; set; }
 
     // Start is called before the first frame update
     void Start()

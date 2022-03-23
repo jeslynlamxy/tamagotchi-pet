@@ -82,35 +82,24 @@ public class WorldAndStageSelectionManager : MonoBehaviour
     }
         public void level1Selected()
     {
-        PlayerPrefs.SetString("levelSelected", "1");
+        PlayerPrefs.SetString("levelSelected", "easy");
         level1.color = Color.red;
         level2.color = Color.black;
         level3.color = Color.black;
-        level4.color = Color.black;
     }
         public void level2Selected()
     {
-        PlayerPrefs.SetString("levelSelected", "2");
+        PlayerPrefs.SetString("levelSelected", "medium");
         level1.color = Color.black;
         level2.color = Color.red;
         level3.color = Color.black;
-        level4.color = Color.black;
     }
         public void level3Selected()
     {
-        PlayerPrefs.SetString("levelSelected", "3");
+        PlayerPrefs.SetString("levelSelected", "hard");
         level1.color = Color.black;
         level2.color = Color.black;
         level3.color = Color.red;
-        level4.color = Color.black;
-    }
-        public void level4Selected()
-    {
-        PlayerPrefs.SetString("levelSelected", "4");
-        level1.color = Color.black;
-        level2.color = Color.black;
-        level3.color = Color.black;
-        level4.color = Color.red;
     }
     public void ComfirmButtonClicked() {
         // check both playerpref steady then continue

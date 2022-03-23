@@ -44,6 +44,14 @@ public class SceneLoaderManager : MonoBehaviour
     {
         SceneManager.LoadScene("ChangeSkinUI");
     }
+    public void LoadGameHistoryUI()
+    {
+        SceneManager.LoadScene("GameHistoryUI");
+    }
+    public void LoadViewDetailedStatisticsUI()
+    {
+        SceneManager.LoadScene("ViewDetailedStatisticsUI");
+    }
     public void LoadSingleMultiPlayerSelectionUI()
     {
         SceneManager.LoadScene("SingleMultiPlayerSelectionUI");
@@ -61,6 +69,17 @@ public class SceneLoaderManager : MonoBehaviour
     {
         SceneManager.LoadScene("ViewStatsUI");
     }
+
+    public void LoadQuestionBankAddScene()
+    {
+    	SceneManager.LoadScene("Question_Bank_Add");
+    }
+
+        public void LoadQuestionBankWorldScene()
+    {
+    	SceneManager.LoadScene("QuestionBankWorldUI");
+    }
+
 
     public void LoadGameUI()
     {
@@ -96,6 +115,10 @@ public class SceneLoaderManager : MonoBehaviour
     public void LoadLeaderboardUI()
     {
         SceneManager.LoadScene("LeaderboardUI");
+    }
+    public void LoadQuestionBankUI()
+    {
+        SceneManager.LoadScene("QuestionBank");
     }
     public void QuitGame()
     {

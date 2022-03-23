@@ -13,7 +13,7 @@ public class Assignment : MonoBehaviour
         this.assignmentDescriptions = assignmentDescriptions;
         this.questionList = questionList;
         this.targetStudentList = targetStudentList;
-        this.deuDate = new DateTime(Year, Month, Date, 23, 59, 00);
+       // this.deuDate = new DateTime(Year, Month, Date, 23, 59, 00);
     }
     public int assignmentId { get; set; }
     public int totalMark { get; set; }

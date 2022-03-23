@@ -112,8 +112,8 @@ public class VirtualVillageManager : MonoBehaviour
 
     public void UpdateSupplyDisplay()
     {
-        currentFood.text = student.currentFood + "/10";
-        currentWater.text = student.currentWater + "/10";
+        currentFood.text = student.currentFood.ToString();
+        currentWater.text = student.currentWater.ToString();
     }
 
     public void ProvideWater()
