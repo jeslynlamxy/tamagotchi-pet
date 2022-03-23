@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 
 // For Question_Bank_Add Scene
 public class Teacher_Add_Qns_Script : MonoBehaviour
@@ -20,6 +21,9 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
     private Dropdown dropdownLevel;
     private Dropdown dropdownStandard;
     private QuestionManager conn;
+    private Question question;
+    private Generator generator;
+    public static int k = Generator.i;
 
     void Start()
     {
@@ -31,6 +35,7 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
         dropdownStandard = entryContainer.Find("Dropdown_Level").GetComponent<Dropdown>();
         popUp.SetActive(false);
         conn = (QuestionManager)transform.GetComponent(typeof(QuestionManager));
+        k = Generator.i;
 
         // button events
         panelObject.transform.Find("Button_Return").GetComponent<Button>().onClick.AddListener(ClickReturn);
@@ -46,15 +51,19 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
     }
     public void ClickSave()
     {
+       
         if (validateFields())
         {
+            //string a = k.ToString();
+            current_question.questionId = k.ToString();
             conn.addStoryQ(current_question);
             SceneManager.LoadScene("QuestionBank");
         }
         else
         {
-            popupQuestionIncomplete();
+              popupQuestionIncomplete();
         }
+        
     }
     // Clear all fields
     public void ClickClear()
@@ -80,7 +89,6 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
     {   // helper function to set popup's message easily
         popUp.transform.Find("Popup_Incomplete").Find("Text").GetComponent<Text>().text = message;
     }
-
     // Validate if the data are valid
     private bool validateFields()
     {

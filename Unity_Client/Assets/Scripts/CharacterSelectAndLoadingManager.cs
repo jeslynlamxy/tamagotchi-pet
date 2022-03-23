@@ -120,27 +120,10 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
 
         string worldUri = System.Web.HttpUtility.UrlPathEncode(world);
         // var url = "http://172.21.148.165/get_question_filtered?world=" + worldUri + "&section=1&limit=8";
-        var url = "http://172.21.148.165/get_question_filtered?world=REQUIREMENT%20ANALYSIS&section=1&limit=8";
-        var responseStr = http.Post(url, "");
-        Debug.Log(url);
-        Debug.Log(responseStr);
+        var url = "http://172.21.148.165/get_question_filtered?world=REQUIREMENT%20ANALYSIS&section=2&limit=8";
+        var questionList = http.Get<List<Question>>(url);
 
-        var questionList = JsonConvert.DeserializeObject<List<Question>>(responseStr);
         SinglePlayerInstance.questionList = questionList;
-
-        // sample only, need to replace with backend stuffs above
-        // var answersText = new List<string>();
-        // answersText.Add("4");
-        // answersText.Add("3");
-        // answersText.Add("2");
-        // answersText.Add("1");
-
-        // var question1 = new Question("0", "2+2", 0, answersText, "requirements", "1", "simple");
-        // var question2 = new Question("0", "3x1", 1, answersText, "requirements", "1", "complex");
-
-        // var questionList = new List<Question>();
-        // questionList.Add(question1);
-        // questionList.Add(question2);
 
 
     }
@@ -160,8 +143,8 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         answersText.Add("2");
         answersText.Add("1");
 
-        var question1 = new Question("0", "2+2", 0, answersText, "requirements", "1", "simple");
-        var question2 = new Question("1", "3x1", 1, answersText, "requirements", "1", "complex");
+        var question1 = new Question("0", "2+2", 0, answersText, "requirements", "1", "simple", "easy");
+        var question2 = new Question("1", "3x1", 1, answersText, "requirements", "1", "complex", "easy");
 
         var questionList = new List<Question>();
         questionList.Add(question1);

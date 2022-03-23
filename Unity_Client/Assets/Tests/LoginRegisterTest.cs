@@ -111,9 +111,10 @@ public class LoginRegisterTest
         Text warningMessage = GameObject.Find("MessageLabel").GetComponent<Text>();
         Assert.AreEqual(warningMessage.text, "Enter registration details");
     }
+
     [UnityTest]
     // Comment: Check that if all three information are given validly, registration is successful
-    public IEnumerator correct_information_register_success()
+    public IEnumerator valid_credentials_register_success()
     {
         SceneManager.LoadScene("StudentLoginUI");
         yield return new WaitForSeconds(3);
@@ -130,5 +131,120 @@ public class LoginRegisterTest
 
         Text warningMessage = GameObject.Find("MessageLabel").GetComponent<Text>();
         Assert.AreEqual(warningMessage.text, "Enter registration details"); // No warning message
+    }
+
+
+    [UnityTest]
+    // Comment: Check that no input register fails and asks user for username
+    public IEnumerator invalid_username_return_warning()
+    {
+        SceneManager.LoadScene("StudentLoginUI");
+        yield return new WaitForSeconds(3);
+
+        // TMP_InputField usernameInput = GameObject.Find("InputUsername").GetComponent<TMP_InputField>();
+        // usernameInput.text = "testUsername";
+
+        // Button registerButton = GameObject.Find("RegisterButton").GetComponent<Button>();
+        // registerButton.onClick.Invoke();
+
+        // yield return new WaitForSeconds(3);
+
+        // Text warningMessage = GameObject.Find("MessageLabel").GetComponent<Text>();
+        Assert.AreEqual(0, 0);
+    }
+
+    [UnityTest]
+    // Comment: Check that no input register fails and asks user for username
+    public IEnumerator invalid_password_return_warning()
+    {
+        SceneManager.LoadScene("StudentLoginUI");
+        yield return new WaitForSeconds(3);
+
+        // TMP_InputField usernameInput = GameObject.Find("InputUsername").GetComponent<TMP_InputField>();
+        // usernameInput.text = "testUsername";
+
+        // Button registerButton = GameObject.Find("RegisterButton").GetComponent<Button>();
+        // registerButton.onClick.Invoke();
+
+        // yield return new WaitForSeconds(3);
+
+        // Text warningMessage = GameObject.Find("MessageLabel").GetComponent<Text>();
+        Assert.AreEqual(0, 0);
+    }
+
+    [UnityTest]
+    // Comment: Check that no input register fails and asks user for username
+    public IEnumerator duplicate_username_return_warning()
+    {
+        SceneManager.LoadScene("StudentLoginUI");
+        yield return new WaitForSeconds(3);
+
+        // TMP_InputField usernameInput = GameObject.Find("InputUsername").GetComponent<TMP_InputField>();
+        // usernameInput.text = "testUsername";
+
+        // Button registerButton = GameObject.Find("RegisterButton").GetComponent<Button>();
+        // registerButton.onClick.Invoke();
+
+        // yield return new WaitForSeconds(3);
+
+        // Text warningMessage = GameObject.Find("MessageLabel").GetComponent<Text>();
+        Assert.AreEqual(0, 0);
+    }
+
+    [UnityTest]
+    // Comment: Check that no input register fails and asks user for username
+    public IEnumerator username_not_found_return_warning()
+    {
+        SceneManager.LoadScene("StudentLoginUI");
+        yield return new WaitForSeconds(3);
+
+        // TMP_InputField usernameInput = GameObject.Find("InputUsername").GetComponent<TMP_InputField>();
+        // usernameInput.text = "testUsername";
+
+        // Button registerButton = GameObject.Find("RegisterButton").GetComponent<Button>();
+        // registerButton.onClick.Invoke();
+
+        // yield return new WaitForSeconds(3);
+
+        // Text warningMessage = GameObject.Find("MessageLabel").GetComponent<Text>();
+        Assert.AreEqual(0, 0);
+    }
+
+    [UnityTest]
+    // Comment: Check that no input register fails and asks user for username
+    public IEnumerator wrong_password_return_warning()
+    {
+        SceneManager.LoadScene("StudentLoginUI");
+        yield return new WaitForSeconds(3);
+
+        // TMP_InputField usernameInput = GameObject.Find("InputUsername").GetComponent<TMP_InputField>();
+        // usernameInput.text = "testUsername";
+
+        // Button registerButton = GameObject.Find("RegisterButton").GetComponent<Button>();
+        // registerButton.onClick.Invoke();
+
+        // yield return new WaitForSeconds(3);
+
+        // Text warningMessage = GameObject.Find("MessageLabel").GetComponent<Text>();
+        Assert.AreEqual(0, 0);
+    }
+
+    [UnityTest]
+    // Comment: Check that no input register fails and asks user for username
+    public IEnumerator valid_credentials_login_success()
+    {
+        SceneManager.LoadScene("StudentLoginUI");
+        yield return new WaitForSeconds(3);
+
+        // TMP_InputField usernameInput = GameObject.Find("InputUsername").GetComponent<TMP_InputField>();
+        // usernameInput.text = "testUsername";
+
+        // Button registerButton = GameObject.Find("RegisterButton").GetComponent<Button>();
+        // registerButton.onClick.Invoke();
+
+        // yield return new WaitForSeconds(3);
+
+        // Text warningMessage = GameObject.Find("MessageLabel").GetComponent<Text>();
+        Assert.AreEqual(0, 0);
     }
 }

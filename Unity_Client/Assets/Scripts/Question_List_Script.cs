@@ -23,7 +23,7 @@ public class Question_List_Script : MonoBehaviour
     List<JSONNode> questionStandardArray = new List<JSONNode>();
     List<JSONNode> questionIdArray = new List<JSONNode>();
     public static Question editQ;
-    public static string questionId;
+    public static string questionIdd;
     public static string selectedWorld = World_Select_Script.worldChoice;
     public static string selectedSectionUnformat = Section_Select_Script.sectionChoice;
     public static string selectedSection = selectedSectionUnformat.Replace(" ", "%20");
@@ -33,7 +33,7 @@ public class Question_List_Script : MonoBehaviour
     //use this for initialization
     void Start()
     {
-        editQ = new Question(questionId);
+        editQ = new Question(questionIdd);
         selectedWorld = World_Select_Script.worldChoice;
         selectedSectionUnformat = Section_Select_Script.sectionChoice;
         selectedSection = selectedSectionUnformat.Replace(" ", "%20");
@@ -81,7 +81,7 @@ public class Question_List_Script : MonoBehaviour
             {
                 string value = questionList[i];
                 string questionStandard = questionStandardList[i];
-                string questionId = questionIdList[i];
+                string questionIdd = questionIdList[i];
                 GameObject playerTextPanel = (GameObject)Instantiate(ContentDataPanel);
                 playerTextPanel.transform.SetParent(mainScrollContentView.transform);
                 playerTextPanel.transform.localScale = new Vector3(1, 1, 1);
@@ -89,7 +89,7 @@ public class Question_List_Script : MonoBehaviour
                 playerTextPanel.transform.Find("Text_No").GetComponent<Text>().text = (i + 1).ToString();
                 playerTextPanel.transform.Find("Text_Question").GetComponent<Text>().text = value;
                 playerTextPanel.transform.Find("Text_Difficulty").GetComponent<Text>().text = questionStandard;
-                playerTextPanel.transform.Find("Text_Id").GetComponent<Text>().text = questionId;
+                playerTextPanel.transform.Find("Text_Id").GetComponent<Text>().text = questionIdd;
 
                 playerTextPanel.transform.Find("Text_Difficulty").transform.Find("Button_Manage").GetComponent<Button>().onClick.AddListener(() => {
                     editQ.questionId = playerTextPanel.transform.Find("Text_Id").GetComponent<Text>().text;
