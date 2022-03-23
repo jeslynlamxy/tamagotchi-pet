@@ -15,7 +15,13 @@ public class ViewStatsManager : MonoBehaviour
 
     private List<StudentsScoreList> studentList;
 
-    private List<QuestionsScoreList> questionsList;
+    private List<Question> questionsStat;
+
+    private List<Stat> stats;
+
+    private List<Question> questionList;
+
+    private DataManager dataController;
 
     private string currStatsPage = "students";
 
@@ -25,6 +31,8 @@ public class ViewStatsManager : MonoBehaviour
 
     public StudentsRowUI studentrowUI;
 
+    public QuestionsRowUi questionsrowUI;
+
     int MaxStats = 5; // Number of scores to be shown on one page
 
     void Start() {
@@ -32,6 +40,7 @@ public class ViewStatsManager : MonoBehaviour
         // GetStudentsStatsData();
         GetQuestionsStatsData();
         // LoadStudentsStatistics(0);
+        LoadQuestionsStatistics(0);
     }
 
     public class StudentsScoreList
@@ -95,62 +104,161 @@ public class ViewStatsManager : MonoBehaviour
         }
     }
 
-    public class QuestionsScoreList
+    // public QuestionList()
+    // {
+    //     dataController = FindObjectOfType<DataManager> ();
+    //     currentRoundData = dataController.GetSinglePlayerInstance();
+
+    //     // string roundId = currentRoundData.roundId;
+    //     // List<Question> questionList = currentRoundData.questionList;
+    //     // List<Stat> statList = currentRoundData.statList;
+    // }
+
+    public class Stat
     {
-        public QuestionsScoreList(string username, int score)
+        public Stat(string statId, string roundId, string questionId, string studentUsername, int timing, int currentHealth, bool isSkillLeft)
         {
-            this.username = username;
-            this.score = score;
+            this.statId = statId;
+            this.roundId = roundId;
+            this.questionId = questionId;
+            this.studentUsername = studentUsername;
+            this.timing = timing;
+            this.currentHealth = currentHealth;
+            this.isSkillLeft = isSkillLeft;
         }
-
-        public string username { get; set; }
-        public int score { get; set; }
-
+        public string statId { get; set; }
+        public string roundId { get; set; }
+        public string questionId { get; set; }
+        public string studentUsername { get; set; }
+        public int timing { get; set; }
+        public int currentHealth { get; set; }
+        public bool isSkillLeft { get; set; }
     }
+
+    public class Question
+    {
+        public Question(string questionId, string questionText, int answerIndex, List<string> answersText, string worldTopic, string specificSection, string questionStandard)
+        {
+            this.questionId = questionId;
+            this.questionText = questionText;
+            this.answerIndex = answerIndex;
+            this.answersText = answersText;
+            this.worldTopic = worldTopic;
+            this.specificSection = specificSection;
+            this.questionStandard = questionStandard;
+
+        }
+        public string questionId { get; set; }
+        public string questionText { get; set; }
+        public int answerIndex { get; set; }
+        public List<string> answersText { get; set; }
+        public string worldTopic { get; set; }
+        public string specificSection { get; set; }
+        public string questionStandard { get; set; } // simple and complex
+    }
+
+    // public class StatList
+    // {
+    //     public StatList(string statId, string roundId, string questionId, string studentUsername, int timing, int currentHealth, bool isSkillLeft)
+    //     {
+    //         this.statId = statId;
+    //         this.roundId = roundId;
+    //         this.questionId = questionId;
+    //         this.studentUsername = studentUsername;
+    //         this.timing = timing;
+    //         this.currentHealth = currentHealth;
+    //         this.isSkillLeft = isSkillLeft;
+    //     }
+    //     public string statId { get; set; }
+    //     public string roundId { get; set; }
+    //     public string questionId { get; set; }
+    //     public string studentUsername { get; set; }
+    //     public int timing { get; set; }
+    //     public int currentHealth { get; set; }
+    //     public bool isSkillLeft { get; set; }
+    // }
+
+    // public class QuestionsList
+    // {
+    //     public QuestionsList(string roundId, string studentId, string sldcWorld, string specificSection, string difficultyLevel, List<Stat> statlist, List<Question>questionList, Pet CharacterUsed)
+    //     {
+    //         this.roundId = roundId;
+    //         this.studentId = studentId;
+    //         this.sldcWorld = sldcWorld;
+    //         this.specificSection = specificSection;
+    //         this.difficultyLevel = difficultyLevel;
+    //         this.statList = statList;
+    //         this.questionList = questionList;
+    //         this.characterUsed = characterUsed;
+    //         this.finalScore = finalScore;
+    //         this.rewardedFood = rewardedFood;
+    //         this.rewardedWater = rewardedWater;
+    //     }
+
+    //     public string roundId { get; set; }
+    //     public string studentId { get; set; }
+    //     public string sldcWorld { get; set; } // different sldc stages
+    //     public string specificSection { get; set; } // section 1, 2, 3, 4
+    //     public string difficultyLevel { get; set; } // level 1, 2, 3, 4
+    //     public Pet characterUsed { get; set; }
+    //     // programmer's end
+    //     public List<Question> questionList { get; set; }
+    //     public List<Stat> statList { get; set; }
+    //     // student's world
+    //     public int finalScore { get; set; } 
+    //     public int rewardedFood { get; set; }
+    //     public int rewardedWater { get; set; }
+
+    // }
 
     public void GetQuestionsStatsData()
     {
         http = new HttpManager();
-        var url = "http://172.21.148.165/get_SinglePlayerRoundData"; // change 
+        var url = "http://172.21.148.165/get_stats"; // change 
         var responseStr = http.Post(url, ""); 
         Debug.Log(responseStr);
-        questionsList = JsonConvert.DeserializeObject<List<QuestionsScoreList>>(responseStr);
-        questionsList = questionsList.OrderByDescending(o=>o.score).ToList();
+        // currentRoundData = dataController.GetSinglePlayerInstance();
+        // questionsStat = JsonConvert.DeserializeObject<List<QuestionsList>>(responseStr);
+        stats = JsonConvert.DeserializeObject<List<Stat>>(responseStr);
+        // questionsStat = questionsStat.ToList();
+        // Debug.Log(questionsStat[1].statList);
+        Debug.Log(stats.Count);
+        // questionsList = questionsList.OrderByDescending(o=>o.score).ToList();
     }
 
     public async void LoadQuestionsStatistics(int currQuestionsIndex)
     {
         if (currQuestionsIndex == 0)
         {
-        for (int i = 0; i < Mathf.Min(MaxStats, questionsList.Count); i++)
+        for (int i = 0; i < Mathf.Min(MaxStats, stats.Count); i++)
         {
-            Debug.Log(questionsList[i].username);
-            Debug.Log(questionsList[i].score);
+            Debug.Log(stats[i].questionId);
+            Debug.Log(stats[i].timing);
                 //if ((studentList[i] != null ) && (studentList[i].score != 0))
-                if ((questionsList[i] != null ))
+                if ((stats[i] != null ))
                 {
-                    var row = Instantiate(studentrowUI, transform).GetComponent<StudentsRowUI>();
+                    var row = Instantiate(questionsrowUI, transform).GetComponent<QuestionsRowUi>();
                     row.gameObject.name = "Row" + (i+1).ToString();
                     // row.rank.text = (i + 1).ToString();
-                    row.name.text = questionsList[i].username;
-                    row.score.text = questionsList[i].score.ToString(); 
+                    row.questions.text = stats[i].questionId;
+                    row.timing.text = stats[i].timing.ToString(); 
                 }
             }
         }
         else
         {
-            for (int i = 5; i < Mathf.Min(2*MaxStats, questionsList.Count); i++)
+            for (int i = 5; i < Mathf.Min(2*MaxStats, stats.Count); i++)
             {
-            Debug.Log(questionsList[i].username);
-            Debug.Log(questionsList[i].score);
+                Debug.Log(stats[i].questionId);
+                Debug.Log(stats[i].timing);
                 //if ((studentList[i] != null ) && (studentList[i].score != 0))
-                if ((questionsList[i] != null ))
+                if ((stats[i] != null ))
                 {
-                    var row = Instantiate(studentrowUI, transform).GetComponent<StudentsRowUI>();
+                    var row = Instantiate(questionsrowUI, transform).GetComponent<QuestionsRowUi>();
                     row.gameObject.name = "Row" + (i+1).ToString();
                     // row.rank.text = (i + 1).ToString();
-                    row.name.text = questionsList[i].username;
-                    row.score.text = questionsList[i].score.ToString(); 
+                    row.questions.text = stats[i].questionId;
+                    row.timing.text = stats[i].timing.ToString(); 
                 }
             }
         }
