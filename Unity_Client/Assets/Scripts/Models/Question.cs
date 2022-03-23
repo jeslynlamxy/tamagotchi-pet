@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 using SimpleJSON;
 using System.Linq;
 
-
 [Serializable]
 public class Question
 {
@@ -33,13 +32,13 @@ public class Question
     public string specificSection { get; set; }
     public string questionStandard { get; set; } // simple and complex
     public string difficultyStandard { get; set; }
+    [field: NonSerialized]
     public string questionId { get; set; }
 
-    public Question(string questionId)
+    public Question(string questionIdd)
     {
-        this.questionId = questionId;
+        this.questionId = questionIdd;
     }
-    [field:NonSerialized]
     public Question(JSONNode jsonStoryQ)
     {
         answersText = new List<string>();
@@ -61,12 +60,9 @@ public class Question
         this.specificSection = specificSection;
         answersText = new List<string>();
         answerIndex = 0;
-        questionId = "30";
+        questionId = "";
         questionText = "";
-        questionStandard = "simple";
-        difficultyStandard = "easy";
+        questionStandard = "";
+        difficultyStandard = "";
     }
-
-
-    public Question() { }
 }

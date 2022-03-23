@@ -101,7 +101,7 @@ public class Teacher_Edit_Qns_Script : MonoBehaviour
     }
     public void confirmDelete()
     {
-        StartCoroutine(conn.deleteStoryQ(current_question));
+        conn.deleteStoryQ(current_question);
         SceneManager.LoadScene("QuestionBank");
     }
     public void exitDelete()

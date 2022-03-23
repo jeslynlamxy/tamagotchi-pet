@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 
 // For Question_Bank_Add Scene
 public class Teacher_Add_Qns_Script : MonoBehaviour
@@ -48,6 +49,7 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
     {
         if (validateFields())
         {
+            
             conn.addStoryQ(current_question);
             SceneManager.LoadScene("QuestionBank");
         }
@@ -80,7 +82,6 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
     {   // helper function to set popup's message easily
         popUp.transform.Find("Popup_Incomplete").Find("Text").GetComponent<Text>().text = message;
     }
-
     // Validate if the data are valid
     private bool validateFields()
     {

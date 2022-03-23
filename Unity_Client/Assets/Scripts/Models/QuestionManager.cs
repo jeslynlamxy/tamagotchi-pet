@@ -59,19 +59,33 @@ public class QuestionManager : MonoBehaviour{
             Debug.Log(response);
             //response = response.Substring(1, response.Length - 2);
 
-        }
+     }
 
     // Deletes a story mode question
-    public IEnumerator deleteStoryQ(Question storyModeQ)
+    //public IEnumerator deleteStoryQ(Question question)
+    //{
+        //deleteStoryQDone = false;
+        //API_Connection api = new API_Connection();
+        //string jsonString = JsonUtility.ToJson(question);
+        //yield return StartCoroutine(api.PostData("delete_question?question_id=" + question.questionId, jsonString, s => {
+            //question.questionId = JSON.Parse(s);
+        //}));
+        //deleteStoryQDone = true;
+    //}
+
+    public void deleteStoryQ(Question question)
     {
-        deleteStoryQDone = false;
-        API_Connection conn = new API_Connection();
-        yield return StartCoroutine(conn.DeleteData("StoryModeQuestion/" + storyModeQ.questionId, s => {
-            Debug.Log(JSON.Parse(s));
-        }));
-        deleteStoryQDone = true;
+        http = new HttpManager();
+        //scene = new SceneLoaderManager();
+        var url = "http://172.21.148.165/delete_question?question_id=" + question.questionId;
+        var response = http.Post(url, question.questionId);
+        Debug.Log(response);
+        //response = response.Substring(1, response.Length - 2);
+
     }
+
+
 }
 
-    
+
 
