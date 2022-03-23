@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 139177970}
   - component: {fileID: 139177969}
   m_Layer: 5
-  m_Name: view-by-questions-button
+  m_Name: view-by-students-button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -392,7 +392,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 139177970}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1833231357}
+        m_TargetAssemblyTypeName: ViewStatsManager, Scripts
+        m_MethodName: LoadStudentsButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &139177970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,7 +835,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 466389124}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1833231357}
+        m_TargetAssemblyTypeName: ViewStatsManager, Scripts
+        m_MethodName: NextPage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &466389124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1254,8 +1278,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ViewStatsManager, Assembly-CSharp
+      - m_Target: {fileID: 1833231357}
+        m_TargetAssemblyTypeName: ViewStatsManager, Scripts
         m_MethodName: BackButtonClick
         m_Mode: 1
         m_Arguments:
@@ -1621,7 +1645,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1286391997}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1833231357}
+        m_TargetAssemblyTypeName: ViewStatsManager, Scripts
+        m_MethodName: PrevPage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1286391997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1983,7 +2019,7 @@ GameObject:
   - component: {fileID: 1495423389}
   - component: {fileID: 1495423388}
   m_Layer: 5
-  m_Name: view-by-student-button
+  m_Name: view-by-questions-button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2052,7 +2088,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1495423389}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1833231357}
+        m_TargetAssemblyTypeName: ViewStatsManager, Scripts
+        m_MethodName: LoadQuestionsButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1495423389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2428,7 +2476,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 791, y: 100}
+  m_CellSize: {x: 791, y: 50}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
