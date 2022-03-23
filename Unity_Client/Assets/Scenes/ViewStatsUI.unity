@@ -1828,6 +1828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   studentrowUI: {fileID: 0}
+  questionsrowUI: {fileID: 0}
 --- !u!1 &1351975963
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,6 +2407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   studentrowUI: {fileID: 4122335187087917920, guid: 31eab34fcdbd07547892cc6a2f1bc463, type: 3}
+  questionsrowUI: {fileID: 769303807345590150, guid: a5dec793259a11840b7ecf4b21c355d6, type: 3}
 --- !u!114 &1833231358
 MonoBehaviour:
   m_ObjectHideFlags: 0
