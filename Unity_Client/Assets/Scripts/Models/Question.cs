@@ -6,13 +6,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using SimpleJSON;
 using System.Linq;
-
+using Newtonsoft.Json;
 [Serializable]
 public class Question
 {
+    [JsonConstructor]
     public Question(string questionId, string questionText, int answerIndex, List<string> answersText, string worldTopic, string specificSection, string questionStandard, string difficultyStandard)
     {
-        
+        this.questionId = questionId;
         this.questionText = questionText;
         this.answerIndex = answerIndex;
         this.answersText = answersText;
@@ -20,11 +21,8 @@ public class Question
         this.specificSection = specificSection;
         this.questionStandard = questionStandard;
         this.difficultyStandard = difficultyStandard;
-        this.questionId = questionId;
-
-
     }
-    
+
     public string questionText { get; set; }
     public int answerIndex { get; set; }
     public List<string> answersText { get; set; }
