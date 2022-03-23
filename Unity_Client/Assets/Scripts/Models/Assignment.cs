@@ -5,8 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Assignment : MonoBehaviour
 {
-    public Assignment(int assignmentId, int totalMark, string assignmentName, string assignmentTopic, string assignmentDescriptions, 
-                        List<Question>questionList, List<Student> targetStudentList, int dueYear, int dueMonth, int dueDay){ 
+    public Assignment(int assignmentId, int totalMark, string assignmentName, string assignmentTopic, string assignmentDescriptions, List<Question>questionList, List<Student> targetStudentList, int dueYear, int dueMonth, int dueDate){ 
         this.assignmentId = assignmentId;
         this.totalMark = totalMark;
         this.assignmentName = assignmentName;
@@ -14,7 +13,7 @@ public class Assignment : MonoBehaviour
         this.assignmentDescriptions = assignmentDescriptions;
         this.questionList = questionList;
         this.targetStudentList = targetStudentList;
-        // this.dueDate = new DateTime(dueYear, dueMonth, dueDay, 23, 59, 00);
+       // this.deuDate = new DateTime(Year, Month, Date, 23, 59, 00);
     }
     public int assignmentId { get; set; }
     public int totalMark { get; set; }

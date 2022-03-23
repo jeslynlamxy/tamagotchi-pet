@@ -72,7 +72,6 @@ public class MultiPlayerGameManager : MonoBehaviour
 
         multiPlayerInstance.multiRoundId = dataController.generateUID();
         multiPlayerInstance.playerStudentId = username;
-        // multiPlayerInstance.playerCharacterUsed = 
         // multiPlayerInstance.opponentCharacterUsed =
 
         skillLeft = true;

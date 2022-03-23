@@ -20,13 +20,13 @@ public class Section_Select_Script : MonoBehaviour
 
         List<string> items = new List<string>();
 
-        if (World_Select_Script.worldChoice == "Planning")
+        if (World_Select_Script.worldChoice == "planning")
         {
-            items.Add("Introduction");
-            items.Add("Requirement Elicitation");
-            items.Add("Requirement Analysis");
-            items.Add("Analysis Model");
-            items.Add("Documentation(SRS)");
+            items.Add("1");
+            items.Add("2");
+            items.Add("3");
+            items.Add("4");
+            items.Add("5");
         }
 
         foreach (var item in items)
@@ -58,6 +58,4 @@ public class Section_Select_Script : MonoBehaviour
     {
         SceneManager.LoadScene("QuestionBank");
     }
-
-
 }
