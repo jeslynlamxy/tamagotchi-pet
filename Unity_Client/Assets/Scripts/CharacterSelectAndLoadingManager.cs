@@ -160,8 +160,8 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         answersText.Add("2");
         answersText.Add("1");
 
-        var question1 = new Question("0", "2+2", 0, answersText, "requirements", "1", "simple");
-        var question2 = new Question("1", "3x1", 1, answersText, "requirements", "1", "complex");
+        var question1 = new Question("0", "2+2", 0, answersText, "requirements", "1", "simple", "easy");
+        var question2 = new Question("1", "3x1", 1, answersText, "requirements", "1", "complex", "easy");
 
         var questionList = new List<Question>();
         questionList.Add(question1);

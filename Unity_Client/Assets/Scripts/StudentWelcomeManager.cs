@@ -51,16 +51,20 @@ public class StudentWelcomeManager : MonoBehaviour
         var lastLoginDay = DateTime.Parse(student.lastLoginDay);
         int daysDiff = (int)Math.Round((DateTime.Now - lastLoginDay).TotalDays);
         Debug.Log(daysDiff);
-        student.currentFood -= daysDiff * 4;
-        student.currentWater -= daysDiff * 4;
-        if (student.currentFood < 0)
+        foreach (var pet in student.petsUnlocked)
         {
-            student.currentFood = 0;
+            pet.petCurrentFood -= daysDiff * 4;
+            pet.petCurrentWater -= daysDiff * 4;
+            if (pet.petCurrentFood < 0)
+            {
+                pet.petCurrentFood = 0;
+            }
+            if (pet.petCurrentWater < 0)
+            {
+                pet.petCurrentWater = 0;
+            }
         }
-        if (student.currentWater < 0)
-        {
-            student.currentWater = 0;
-        }
+
         student.lastLoginDay = DateTime.Now.ToString();
         UpdateStudentData();
     }
