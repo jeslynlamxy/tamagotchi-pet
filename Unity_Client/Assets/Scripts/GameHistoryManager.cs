@@ -52,7 +52,7 @@ public class GameHistoryManager : MonoBehaviour
                     var row = Instantiate(rowUi, transform).GetComponent<HistoryRowUi>();
                     row.gameObject.name = "Row" + (count + 1).ToString();
                     //row.date.text = (count + 1).ToString();
-                    row.date.text = "22/3/22";
+                    row.date.text = "2"+count.ToString()+"/3/22";
                     row.mode.text = playerRoundData[i].sldcWorld;
                     row.topic.text = playerRoundData[i].specificSection;
                     row.score.text = playerRoundData[i].finalScore.ToString();
@@ -64,7 +64,7 @@ public class GameHistoryManager : MonoBehaviour
 
     public void NextPage()
     {
-        currHistoryPage += 1;
+        currHistoryPage = 1;
         foreach (Transform child in transform) {
             Destroy(child.gameObject);
         }
