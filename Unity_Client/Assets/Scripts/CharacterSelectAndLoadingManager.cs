@@ -173,9 +173,8 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         }
     }
 
-    public void BackButton()
-    {
-        SceneManager.LoadScene("WorldAndStageSelectionUI");
+    public void BackSelected() {
+        SceneManager.LoadScene("SingleMultiPlayerSelectionUI");
     }
 
 }
