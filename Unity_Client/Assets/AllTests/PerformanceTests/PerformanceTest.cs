@@ -21,7 +21,7 @@ public class PerformanceTest
         }
         yield return null;
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(.001f);
 
         TMP_InputField usernameInput = GameObject.Find("InputUsername").GetComponent<TMP_InputField>();
         usernameInput.text = "studentH";
@@ -35,7 +35,7 @@ public class PerformanceTest
         Button LoginButton = GameObject.Find("LoginButton").GetComponent<Button>();
         LoginButton.onClick.Invoke();
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.001f);
 
         yield return Measure.Frames().Run();
     }
@@ -53,5 +53,77 @@ public class PerformanceTest
         yield return Measure.Frames().Run();
     }
 
+    // Measure the total allocated memory and total reserved memory
+    [Test, Performance, Version("1")]
+    public void Measure_Custom()
+    {
+        var allocated = new SampleGroup("TotalAllocatedMemory", SampleUnit.Megabyte);
+        var reserved = new SampleGroup("TotalReservedMemory", SampleUnit.Megabyte);
+        Measure.Custom(allocated, Profiler.GetTotalAllocatedMemoryLong() / 1048576f);
+        Measure.Custom(reserved, Profiler.GetTotalReservedMemoryLong() / 1048576f);
+    }
+    
+
+    // Measure transition time from main menu to start single player game
+    [UnityTest, Performance]
+    public IEnumerator StudentMainMenu_to_SinglePlayerMode()
+    {
+        using (Measure.Scope(new SampleGroup("Setup.LoadScene")))
+        {
+            SceneManager.LoadScene("StudentWelcomeUI");
+        }
+        yield return new WaitForSeconds(.001f);
+
+        Button StartGameButton = GameObject.Find("StartGameButton").GetComponent<Button>();
+        StartGameButton.onClick.Invoke();
+
+        yield return new WaitForSeconds(.001f);
+
+        Button SingleButton = GameObject.Find("SingleButton").GetComponent<Button>();
+        SingleButton.onClick.Invoke();
+
+        yield return null;
+        yield return Measure.Frames().Run();
+    }
+
+    // Measure transition time from main menu to start multiplayer game
+    [UnityTest, Performance]
+    public IEnumerator StudentMainMenu_to_MultiPlayerMode()
+    {
+        using (Measure.Scope(new SampleGroup("Setup.LoadScene")))
+        {
+            SceneManager.LoadScene("StudentWelcomeUI");
+        }
+        yield return new WaitForSeconds(.001f);
+
+        Button StartGameButton = GameObject.Find("StartGameButton").GetComponent<Button>();
+        StartGameButton.onClick.Invoke();
+
+        yield return new WaitForSeconds(.001f);
+
+        Button MultiButton = GameObject.Find("MultiButton").GetComponent<Button>();
+        MultiButton.onClick.Invoke();
+
+        yield return null;
+        yield return Measure.Frames().Run();
+    }
+
+    // Loading Next Page Button
+    [UnityTest, Performance]
+    public IEnumerator Next_Page_Button()
+    {
+        using (Measure.Scope(new SampleGroup("Setup.LoadScene")))
+        {
+            SceneManager.LoadScene("LeaderboardUI");
+        }
+        yield return new WaitForSeconds(.001f);
+
+        Button NextPageButton = GameObject.Find("next-page-button").GetComponent<Button>();
+        NextPageButton.onClick.Invoke();
+
+        yield return null;
+
+        yield return Measure.Frames().Run();
+    }
 
 }
