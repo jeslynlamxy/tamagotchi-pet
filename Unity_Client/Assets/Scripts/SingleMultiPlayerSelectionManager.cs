@@ -29,4 +29,9 @@ public class SingleMultiPlayerSelectionManager : MonoBehaviour
         // SceneManager.LoadScene("");
     }
 
+    public void BackPressed()
+    {
+        SceneManager.LoadScene("StudentWelcomeUI");
+    }
+
 }

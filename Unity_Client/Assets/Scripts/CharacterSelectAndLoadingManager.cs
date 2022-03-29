@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Newtonsoft.Json;
 using static Question;
+using static SinglePlayerRoundData;
+using System.Linq;
+using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 public class CharacterSelectAndLoadingManager : MonoBehaviour
 {
     public Student student;
@@ -71,94 +76,65 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         dataController.selectedPetIndex = displayPetsIndex;
     }
 
-    // private List<string> tamagotchiList = new List<string>
-    //         {"a", "b", "c"}; // tbc
-    // private int currentPointer = 0;
-
-    // int mod(int a, int n) {
-    //     return ((a%n)+n) % n;
-    // }
-
-    // public void LoadCharacterInPanel(int currentPointer) {
-    //     int tamagotchiIndex = mod(currentPointer, tamagotchiList.Count);
-    //     // get tamagotchi and display in screen
-    //     // idk how lmao
-    //     Debug.Log(tamagotchiIndex.ToString());
-    //     Debug.Log(tamagotchiList[tamagotchiIndex]);
-    // }
-
-    // public void NextButtonPress()
-    // {
-    //     currentPointer += 1;
-    //     LoadCharacterInPanel(currentPointer);
-    // }
-
-    // public void PreviousButtonPress()
-    // {
-    //     currentPointer -= 1;
-    //     LoadCharacterInPanel(currentPointer);
-    // }
-
     public void SetSinglePlayerQuestions(string world, string section, string level)
     {
-        // considering the world section level do the item below
-        // if (level == "easy")
-        // {
-        //     // get 6 simple questions from server
-        //     // get 2 complex questions from server
-        // }
-        // else if (level == "medium")
-        // {
-        //     // get 4 simple questions from server
-        //     // get 4 complex questions from server
-        // }
-        // else if (level == "hard")
-        // {
-        //     // get 2 simple questions from server
-        //     // get 6 complex questions from server
-        // }
-
-        string worldUri = System.Web.HttpUtility.UrlPathEncode(world);
-        // var url = "http://172.21.148.165/get_question_filtered?world=" + worldUri + "&section=1&limit=8";
-        var url = "http://172.21.148.165/get_question_filtered?world=REQUIREMENT%20ANALYSIS&section=2&limit=8";
+        var url = "http://172.21.148.165/get_question_filtered_optional"; // temp
+        if (level == "easy")
+        {
+            url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT%20ANALYSIS&section=1&difficultyStandard=EASY";
+        }
+        else if (level == "medium")
+        {
+            url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT%20ANALYSIS&section=1&difficultyStandard=MEDIUM";
+        }
+        else
+        {
+            url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT%20ANALYSIS&section=1&difficultyStandard=HARD";
+        }
         var questionList = http.Get<List<Question>>(url);
-
-        SinglePlayerInstance.questionList = questionList;
-
-
+        SinglePlayerInstance.questionList = GetRandomElements(questionList, 3);
     }
-
+    public static List<t> GetRandomElements<t>(IEnumerable<t> list, int elementsCount)
+        {
+            return list.OrderBy(x => Guid.NewGuid()).Take(elementsCount).ToList();
+        }
     public async void SetMultiPlayerQuestions(string world, string section, string level)
     {
         // considering the world section level do the item below
-        // get single player game in data base with same world section level
-        // get the stat data as well
 
-        // MultiPlayerInstance.opponentRoundId = 
+        // if (world == "requirements")
+        // {
+        //     Debug.Log("to be checked");
+        // }
+
+        // for now just requirement, 1, and easy need to double check the values in server, maybe need wipe out everything
+        var url = "http://172.21.148.165/get_single_round_data_by?world=requirement&section=1&difficultyStandard=easy";
+        var all_data_list = http.Get<List<SinglePlayerRoundData>>(url);
+        var chosen_game = GetRandomElements(all_data_list, 1);
+
+        // very anon
+        MultiPlayerInstance.questionList = chosen_game[0].questionList;
+        MultiPlayerInstance.opponentStatList = chosen_game[0].statList;
 
         // sample only, need to replace with backend stuffs above
-        var answersText = new List<string>();
-        answersText.Add("4");
-        answersText.Add("3");
-        answersText.Add("2");
-        answersText.Add("1");
 
-        var question1 = new Question("0", "2+2", 0, answersText, "requirements", "1", "simple", "easy");
-        var question2 = new Question("1", "3x1", 1, answersText, "requirements", "1", "complex", "easy");
-
-        var questionList = new List<Question>();
-        questionList.Add(question1);
-        questionList.Add(question2);
-
-        MultiPlayerInstance.questionList = questionList;
-        var stat1 = new Stat(dataController.generateUID(), dataController.generateUID(), "0", "meowmeow", 15, true, 2, true);
-        var stat2 = new Stat(dataController.generateUID(), dataController.generateUID(), "1", "meowmeow", 20, true, 2, true);
-
-        var opponentStatList = new List<Stat>();
-        opponentStatList.Add(stat1);
-        opponentStatList.Add(stat2);
-
-        MultiPlayerInstance.opponentStatList = opponentStatList;
+        // var answersText = new List<string>();
+        // answersText.Add("4");
+        // answersText.Add("3");
+        // answersText.Add("2");
+        // answersText.Add("1");
+        // var question1 = new Question("0", "2+2", 0, answersText, "requirements", "1", "easy");
+        // var question2 = new Question("1", "3x1", 1, answersText, "requirements", "1", "easy");
+        // var questionList = new List<Question>();
+        // questionList.Add(question1);
+        // questionList.Add(question2);
+        // MultiPlayerInstance.questionList = questionList;
+        // var stat1 = new Stat(dataController.generateUID(), dataController.generateUID(), "0", "meowmeow", 15, true, 2, true);
+        // var stat2 = new Stat(dataController.generateUID(), dataController.generateUID(), "1", "meowmeow", 20, true, 2, true);
+        // var opponentStatList = new List<Stat>();
+        // opponentStatList.Add(stat1);
+        // opponentStatList.Add(stat2);
+        // MultiPlayerInstance.opponentStatList = opponentStatList;
     }
 
 
@@ -195,6 +171,11 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         {
             Debug.Log("Error!");
         }
+    }
+
+    public void BackButton()
+    {
+        SceneManager.LoadScene("WorldAndStageSelectionUI");
     }
 
 }

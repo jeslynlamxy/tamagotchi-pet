@@ -14,6 +14,6 @@ public class Generator : MonoBehaviour
 
     public void generate()
     {
-        i = Random.Range(0, 1000000000);
+        i = Random.Range(0, 1000000000); // i think need check if the number exist already or not
     }
 }

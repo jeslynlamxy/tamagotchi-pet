@@ -139,7 +139,7 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
             return false;
         }
         current_question.answerIndex = dropdownAnswer.value - 1;
-        current_question.questionStandard = dropdownLevel.options[dropdownLevel.value].text;
+        // current_question.questionStandard = dropdownLevel.options[dropdownLevel.value].text;
         current_question.difficultyStandard = dropdownStandard.options[dropdownStandard.value].text;
         populateFields();
         switch (current_question.answerIndex)

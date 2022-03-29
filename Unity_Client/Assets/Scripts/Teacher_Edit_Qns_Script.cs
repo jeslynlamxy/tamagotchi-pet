@@ -164,7 +164,7 @@ public class Teacher_Edit_Qns_Script : MonoBehaviour
             return false;
         }
         current_question.answerIndex = dropdownAnswer.value - 1;
-        current_question.questionStandard = dropdownLevel.options[dropdownLevel.value].text;
+        // current_question.questionStandard = dropdownLevel.options[dropdownLevel.value].text;
         current_question.difficultyStandard = dropdownStandard.options[dropdownStandard.value].text;
         populateFields();
         switch (current_question.answerIndex)
@@ -224,15 +224,15 @@ public class Teacher_Edit_Qns_Script : MonoBehaviour
                 dropdownLevel.value = 2;
                 break;
         }
-        switch (current_question.questionStandard)
-        {
-            case "simple":
-                dropdownLevel.value = 0;
-                break;
-            case "complex":
-                dropdownLevel.value = 1;
-                break;
-        }
+        // switch (current_question.questionStandard)
+        // {
+        //     case "simple":
+        //         dropdownLevel.value = 0;
+        //         break;
+        //     case "complex":
+        //         dropdownLevel.value = 1;
+        //         break;
+        // }
     }
     private void popupQuestionIncomplete()
     {

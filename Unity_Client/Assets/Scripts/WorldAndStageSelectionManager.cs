@@ -22,11 +22,12 @@ public class WorldAndStageSelectionManager : MonoBehaviour
         lvl2.interactable = false;
         lvl3.interactable = false;
         lvl4.interactable = false;
-        checkAndUnlock();
+        // checkAndUnlock();
     }
     void checkAndUnlock() {
         // get shit and unlock stages from user lmao
     }
+    
     public void requirementButtonSelected()
     {
         PlayerPrefs.SetString("worldSelected", "requirement");
@@ -106,5 +107,9 @@ public class WorldAndStageSelectionManager : MonoBehaviour
         if (PlayerPrefs.HasKey("worldSelected") && PlayerPrefs.HasKey("sectionSelected") && PlayerPrefs.HasKey("levelSelected")) {
             SceneManager.LoadScene("CharacterSelectionUI");
         }
+    }
+
+    public void BackSelected() {
+        SceneManager.LoadScene("SingleMultiPlayerSelectionUI");
     }
 }
