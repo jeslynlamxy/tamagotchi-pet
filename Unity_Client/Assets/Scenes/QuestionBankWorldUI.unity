@@ -415,8 +415,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1098856702}
-        m_TargetAssemblyTypeName: World_Select_Script, Assembly-CSharp
-        m_MethodName: onPlanningSelect
+        m_TargetAssemblyTypeName: World_Select_Script, Scripts
+        m_MethodName: onRequirementSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
