@@ -14,13 +14,13 @@ public class Question_List_Script : MonoBehaviour
 {
 
     List<JSONNode> questionList;
-    List<JSONNode> questionStandardList;
+    List<JSONNode> difficultyStandardList;
     List<JSONNode> questionIdList;
     GameObject studentPopUp;
     public GameObject mainScrollContentView;
     public GameObject ContentDataPanel;
     List<JSONNode> questionContentTextArray = new List<JSONNode>();
-    List<JSONNode> questionStandardArray = new List<JSONNode>();
+    List<JSONNode> difficultyStandardArray = new List<JSONNode>();
     List<JSONNode> questionIdArray = new List<JSONNode>();
     public static Question editQ;
     public static string questionIdd;
@@ -58,7 +58,7 @@ public class Question_List_Script : MonoBehaviour
         for (int i = 0; i < questionInfo.Count; i++)
         {
             questionContentTextArray.Add(questionInfo[i]["questionText"]);
-            questionStandardArray.Add(questionInfo[i]["questionStandard"]);
+            difficultyStandardArray.Add(questionInfo[i]["difficultyStandard"]);
             questionIdArray.Add(questionInfo[i]["questionId"]);
         }
 
@@ -66,8 +66,8 @@ public class Question_List_Script : MonoBehaviour
         questionList = questionContentTextArray;
 
 
-        questionStandardList = new List<JSONNode>();
-        questionStandardList = questionStandardArray;
+        difficultyStandardList = new List<JSONNode>();
+        difficultyStandardList = difficultyStandardArray;
 
         questionIdList = new List<JSONNode>();
         questionIdList = questionIdArray;
@@ -80,7 +80,7 @@ public class Question_List_Script : MonoBehaviour
             for (int i = 0; i < questionList.Count; i++)
             {
                 string value = questionList[i];
-                string questionStandard = questionStandardList[i];
+                string difficultyStandard = difficultyStandardList[i];
                 string questionIdd = questionIdList[i];
                 GameObject playerTextPanel = (GameObject)Instantiate(ContentDataPanel);
                 playerTextPanel.transform.SetParent(mainScrollContentView.transform);
@@ -88,7 +88,7 @@ public class Question_List_Script : MonoBehaviour
                 playerTextPanel.transform.localPosition = new Vector3(0, 0, 0);
                 playerTextPanel.transform.Find("Text_No").GetComponent<Text>().text = (i + 1).ToString();
                 playerTextPanel.transform.Find("Text_Question").GetComponent<Text>().text = value;
-                playerTextPanel.transform.Find("Text_Difficulty").GetComponent<Text>().text = questionStandard;
+                playerTextPanel.transform.Find("Text_Difficulty").GetComponent<Text>().text = difficultyStandard;
                 playerTextPanel.transform.Find("Text_Id").GetComponent<Text>().text = questionIdd;
 
                 playerTextPanel.transform.Find("Text_Difficulty").transform.Find("Button_Manage").GetComponent<Button>().onClick.AddListener(() => {
