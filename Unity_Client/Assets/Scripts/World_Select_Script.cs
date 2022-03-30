@@ -12,35 +12,25 @@ public class World_Select_Script : MonoBehaviour
     public static string worldChoice;
 
     // Start is called before the first frame update
-    public void onPlanningSelect()
-    {
-        worldChoice = "planning" ;
-        SceneManager.LoadScene("QuestionBankSection");
-    }
 
     public void onDesignSelect()
     {
-        worldChoice = "design";
+        worldChoice = "DESIGN";
         SceneManager.LoadScene("QuestionBankSection");
     }
 
     public void onImplementationSelect()
     {
-        worldChoice = "implementation";
+        worldChoice = "IMPLEMENTATION";
         SceneManager.LoadScene("QuestionBankSection");
     }
 
-    public void onTestingSelect()
+    public void onRequirementSelect()
     {
-        worldChoice = "testing";
+        worldChoice = "REQUIREMENT";
         SceneManager.LoadScene("QuestionBankSection");
     }
 
-    public void onMaintenanceSelect()
-    {
-        worldChoice = "maintenance";
-        SceneManager.LoadScene("QuestionBankSection");
-    }
 
 
 
