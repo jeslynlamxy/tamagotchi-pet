@@ -6,6 +6,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using Newtonsoft.Json;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 
 public class MultiPlayerGameCompletionManager : MonoBehaviour
 {
@@ -77,10 +80,10 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
     }
     public void LeaderboardButtonClick()
     {
-        //
+        SceneManager.LoadScene("LeaderboardUI");
     }
     public void SocialsButtonClick()
     {
-        //
+        // new NativeShare().SetText( "http://google.com" ).Share();
     }
 }
