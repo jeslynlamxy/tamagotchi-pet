@@ -82,8 +82,9 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
     {
         SceneManager.LoadScene("LeaderboardUI");
     }
+
     public void SocialsButtonClick()
     {
-        // new NativeShare().SetText( "http://google.com" ).Share();
+        Debug.Log("tbc");
     }
 }
