@@ -20,13 +20,26 @@ public class Section_Select_Script : MonoBehaviour
 
         List<string> items = new List<string>();
 
-        if (World_Select_Script.worldChoice == "planning")
+        if (World_Select_Script.worldChoice == "REQUIREMENT")
         {
             items.Add("1");
             items.Add("2");
             items.Add("3");
             items.Add("4");
-            items.Add("5");
+        }
+        if (World_Select_Script.worldChoice == "DESIGN")
+        {
+            items.Add("1");
+            items.Add("2");
+            items.Add("3");
+            items.Add("4");
+        }
+        if (World_Select_Script.worldChoice == "IMPLEMENTATION")
+        {
+            items.Add("1");
+            items.Add("2");
+            items.Add("3");
+            items.Add("4");
         }
 
         foreach (var item in items)
