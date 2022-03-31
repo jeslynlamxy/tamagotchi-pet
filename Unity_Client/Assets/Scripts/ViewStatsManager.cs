@@ -29,8 +29,6 @@ public class ViewStatsManager : MonoBehaviour
 
     private int currQuestionsIndex = 0;
 
-    private int currPageIndex = 0;
-
     public StudentsRowUI studentrowUI;
 
     public QuestionsRowUi questionsrowUI;
@@ -75,13 +73,13 @@ public class ViewStatsManager : MonoBehaviour
         studentList = studentList.OrderByDescending(o=>o.score).ToList();
     }
 
-    public async void LoadStudentsStatistics(int currStudentsIndex)
+    public void LoadStudentsStatistics(int currStudentsIndex)
     {
         foreach (Transform child in transform) {
             Destroy(child.gameObject);
         }
         if (currStudentsIndex == 0)
-        {
+        {   
             for (int i = 0; i < Mathf.Min(MaxStats, studentList.Count); i++)
             {
                 Debug.Log(studentList[i].username);
@@ -136,10 +134,11 @@ public class ViewStatsManager : MonoBehaviour
         var responseStrQuestion = http.Post(url_question, ""); 
         Debug.Log(responseStr);
         questionList = JsonConvert.DeserializeObject<List<Question>>(responseStrQuestion);
-        Debug.Log(questionList[0].questionText);
+        // Debug.Log("questionList.Count");
+        // Debug.Log(questionList.Count);
     }
 
-    public async void LoadQuestionsStatistics(int currQuestionsIndex)
+    public void LoadQuestionsStatistics(int currQuestionsIndex)
     {
         foreach (Transform child in transform) {
             Destroy(child.gameObject);
