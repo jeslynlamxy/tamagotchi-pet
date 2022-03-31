@@ -261,4 +261,8 @@ public class ViewStatsManager : MonoBehaviour
         SceneManager.LoadScene("TeacherWelcomeUI");
     }
 
+    public void ReportButtonClick() {
+        Application.OpenURL("http://172.21.148.165/get_Report");
+    }
+
 }
