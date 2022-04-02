@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement; // can load scene
@@ -37,7 +38,7 @@ public class DataManager : MonoBehaviour
         string uniqueSessionId = ticks.ToString() + '-' + guid; //guid created by combining ticks 
         return uniqueSessionId;
     }
-    private static Random random = new Random();
+    private static System.Random random = new System.Random();
     public static string RandomString(int length)
     {
         const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -45,7 +46,7 @@ public class DataManager : MonoBehaviour
         .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 
-    public IEnumerator TakeScreenshotAndShare(String shareMsg)
+    public static IEnumerator TakeScreenshotAndShare(String shareMsg)
     {
         yield return new WaitForEndOfFrame();
 
@@ -59,10 +60,10 @@ public class DataManager : MonoBehaviour
         // To avoid memory leaks
         Destroy( ss );
 
-        new NativeShare().AddFile( filePath )
-            .SetSubject( "Tamagotchi Pet" ).SetText(shareMsg)
-            .SetCallback( ( result, shareTarget ) => Debug.Log( "Share result: " + result + ", selected app: " + shareTarget ) )
-            .Share();
+        // new NativeShare().AddFile( filePath )
+        //     .SetSubject( "Tamagotchi Pet" ).SetText(shareMsg)
+        //     .SetCallback( ( result, shareTarget ) => Debug.Log( "Share result: " + result + ", selected app: " + shareTarget ) )
+        //     .Share();
 
     }
 

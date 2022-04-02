@@ -19,7 +19,7 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
     public string username;
     public Student student;
     private HttpManager http;
-    private String shareMsg;
+    private string shareMsg;
     // Start is called before the first frame update
     void Start()
     {
@@ -87,10 +87,10 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
     public void SocialsButtonClick()
     {
         if (victoryOrDefeatText.text == "victory") {
-            shareMsg = "I just obtained victory in Tamagotchi Pet Multiplayer, winners like me score " + playerScore.ToString() + " come and try to beat me!";
+            shareMsg = "I just obtained victory in Tamagotchi Pet Multiplayer, winners like me score " + currentRoundData.finalScore.ToString() + " come and try to beat me!";
         }
         else {
-            shareMsg = "Unfortunately, i just got defeated in Tamagotchi Pet Multiplayer, i will work harder and score higher than " + playerScore.ToString() + " next time.";
+            shareMsg = "Unfortunately, i just got defeated in Tamagotchi Pet Multiplayer, i will work harder and score higher than " + currentRoundData.finalScore.ToString() + " next time.";
         }
         StartCoroutine(DataManager.TakeScreenshotAndShare(shareMsg));
     }

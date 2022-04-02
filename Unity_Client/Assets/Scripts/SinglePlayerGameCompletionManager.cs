@@ -77,7 +77,7 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
     }
     public void SocialsButtonClick()
     {
-        shareMsg = "I just played a game on Tamagotchi Pet and scored " + score.ToString() + " come and learn through this fabulous game!";
+        shareMsg = "I just played a game on Tamagotchi Pet and scored " + currentRoundData.finalScore.ToString() + " come and learn through this fabulous game!";
         StartCoroutine(DataManager.TakeScreenshotAndShare(shareMsg));
     }
 }
