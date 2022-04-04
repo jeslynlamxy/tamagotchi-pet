@@ -19,8 +19,11 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
     private GameObject popUp;
     private Dropdown dropdownAnswer;
     private Dropdown dropdownLevel;
-    private Dropdown dropdownStandard;
+    //private Dropdown dropdownStandard;
     private QuestionManager conn;
+    private Question question;
+    private Generator generator;
+    public static int k = Generator.i;
 
     void Start()
     {
@@ -28,10 +31,11 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
         popUp = mainContentPanel.transform.Find("Panel_Messages").gameObject;
         entryContainer = panelObject.transform.Find("Panel_Question_Add_Teacher");
         dropdownAnswer = entryContainer.Find("Dropdown_Answer").GetComponent<Dropdown>();
-        dropdownLevel = entryContainer.Find("Dropdown_Standard").GetComponent<Dropdown>();
-        dropdownStandard = entryContainer.Find("Dropdown_Level").GetComponent<Dropdown>();
+        //dropdownLevel = entryContainer.Find("Dropdown_Standard").GetComponent<Dropdown>();
+        dropdownLevel = entryContainer.Find("Dropdown_Level").GetComponent<Dropdown>();
         popUp.SetActive(false);
         conn = (QuestionManager)transform.GetComponent(typeof(QuestionManager));
+        k = Generator.i;
 
         // button events
         panelObject.transform.Find("Button_Return").GetComponent<Button>().onClick.AddListener(ClickReturn);
@@ -47,16 +51,19 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
     }
     public void ClickSave()
     {
+       
         if (validateFields())
         {
-            
+            //string a = k.ToString();
+            current_question.questionId = k.ToString();
             conn.addStoryQ(current_question);
             SceneManager.LoadScene("QuestionBank");
         }
         else
         {
-            popupQuestionIncomplete();
+              popupQuestionIncomplete();
         }
+        
     }
     // Clear all fields
     public void ClickClear()
@@ -132,8 +139,8 @@ public class Teacher_Add_Qns_Script : MonoBehaviour
             return false;
         }
         current_question.answerIndex = dropdownAnswer.value - 1;
-        current_question.questionStandard = dropdownLevel.options[dropdownLevel.value].text;
-        current_question.difficultyStandard = dropdownStandard.options[dropdownStandard.value].text;
+        // current_question.questionStandard = dropdownLevel.options[dropdownLevel.value].text;
+        current_question.difficultyStandard = dropdownLevel.options[dropdownLevel.value].text;
         populateFields();
         switch (current_question.answerIndex)
         {

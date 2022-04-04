@@ -6,6 +6,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using Newtonsoft.Json;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 
 public class MultiPlayerGameCompletionManager : MonoBehaviour
 {
@@ -16,6 +19,7 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
     public string username;
     public Student student;
     private HttpManager http;
+    private string shareMsg;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,10 +81,17 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
     }
     public void LeaderboardButtonClick()
     {
-        //
+        SceneManager.LoadScene("LeaderboardUI");
     }
+
     public void SocialsButtonClick()
     {
-        //
+        if (victoryOrDefeatText.text == "victory") {
+            shareMsg = "I just obtained victory in Tamagotchi Pet Multiplayer, winners like me score " + currentRoundData.finalScore.ToString() + " come and try to beat me!";
+        }
+        else {
+            shareMsg = "Unfortunately, i just got defeated in Tamagotchi Pet Multiplayer, i will work harder and score higher than " + currentRoundData.finalScore.ToString() + " next time.";
+        }
+        StartCoroutine(DataManager.TakeScreenshotAndShare(shareMsg));
     }
 }

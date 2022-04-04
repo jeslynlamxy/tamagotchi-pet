@@ -26,7 +26,12 @@ public class SingleMultiPlayerSelectionManager : MonoBehaviour
     public void CustomGameSelected()
     {
         PlayerPrefs.SetString("gameTypeSelected", "Custom");
-        // SceneManager.LoadScene("");
+        SceneManager.LoadScene("CustomGameInputUI");
+    }
+
+    public void BackPressed()
+    {
+        SceneManager.LoadScene("StudentWelcomeUI");
     }
 
 }

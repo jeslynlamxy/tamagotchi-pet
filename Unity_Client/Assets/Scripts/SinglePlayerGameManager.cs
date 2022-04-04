@@ -291,8 +291,6 @@ public class SinglePlayerGameManager : MonoBehaviour
         singlePlayerInstance.finalScore = playerScore;
         determineFood();
         determineWater();
-        // post to server round data
-        await Task.Delay(timeBetweenQuestion);
         SceneManager.LoadScene("SinglePlayerGameCompletionUI");
     }
     public void UserSelectOne()

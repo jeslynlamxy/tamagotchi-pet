@@ -95,4 +95,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/YK Archive.unity
     guid: 544e45b5617c2384ca04164dd0363900
+  - enabled: 1
+    path: Assets/Scenes/CustomGameInputUI.unity
+    guid: 10ce4f61bd6bcf2458f22ccc3caee4d1
   m_configObjects: {}

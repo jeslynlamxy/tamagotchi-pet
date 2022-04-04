@@ -26,8 +26,8 @@ public class Teacher_Edit_Qns_Script : MonoBehaviour
         popUp = mainContentPanel.transform.Find("Panel_Messages").gameObject;
         entryContainer = panelObject.transform.Find("Panel_Question_Add_Teacher");
         dropdownAnswer = entryContainer.Find("Dropdown_Answer").GetComponent<Dropdown>();
-        dropdownLevel = entryContainer.Find("Dropdown_Standard").GetComponent<Dropdown>();
-        dropdownStandard = entryContainer.Find("Dropdown_Level").GetComponent<Dropdown>();
+        //dropdownLevel = entryContainer.Find("Dropdown_Standard").GetComponent<Dropdown>();
+        dropdownLevel = entryContainer.Find("Dropdown_Level").GetComponent<Dropdown>();
         popUp.SetActive(false);
         conn = (QuestionManager)transform.GetComponent(typeof(QuestionManager));
         panelObject.gameObject.SetActive(false);
@@ -164,8 +164,8 @@ public class Teacher_Edit_Qns_Script : MonoBehaviour
             return false;
         }
         current_question.answerIndex = dropdownAnswer.value - 1;
-        current_question.questionStandard = dropdownLevel.options[dropdownLevel.value].text;
-        current_question.difficultyStandard = dropdownStandard.options[dropdownStandard.value].text;
+        current_question.difficultyStandard = dropdownLevel.options[dropdownLevel.value].text;
+        //current_question.difficultyStandard = dropdownStandard.options[dropdownStandard.value].text;
         populateFields();
         switch (current_question.answerIndex)
         {
@@ -224,15 +224,15 @@ public class Teacher_Edit_Qns_Script : MonoBehaviour
                 dropdownLevel.value = 2;
                 break;
         }
-        switch (current_question.questionStandard)
-        {
-            case "simple":
-                dropdownLevel.value = 0;
-                break;
-            case "complex":
-                dropdownLevel.value = 1;
-                break;
-        }
+        // switch (current_question.questionStandard)
+        // {
+        //     case "simple":
+        //         dropdownLevel.value = 0;
+        //         break;
+        //     case "complex":
+        //         dropdownLevel.value = 1;
+        //         break;
+        // }
     }
     private void popupQuestionIncomplete()
     {

@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class SinglePlayerGameCompletionManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
     public string username;
     public Student student;
     private HttpManager http;
+    private string shareMsg;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +77,7 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
     }
     public void SocialsButtonClick()
     {
-        //
+        shareMsg = "I just played a game on Tamagotchi Pet and scored " + currentRoundData.finalScore.ToString() + " come and learn through this fabulous game!";
+        StartCoroutine(DataManager.TakeScreenshotAndShare(shareMsg));
     }
 }

@@ -44,11 +44,8 @@ public class MultiPlayerGameManager : MonoBehaviour
         petSelectedIndex = dataController.selectedPetIndex;
         multiPlayerInstance = dataController.GetMultiPlayerInstance();
         multiPlayerInstance.playerStatList = new List<Stat>();
-
         GetPetChosen();
         UpdatePetDisplay();
-
-
         if (multiPlayerInstance.difficultyLevel == "easy")
         {
             difficulty = 1;
@@ -61,7 +58,6 @@ public class MultiPlayerGameManager : MonoBehaviour
         {
             difficulty = 3;
         }
-
         questionPool = multiPlayerInstance.questionList;
         opponentStatPool = multiPlayerInstance.opponentStatList;
 
@@ -72,7 +68,6 @@ public class MultiPlayerGameManager : MonoBehaviour
 
         multiPlayerInstance.multiRoundId = dataController.generateUID();
         multiPlayerInstance.playerStudentId = username;
-        // multiPlayerInstance.opponentCharacterUsed =
 
         skillLeft = true;
         roundId = dataController.generateUID();
@@ -136,6 +131,7 @@ public class MultiPlayerGameManager : MonoBehaviour
             usedSkill.interactable = false;
         }
     }
+
     // food = accuracy * level chosen + bonus win point
     // water = speed * level chosen + bonus win point
     void determineFood()
@@ -279,8 +275,6 @@ public class MultiPlayerGameManager : MonoBehaviour
         multiPlayerInstance.winPoint = winPoint;
         determineFood();
         determineWater();
-        // post to server round data
-        await Task.Delay(timeBetweenQuestion);
         SceneManager.LoadScene("MultiPlayerGameCompletionUI");
     }
     public int getOpponentTiming(string questionId)

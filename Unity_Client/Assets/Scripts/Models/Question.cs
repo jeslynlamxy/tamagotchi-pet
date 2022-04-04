@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 public class Question
 {
     [JsonConstructor]
-    public Question(string questionId, string questionText, int answerIndex, List<string> answersText, string worldTopic, string specificSection, string questionStandard, string difficultyStandard)
+    public Question(string questionId, string questionText, int answerIndex, List<string> answersText, string worldTopic, string specificSection, string difficultyStandard)
     {
         this.questionId = questionId;
         this.questionText = questionText;
@@ -19,7 +19,6 @@ public class Question
         this.answersText = answersText;
         this.worldTopic = worldTopic;
         this.specificSection = specificSection;
-        this.questionStandard = questionStandard;
         this.difficultyStandard = difficultyStandard;
     }
 
@@ -28,7 +27,6 @@ public class Question
     public List<string> answersText { get; set; }
     public string worldTopic { get; set; }
     public string specificSection { get; set; }
-    public string questionStandard { get; set; } // simple and complex
     public string difficultyStandard { get; set; }
     [field: NonSerialized]
     public string questionId { get; set; }
@@ -42,7 +40,7 @@ public class Question
         answersText = new List<string>();
         specificSection = jsonStoryQ["specificSection"];
         questionText = jsonStoryQ["questionText"];
-        questionStandard = jsonStoryQ["questionStandard"];
+        difficultyStandard = jsonStoryQ["difficultyStandard"];
         worldTopic = jsonStoryQ["worldTopic"];
         questionId = jsonStoryQ["questionId"];
         answerIndex = int.Parse(jsonStoryQ["answerIndex"]);
@@ -60,7 +58,6 @@ public class Question
         answerIndex = 0;
         questionId = "";
         questionText = "";
-        questionStandard = "";
         difficultyStandard = "";
     }
 }
