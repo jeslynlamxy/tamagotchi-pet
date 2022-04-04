@@ -78,21 +78,21 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
 
     public void SetSinglePlayerQuestions(string world, string section, string level)
     {
-        var url = "http://172.21.148.165/get_question_filtered_optional"; // temp
+        var url = "temp"; // temp
         if (level == "easy")
         {
-            url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT%20ANALYSIS&section=1&difficultyStandard=EASY";
+            url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT&section=1&difficultyStandard=EASY";
         }
         else if (level == "medium")
         {
-            url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT%20ANALYSIS&section=1&difficultyStandard=MEDIUM";
+            url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT&section=1&difficultyStandard=MEDIUM";
         }
         else
         {
-            url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT%20ANALYSIS&section=1&difficultyStandard=HARD";
+            url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT&section=1&difficultyStandard=HARD";
         }
         var questionList = http.Get<List<Question>>(url);
-        SinglePlayerInstance.questionList = GetRandomElements(questionList, 3);
+        SinglePlayerInstance.questionList = GetRandomElements(questionList, 2);
     }
     public static List<t> GetRandomElements<t>(IEnumerable<t> list, int elementsCount)
         {
@@ -101,14 +101,9 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
     public async void SetMultiPlayerQuestions(string world, string section, string level)
     {
         // considering the world section level do the item below
-
-        // if (world == "requirements")
-        // {
-        //     Debug.Log("to be checked");
-        // }
-
-        // for now just requirement, 1, and easy need to double check the values in server, maybe need wipe out everything
-        var url = "http://172.21.148.165/get_single_round_data_by?world=requirement&section=1&difficultyStandard=easy";
+        // need to double check the values in server, maybe need wipe out everything
+        // done and checked, works well
+        var url = "http://172.21.148.165/get_single_round_data_by?world="+world+"&section="+section+"&difficultyStandard="+level;
         var all_data_list = http.Get<List<SinglePlayerRoundData>>(url);
         var chosen_game = GetRandomElements(all_data_list, 1);
 
@@ -117,7 +112,6 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
         MultiPlayerInstance.opponentStatList = chosen_game[0].statList;
 
         // sample only, need to replace with backend stuffs above
-
         // var answersText = new List<string>();
         // answersText.Add("4");
         // answersText.Add("3");

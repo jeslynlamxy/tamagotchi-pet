@@ -84,7 +84,7 @@ public class ViewDetailedStatisticsManager : MonoBehaviour
         // Debug.Log(username);
     }
 
-    public async void LoadTopicsStatistics(int currTopicsIndex)
+    public void LoadTopicsStatistics(int currTopicsIndex)
     {
         foreach (Transform child in transform) {
             Destroy(child.gameObject);
@@ -213,7 +213,7 @@ public class ViewDetailedStatisticsManager : MonoBehaviour
         questionList = JsonConvert.DeserializeObject<List<Question>>(responseStrQuestion);
     }
 
-    public async void LoadQuestionsStatistics(int currQuestionsIndex)
+    public void LoadQuestionsStatistics(int currQuestionsIndex)
     {
         foreach (Transform child in transform) {
             Destroy(child.gameObject);
@@ -270,7 +270,7 @@ public class ViewDetailedStatisticsManager : MonoBehaviour
         var responseStr = http.Post(url, ""); 
         // Debug.Log(responseStr);
         rounddata = JsonConvert.DeserializeObject<List<SinglePlayerRoundData>>(responseStr);
-        Debug.Log(rounddata[1].questionList[1].worldTopic);
+        // Debug.Log(rounddata[1].questionList[1].worldTopic);
 
         http = new HttpManager();
         var url_question = "http://172.21.148.165/get_MultiPlayerRoundData"; // change 
@@ -281,7 +281,7 @@ public class ViewDetailedStatisticsManager : MonoBehaviour
         
     }
 
-    public async void LoadModeStatistics(int currModeIndex)
+    public void LoadModeStatistics(int currModeIndex)
     {
         foreach (Transform child in transform) {
             Destroy(child.gameObject);
