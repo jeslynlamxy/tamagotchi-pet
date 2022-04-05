@@ -1472,6 +1472,7 @@ GameObject:
   - component: {fileID: 904141625}
   - component: {fileID: 904141624}
   - component: {fileID: 904141623}
+  - component: {fileID: 904141626}
   m_Layer: 5
   m_Name: 'DesignGameButton '
   m_TagString: Untagged
@@ -1543,9 +1544,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 904141626}
+        m_TargetAssemblyTypeName: SceneLoaderManager, Scripts
+        m_MethodName: LoadCustomGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1593,6 +1594,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904141621}
   m_CullTransparentMesh: 1
+--- !u!114 &904141626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904141621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e112d5043fda0874897c75c38bb15861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &910758205
 GameObject:
   m_ObjectHideFlags: 0

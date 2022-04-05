@@ -9,6 +9,8 @@ public class DataManager : MonoBehaviour
 {
     public SinglePlayerRoundData SinglePlayerInstance;
     public MultiPlayerRoundData MultiPlayerInstance;
+    public Assignment AssignmentInstance;
+    public CustomGame CustomGameInstance;
     // public Student student { get; set; }
     public string username { get; set; }
     public int selectedPetIndex { get; set; }
@@ -30,6 +32,27 @@ public class DataManager : MonoBehaviour
     public MultiPlayerRoundData GetMultiPlayerInstance()
     {
         return MultiPlayerInstance;
+    }
+    public Assignment GetAssignment()
+    {
+        AssignmentInstance = new Assignment(
+            "01",
+            100,
+            "AssignmentName",
+            "AssignmentTopid",
+            "AssignmentDescription"
+        );
+        return AssignmentInstance;
+    }
+
+    public CustomGame GetCustomGame()
+    {
+        CustomGameInstance = new CustomGame(
+            "01",
+            "GameName",
+            "GameDescription"
+        );
+        return CustomGameInstance;
     }
     public string generateUID()
     {

@@ -7,63 +7,101 @@ using System.Text.RegularExpressions;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 using TMPro;
-// using qnRowUi;
+using System;
+using System.Threading;
 
-
-
-public class DesignMyGameManager1 : MonoBehaviour
+public class DesignMyGameManager1  : MonoBehaviour
 {
     private HttpManager http;
+    public GameObject panelObject;
     private SceneLoaderManager scene;
-    private List<Question> questionList;
-    private List<Question> gameQnList = new List<Question>();
-    private List<Student> studentList = new List<Student>();
-    private string worldSelected = "REQUIREMENT%20ANALYSIS";
-    private string sectionSelected = "1";
-    private string difficultySelected = "EASY";
+    private static string worldSelected = null;
+    private static string sectionSelected = null;
+    private static string difficultySelected = null;
     public Button addButton1;
     public Button addButton2;
     public Button addButton3;
-
     public Button removeButton1;
     public Button removeButton2;
     public Button removeButton3;
-    
+    public Button qnPrevPageButton;
+    public Button qnNextPageButton;
+    public Button gamePrevPageButton;
+    public Button gameNextPageButton;
     public Text QnContent1;
     public Text QnContent2;
     public Text QnContent3;
     public Text QnId1;
     public Text QnId2;
     public Text QnId3;
-
     public Text AddedQnId1;
     public Text AddedQnId2;
     public Text AddedQnId3;
-
     public Text AddedQnContent1;
     public Text AddedQnContent2;
     public Text AddedQnContent3;
-
     int QnRows = 3;
     private int CustomGameRows = 3;
-    private int currQuestionIndex = 0;
-    private int currGameQnIndex = 0;    
+    private static int currQuestionIndex = 0;
+    private static int currGameQnIndex = 0;   
+    private static List<Question> questionList;
+    private List<Student> studentList = new List<Student>();
+    public static List<Question> gameQnList = new List<Question>();
+    public Image popUpBox;
+    public Text popUpText;
+
 
     void Start()
     {
+        gameQnList = new List<Question>();
         Debug.Log("starting session...");
         SetButtons();
         SetTextBoxObjects();
-        Debug.Log("Fetching question data now....");
-        GetQuestionData();
+        // Debug.Log("Fetching question data now....");
+        GetQuestionData();  
         Debug.Log("Data fetched successfully!");
         DisplayQuestionData(currQuestionIndex);
-        DisplayAddedQuestionData(currGameQnIndex);
+        DisplayAddedQuestionData(currGameQnIndex, gameQnList);
     }
-    
+
     public void GetQuestionData(){
         http = new HttpManager();
         var url = "http://172.21.148.165/get_question";
+        var responseStr = http.Post(url, ""); 
+        Debug.Log(responseStr);
+        questionList = JsonConvert.DeserializeObject<List<Question>>(responseStr);
+        questionList = questionList.ToList();
+        Debug.Log(questionList);
+    }
+
+    public void GetQuestionDataFiltered(){
+        http = new HttpManager();
+        var url = "";
+        if (worldSelected!=null && sectionSelected!=null&difficultySelected!=null){
+            url = "http://172.21.148.165/get_question_filtered_optional?world="+worldSelected+"&section="+sectionSelected+"&difficultyStandard="+difficultySelected;
+        }
+        else if (worldSelected == null & sectionSelected == null & difficultySelected!=null){
+            url = "http://172.21.148.165/get_question_filtered_optional?difficultyStandard=" + difficultySelected;
+        }
+        else if (worldSelected == null & sectionSelected != null & difficultySelected==null){
+            url = "http://172.21.148.165/get_question_filtered_optional?section=" + sectionSelected;
+        }
+        else if (worldSelected != null && sectionSelected==null & difficultySelected==null){
+            url = "http://172.21.148.165/get_question_filtered_optional?world="+worldSelected;
+        }
+        else if (worldSelected==null & sectionSelected!=null&difficultySelected!=null){
+            url = "http://172.21.148.165/get_question_filtered_optional?section="+sectionSelected+"&difficultyStandard="+difficultySelected;
+        }
+        else if (worldSelected!=null && sectionSelected!=null&difficultySelected==null){
+            url = "http://172.21.148.165/get_question_filtered_optional?world="+worldSelected+"&section="+sectionSelected;
+        }
+        else if (worldSelected!=null && sectionSelected==null&difficultySelected!=null){
+            url = "http://172.21.148.165/get_question_filtered_optional?world="+worldSelected+"&difficultyStandard="+difficultySelected;
+        }
+        else{
+            url = "http://172.21.148.165/get_question";
+        }
+        
         var responseStr = http.Post(url, ""); 
         Debug.Log(responseStr);
         questionList = JsonConvert.DeserializeObject<List<Question>>(responseStr);
@@ -79,17 +117,25 @@ public class DesignMyGameManager1 : MonoBehaviour
     }
 
     public void DisplayQuestionData(int currQuestionIndex){
-        int idx = currQuestionIndex;
-        Debug.Log("Displaying Question Data now. current displayed index is " + idx);        
+        int idx = Math.Abs(currQuestionIndex);
+        // Debug.Log("Displaying Question Data now. current displayed index is " + idx);        
 
         if (questionList.Count>idx){
+        addButton1.enabled = true;
+        // Debug.Log("get text");
         QnContent1.text = questionList[idx].questionText;
-        QnId1.text = questionList[idx].questionId;}
+        // Debug.Log("Get text successful");
+        String idTemp = questionList[idx].questionId;
+        // String idTemp = questionList[idx]?.questionId.ToString()??"w123";
+        QnId1.text = idTemp;
+        // Debug.Log("get id sucessfully");
+        // Debug.Log("ID is " + idTemp);
+        }
         else{
             Debug.Log("Row 1 is empty");
             QnContent1.text = "";
             QnId1.text = "";
-            // addButton1.enabled = false;
+            addButton1.enabled = false;
         }
         if (questionList.Count>idx+1){
         QnContent2.text = questionList[idx+1].questionText;
@@ -114,21 +160,22 @@ public class DesignMyGameManager1 : MonoBehaviour
         }
     }
 
-    public void DisplayAddedQuestionData(int currGameQnIndex){
-        int idx_custom_game = currGameQnIndex;
-        Debug.Log("Refersing currently added questions. current custome game Index displayed is "+currGameQnIndex);
+    public void DisplayAddedQuestionData(int currGameQnIndex, List<Question> gameQnList){
+        int idx_custom_game = Math.Abs(currGameQnIndex);
+        // Debug.Log("Refresing currently added questions. current Assignment Index displayed is "+idx_custom_game);
         if (gameQnList.Count>idx_custom_game){
+            removeButton1.enabled = true;
             AddedQnContent1.text = gameQnList[idx_custom_game].questionText;
-            AddedQnId1.text =gameQnList[idx_custom_game].questionId;
+            AddedQnId1.text = (idx_custom_game+1).ToString();
         }
         else{
             AddedQnContent1.text = "";
             AddedQnId1.text = "";
-            // addButton1.enabled = false;
+            removeButton1.enabled = false;
         }
         if (gameQnList.Count>idx_custom_game+1){
-            AddedQnContent2.text = gameQnList[idx_custom_game].questionText;
-            AddedQnId2.text =gameQnList[idx_custom_game].questionId;
+            AddedQnContent2.text = gameQnList[idx_custom_game+1].questionText;
+            AddedQnId2.text = (idx_custom_game+2).ToString();
         }
         else{
             AddedQnContent2.text = "";
@@ -136,8 +183,8 @@ public class DesignMyGameManager1 : MonoBehaviour
             // addButton2.enabled = false;
         }
         if (gameQnList.Count>idx_custom_game+2){
-            AddedQnContent3.text = gameQnList[idx_custom_game].questionText;
-            AddedQnId3.text =gameQnList[idx_custom_game].questionId;
+            AddedQnContent3.text = gameQnList[idx_custom_game+2].questionText;
+            AddedQnId3.text =(idx_custom_game+3).ToString();
         }
         else{
             AddedQnContent3.text = "";
@@ -147,151 +194,193 @@ public class DesignMyGameManager1 : MonoBehaviour
 
     }
 
-    public void QnNextPage(){
-        currQuestionIndex += QnRows;
-        Debug.Log("Showing next page of question data. questionIndex: " + currQuestionIndex);
-        DisplayQuestionData(currQuestionIndex); 
+    public List<Question> addQnListener(int buttonIndex, List<Question> gameQnList){
+        // Debug.Log("Listener add question listener now....");
+        int indexToAdd = Math.Abs(currQuestionIndex) + buttonIndex;
+          if (questionList.Count>=indexToAdd){
+              if (gameQnList.Contains(questionList[indexToAdd])){
+                    Debug.Log("Question already exist, donot add.");
+                    // PopUpBox("Question already added!");
+              }
+              else{
+                gameQnList.Add(questionList[indexToAdd]);
+                Debug.Log("Question in row 1 added successfully! ");
+                Debug.Log("Current game question list: ");
+                int pos=0;
+                foreach( var x in gameQnList) {
+                    Debug.Log("Question No. "+ (pos+1).ToString()+" "+x.questionId + " " +x.questionText);
+                    pos = pos + 1;}
+              }
+            }
+        else{
+            Debug.Log("Index out of range");
+        }
+        return gameQnList;
     }
 
-    public void QnPrevPage(){
-        Debug.Log("Current Index to be decreased later: " + currQuestionIndex);
-        // GetComponent<Button>().interactable = true;
-        currQuestionIndex = currQuestionIndex - 3;
-        // currQuestionIndex = -currQuestionIndex;
-        Debug.Log("Showing previous page of question data. Question index: " + currQuestionIndex);
-        DisplayQuestionData(currQuestionIndex);
-    }
+    public List<Question> removeQnListener(int buttonIndex,List<Question> gameQnList){
 
-    public void CustomGameNextPage(){
-        currGameQnIndex += CustomGameRows;
-        DisplayAddedQuestionData(currGameQnIndex);
-    }
-
-    public void CustomGamePrevPage(){
-        currGameQnIndex -= CustomGameRows;
-        DisplayAddedQuestionData(currGameQnIndex);
+        if (gameQnList.Count>(0+buttonIndex)){
+            gameQnList.RemoveAt(buttonIndex);
+            // DisplayQuestionData(currQuestionIndex);
+            // Debug.Log("Current  question list: ");
+            }
+        else{
+            Debug.Log("Index out of range");     
+            // PopUpBox("Index out of range");   
+        }
+        return gameQnList;
     }
 
     public void Add1(){
-        if (questionList.Count>=currQuestionIndex){
-            gameQnList.Add(questionList[currQuestionIndex]);
-            Debug.Log("Question in row 1 added successfully! ");
-            DisplayAddedQuestionData(currGameQnIndex);
-        }
-        else{
-            // GetComponent<Button>().enabled = false; 
-            // GetComponent<Image>().enabled = false;
-        }
+        Debug.Log("=============Add1============");
+        gameQnList = addQnListener(0,gameQnList);
+        DisplayAddedQuestionData(currGameQnIndex, gameQnList);
     }
 
     public void Add2(){
-        if (questionList.Count>=currQuestionIndex+1){
-            gameQnList.Add(questionList[currQuestionIndex+1]);
-            Debug.Log("Question in row 2 added successfully! ");
-            DisplayAddedQuestionData(currGameQnIndex);
-        }
-        else{
-            // GetComponent<Button>().enabled = false; 
-            // GetComponent<Image>().enabled = false;
-        }
+        Debug.Log("=============Add2============");
+        gameQnList = addQnListener(1,gameQnList);
+        DisplayAddedQuestionData(currGameQnIndex, gameQnList);
     }
 
     public void Add3(){
-        if (questionList.Count>=currQuestionIndex+2){
-            gameQnList.Add(questionList[currQuestionIndex+2]);
-            Debug.Log("Question in row 3 added successfully! ");
-            DisplayAddedQuestionData(currGameQnIndex);
-        }
-        else{
-            // GetComponent<Button>().enabled = false; 
-            // GetComponent<Image>().enabled = false;
-        }
+        Debug.Log("=============Add3============");
+        gameQnList = addQnListener(2,gameQnList);
+        DisplayAddedQuestionData(currGameQnIndex, gameQnList);
     }
 
 
     public void Remove1(){
-        if (gameQnList.Count>=1){
-            gameQnList.RemoveAt(0);
-            DisplayQuestionData(currQuestionIndex);
-            }
-        else{
-            // GetComponent<Button>().enabled = false;
-            // GetComponent<Image>().enabled = false;
-        }
+        Debug.Log("=============Remove1============");
+        gameQnList = removeQnListener(0,gameQnList);
+        DisplayAddedQuestionData(currGameQnIndex, gameQnList);
     }
 
     public void Remove2(){
-        if (gameQnList.Count>=2){
-            gameQnList.RemoveAt(1);
-            DisplayQuestionData(currQuestionIndex);
-            }
-        else{
-            // GetComponent<Button>().enabled = false;
-            // GetComponent<Image>().enabled = false;
-        }
+        Debug.Log("=============Remove2============");
+        gameQnList = removeQnListener(1,gameQnList);
+        DisplayAddedQuestionData(currGameQnIndex, gameQnList);
     }
 
     public void Remove3(){
-        if (gameQnList.Count>=3){
-            gameQnList.RemoveAt(2);
-            DisplayQuestionData(currQuestionIndex);
-            }
-        else{
-            // GetComponent<Button>().enabled = false;
-            // GetComponent<Image>().enabled = false;
-        }
+        Debug.Log("=============Remove3============");
+        gameQnList = removeQnListener(2,gameQnList);
+        DisplayAddedQuestionData(currGameQnIndex, gameQnList);
     }
 
     public void HandleWorldDropdown(int val){
         if (val == 0){
-            worldSelected = "";
+            // worldSelected = "";
         }
         if (val==1){
-            worldSelected = "REQUIREMENT%30ANALYSIS";
+            worldSelected = "REQUIREMENT";
+            GetQuestionDataFiltered();
         }
         if (val==3){
-            worldSelected = "DESIGN%30PHASE";
+            worldSelected = "DESIGN";
             Debug.Log("World 3: " + worldSelected);
+            GetQuestionDataFiltered();
         }
         if (val==3){
-            worldSelected = "IMPLEMENTATION%30PHASE";
+            worldSelected = "IMPLEMENTATION";
+            GetQuestionDataFiltered();
         }
         Debug.Log("World " + worldSelected + " is selected.");
     }
     public void HandleSectionDropdown(int val){
         if (val == 0){
-            sectionSelected = "";
+            // sectionSelected = "";
         }
         if (val == 1){
             sectionSelected = "1";
+            GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
             // output.text = questionList[0].questionText;
         }
         if (val == 3){
             sectionSelected = "3";
+            GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
         }
         if (val == 3){
             sectionSelected = "3";
+            GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
         }
         if (val == 4){
             sectionSelected = "4";
+            GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
         }
         Debug.Log("Section " + sectionSelected + " is selected.");
     }
     public void HandleDiffcultyDropdown(int val){
         if (val == 0){
-            difficultySelected = "";
+            // difficultySelected = "";
         }
         if (val == 1){
             difficultySelected = "EASY";
+            GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
         }
         if (val == 3){
             difficultySelected = "MEDIUM";
+            GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
         }
         if (val == 3){
             difficultySelected = "HARD";
+            GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
         }
         Debug.Log("Difficulty Level " + difficultySelected + " is selected " );
     }
+
+    public void QnNextPage(){
+        if (currQuestionIndex + QnRows<questionList.Count){
+        // qnNextPageButton.enabled = true;
+        currQuestionIndex += QnRows;
+        Debug.Log("============Show next page (Page " +(currQuestionIndex/3+1) +") of question data.============");
+        DisplayQuestionData(currQuestionIndex); }
+        else{
+            // qnNextPageButton.enabled = false;
+            // PopUpBox("This is the Last page already!");
+        }
+    }
+
+    public void QnPrevPage(){
+ 
+        if(Math.Abs(currQuestionIndex)!=0){
+        // Debug.Log("Current Question Index (absolute value) to be decreased later: " + Math.Abs(currQuestionIndex));
+        // GetComponent<Button>().interactable = true;
+        // qnPrevPageButton.enabled = true;
+        currQuestionIndex = Math.Abs(currQuestionIndex) +(-3);
+        // currQuestionIndex = -currQuestionIndex;
+        Debug.Log("============Show prev page (Page " + (currQuestionIndex/3+1) +") of question data============");
+        DisplayQuestionData(currQuestionIndex);}
+        else{
+            // qnNextPageButton.enabled = false;
+            // PopUpBox("This is the first page already!");
+        }
+    }
+
+    public void AssignmentNextPage(){
+
+        currGameQnIndex += CustomGameRows;
+        Debug.Log("============Show next page (Page " +(currGameQnIndex/3+1 )+") of game data============");
+
+        DisplayAddedQuestionData(currGameQnIndex, gameQnList);
+    }
+
+    public void AssignmentPrevPage(){
+
+        // Debug.Log("Current Assignment Question Index (absolute value) to be decreased later: " + Math.Abs(currGameQnIndex));
+        currGameQnIndex = Math.Abs(currGameQnIndex)+(-3);
+        Debug.Log("============Show prev page (Page " +(currGameQnIndex/3+1)+") of game data============");
+        DisplayAddedQuestionData(currGameQnIndex,gameQnList);
+    }
+
 
 
     public void SetButtons(){
@@ -302,8 +391,16 @@ public class DesignMyGameManager1 : MonoBehaviour
         removeButton1 = GameObject.Find("remove-button-1").GetComponent<Button>();
         removeButton2 = GameObject.Find("remove-button-2").GetComponent<Button>();
         removeButton3 = GameObject.Find("remove-button-3").GetComponent<Button>();
-    }
 
+       
+        addButton1.onClick.AddListener(()=>addQnListener(0,gameQnList));
+        addButton2.onClick.AddListener(()=>addQnListener(1,gameQnList));
+        addButton3.onClick.AddListener(()=>addQnListener(2,gameQnList));
+
+        removeButton1.onClick.AddListener(()=>removeQnListener(0,gameQnList));
+        removeButton2.onClick.AddListener(()=>removeQnListener(1,gameQnList));
+        removeButton3.onClick.AddListener(()=>removeQnListener(2,gameQnList));
+    }
     public void SetTextBoxObjects(){
         QnContent1=GameObject.Find("QnContent1").GetComponent<Text>(); 
         QnId1=GameObject.Find("QnId1").GetComponent<Text>();
@@ -320,6 +417,18 @@ public class DesignMyGameManager1 : MonoBehaviour
         AddedQnId3 = GameObject.Find("addedQnId3").GetComponent<Text>();
     }
 
+        // popUpText = GameObject.Find("popup-text").GetComponent<Text>();
+        // popUpBox = GameObject.Find("PopUpBox").GetComponent<Image>();
+        // popUpBox.gameObject.SetActive(false);
+    // }
+    // public void PopUpBox(String message){
+    //     // popUpBox.gameObject.SetActive(true);
+    //     // popUpText.text = message;
+    //     TimeSpan ts = new TimeSpan(0,0,1);
+    //     Thread.Sleep(ts);
+    //     // popUpBox.gameObject.SetActive(false);
+    // }
+
     public void NextPageButton(){
         SceneManager.LoadScene("DesignMyGame-P2");  
     }
@@ -327,7 +436,6 @@ public class DesignMyGameManager1 : MonoBehaviour
     public void BackToMenuButton(){
         SceneManager.LoadScene("StudentWelcomeUI");
     }
-
 
 
 }

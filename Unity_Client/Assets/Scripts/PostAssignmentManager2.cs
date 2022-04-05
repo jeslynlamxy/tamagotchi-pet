@@ -7,39 +7,78 @@ using System.Text.RegularExpressions;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 using TMPro;
+using System;
+using System.Threading;
 
 public class PostAssignmentManager2 : MonoBehaviour
 {
-    private string assignmentTitle;
-    private string assignmentDescription;
-
-    private string assignmentMark;
-    private string assignmentTopic;
-    private int dueYear;
-    private int dueMonth;
-    private int dueDay;
-    private int dueHour;
-
+    private DataManager dataController;
+    private static  string assignmentTitle;
+    private static  string assignmentDescription;
+    private static int assignmentMark;
+    private static string assignmentTopic;
+    private static  int dueYear;
+    private static  int dueMonth;
+    private static  int dueDay;
+    private static  int dueHour;
+   [SerializeField]
     public Text successMsg;
+    private HttpManager http;
+    public static Assignment AssignmentInstance;
+    public static string ID="";
+    public static PostAssignmentManager1 assignmentScript1;
+    public static List<Question> assignmentQnListToAdd;
+    
     void Start()
-    {
+    {   
+        successMsg.gameObject.SetActive(false);
+        dataController = FindObjectOfType<DataManager>();
+        AssignmentInstance = dataController.GetAssignment();
+        AssignmentInstance.questionList = PostAssignmentManager1.assignmentQnList;
+
         
     }
+    public void postAssignment(){
+        AssignmentInstance.assignmentId="12ad8";
+        AssignmentInstance.assignmentName="Requirement Analysis";
+        AssignmentInstance.assignmentDescriptions="Finish it asap";
+        AssignmentInstance.totalMark=1000;
+        AssignmentInstance.assignmentTopic = "REQUIREMENT";
+        Debug.Log("======checking assignmetn List ======");
 
+
+        Debug.Log("Posting assignment to database now");
+        http = new HttpManager();
+        var url = "http://172.21.148.165/add_Assignment";
+        // var response = http.Post(url, AssignmentInstance);
+        Debug.Log("Assignment Posted Successfully");
+    }
+
+    public void postButton(){
+        postAssignment();
+        Debug.Log("Positng done");
+        successMsg.gameObject.SetActive(true);
+        successMsg.text = "Posted successfully!, \n Assignment Code is: " + AssignmentInstance.assignmentId;
+    }
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void readNameInput(string title){
         assignmentTitle = title;
         Debug.Log(title);
+        // AssignmentInstance.assignmentName=assignmentTitle;
     }
 
     public void readDescriptionInput(string description){
         assignmentDescription = description;
         Debug.Log(description);
+        // AssignmentInstance.assignmentDescriptions=assignmentDescription;
     }
 
     public void readTotalMarkInput(string totalMark){
-        assignmentMark = totalMark;
+        assignmentMark = Int32.Parse(totalMark);
         Debug.Log(totalMark);
+        // AssignmentInstance.totalMark=assignmentMark;
     }
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void handleTopicDropdown(int val){
 
@@ -47,18 +86,18 @@ public class PostAssignmentManager2 : MonoBehaviour
             assignmentTopic = "";
         }
         if (val==1){
-            assignmentTopic = "REQUIREMENT%30ANALYSIS";
+            assignmentTopic = "REQUIREMENT";
         }
         if (val==3){
-            assignmentTopic = "DESIGN%30PHASE";
+            assignmentTopic = "DESIGN";
             Debug.Log("World 3: " + assignmentTopic);
         }
         if (val==3){
-            assignmentTopic = "IMPLEMENTATION%30PHASE";
+            assignmentTopic = "IMPLEMENTATION";
         }
         Debug.Log("topic " + assignmentTopic + " is selected.");
+        // AssignmentInstance.assignmentTopic = assignmentTopic;
     }
-
     public void handleDueYearDropDown(int val){
         if (val == 0){
             dueYear = 2021;
@@ -84,22 +123,7 @@ public class PostAssignmentManager2 : MonoBehaviour
     public void handleDueTimeDropdown(int val){
         dueHour = val;
     }
-
-
-    public void SelectTargetStudentButton(){
-        SceneManager.LoadScene("PostAssignment-P3");
-    }
-    
     public void backButton(){
         SceneManager.LoadScene("PostAssignment-P1");
     }
-
-    public void postButton(){
-        successMsg = GameObject.Find("SuccessMsg").GetComponent<Text>();
-        successMsg.text = "Posted successfully!";
-        SceneManager.LoadScene("TeacherWelcomeUI");
-    }
-
-    
-
 }

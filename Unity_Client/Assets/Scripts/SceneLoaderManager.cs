@@ -126,4 +126,11 @@ public class SceneLoaderManager : MonoBehaviour
         Debug.Log("Quit!");
 
     }
+
+    public void LoadPostAssignment(){
+        SceneManager.LoadScene("PostAssignment-P1");
+    }
+    public void LoadCustomGame(){
+        SceneManager.LoadScene("DesignMyGame-P1");
+    }
 }
