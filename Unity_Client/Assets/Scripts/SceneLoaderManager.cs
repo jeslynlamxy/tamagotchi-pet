@@ -18,6 +18,10 @@ public class SceneLoaderManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainPageUI");
     }
+    public void LoadPersistent()
+    {
+        SceneManager.LoadScene("Persistent");
+    }
 
     public void LoadStudentLoginUI()
     {
@@ -72,12 +76,12 @@ public class SceneLoaderManager : MonoBehaviour
 
     public void LoadQuestionBankAddScene()
     {
-    	SceneManager.LoadScene("Question_Bank_Add");
+        SceneManager.LoadScene("Question_Bank_Add");
     }
 
-        public void LoadQuestionBankWorldScene()
+    public void LoadQuestionBankWorldScene()
     {
-    	SceneManager.LoadScene("QuestionBankWorldUI");
+        SceneManager.LoadScene("QuestionBankWorldUI");
     }
 
 
