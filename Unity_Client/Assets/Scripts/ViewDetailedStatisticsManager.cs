@@ -93,7 +93,7 @@ public class ViewDetailedStatisticsManager : MonoBehaviour
         topicsTiming = 0;
         if (currTopicsIndex == 0)
         {
-            for (int i = 1; i < rounddata.Count; i++)
+            for (int i = 0; i < rounddata.Count; i++)
             {  
                 if ((rounddata[i] != null))
                 {
@@ -160,7 +160,7 @@ public class ViewDetailedStatisticsManager : MonoBehaviour
                     if ((rounddata[i] != null))
                     {
                         foreach (string item in topicList)
-                        Debug.Log(rounddata[i].questionList[0].worldTopic);
+                        // Debug.Log(rounddata[i].questionList[0].worldTopic);
                         {
                             if ((topicList.Contains(rounddata[i].questionList[0].worldTopic)))
                             {
@@ -209,7 +209,7 @@ public class ViewDetailedStatisticsManager : MonoBehaviour
         http = new HttpManager();
         var url_question = "http://172.21.148.165/get_question"; // change 
         var responseStrQuestion = http.Post(url_question, ""); 
-        Debug.Log(responseStr);
+        // Debug.Log(responseStr);
         questionList = JsonConvert.DeserializeObject<List<Question>>(responseStrQuestion);
     }
 
@@ -275,9 +275,9 @@ public class ViewDetailedStatisticsManager : MonoBehaviour
         http = new HttpManager();
         var url_question = "http://172.21.148.165/get_MultiPlayerRoundData"; // change 
         var responseStrMultiPlayer = http.Post(url_question, ""); 
-        Debug.Log(responseStrMultiPlayer);
+        // Debug.Log(responseStrMultiPlayer);
         multiplayerRoundData = JsonConvert.DeserializeObject<List<MultiPlayerRoundData>>(responseStrMultiPlayer);
-        Debug.Log(multiplayerRoundData);
+        // Debug.Log(multiplayerRoundData);
         
     }
 

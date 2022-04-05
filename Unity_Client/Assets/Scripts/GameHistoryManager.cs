@@ -23,7 +23,7 @@ public class GameHistoryManager : MonoBehaviour
     {
         // dataController = FindObjectOfType<DataManager>();
         // username = dataController.username;
-        username = "studentH";
+        username = "jeslynlxy";
         GetHistoryData();
         GetSpeed();
         GetAccuracy();
