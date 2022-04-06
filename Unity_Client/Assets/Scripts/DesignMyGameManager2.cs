@@ -66,6 +66,6 @@ public class DesignMyGameManager2 : MonoBehaviour
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void backButton(){
-        SceneManager.LoadScene("DesignMyGame-P1");
+        SceneManager.LoadScene("StudentWelcomeUI");
     }
 }
