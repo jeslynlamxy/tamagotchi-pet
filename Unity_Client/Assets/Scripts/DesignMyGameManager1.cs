@@ -10,7 +10,7 @@ using TMPro;
 using System;
 using System.Threading;
 
-public clCustomGameInstance DesignMyGameManager1  : MonoBehaviour
+public class DesignMyGameManager1  : MonoBehaviour
 {
     private HttpManager http;
     public GameObject panelObject;
