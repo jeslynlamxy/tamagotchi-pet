@@ -87,6 +87,9 @@ EditorBuildSettings:
     path: Assets/Scenes/PostAssignment-P2.unity
     guid: 8baf2d0165401294db2523caaabbe409
   - enabled: 1
+    path: Assets/Scenes/Question_Bank_Edit.unity
+    guid: 5dcdadbc3e98c1e44898644d38ebc263
+  - enabled: 1
     path: Assets/Scenes/PostAssignment-P3.unity
     guid: 858557c4c8844ff4c89c359431ad14b6
   - enabled: 1
@@ -111,8 +114,11 @@ EditorBuildSettings:
     path: Assets/Scenes/WorldAndStageSelectionUI.unity
     guid: 0345ddfb48f6f9549bf5d14b7cdc5e3a
   - enabled: 0
-    path: Assets/Scenes/YK Archive.unity
+    path: 
     guid: 544e45b5617c2384ca04164dd0363900
+  - enabled: 1
+    path: Assets/Scenes/EditQuestion.unity
+    guid: 6d359b2b4973cf94d9276d9d214b7e7b
   - enabled: 1
     path: Assets/Scenes/CustomGameInputUI.unity
     guid: 10ce4f61bd6bcf2458f22ccc3caee4d1
