@@ -34,7 +34,7 @@ public class DesignMyGameManager2 : MonoBehaviour
         dataController = FindObjectOfType<DataManager>();
         CustomGameInstance= dataController.GetCustomGame();
         CustomGameInstance.questionList = DesignMyGameManager1.gameQnList;
-        CustomGameInstance.customeGameId ="abd34";
+        CustomGameInstance.customeGameId ="ABD34";
         CustomGameInstance.customeGameName ="Requirement Analysis";
         CustomGameInstance.customGameDescription="Just do it for fun";
 
@@ -50,7 +50,7 @@ public class DesignMyGameManager2 : MonoBehaviour
         postGame();
         Debug.Log("Positng done");
         successMsg.gameObject.SetActive(true);
-        successMsg.text = "Posted successfully!, \n Assignment Code is: " + CustomGameInstance.customeGameId;
+        successMsg.text = "Posted successfully!, \n\n Assignment Code is: \n" + CustomGameInstance.customeGameId;
     }
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void readNameInput(string title){

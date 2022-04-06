@@ -50,6 +50,11 @@ public class PostAssignmentManager1 : MonoBehaviour
     public Image popUpBox;
     public Text popUpText;
 
+    private Dropdown worldDropdown;
+    private Dropdown sectionDropdown;
+    private Dropdown levelDropdown;
+
+
 
     void Start()
     {
@@ -57,6 +62,7 @@ public class PostAssignmentManager1 : MonoBehaviour
         Debug.Log("starting session...");
         SetButtons();
         SetTextBoxObjects();
+        SetDropdown();
         // Debug.Log("Fetching question data now....");
         GetQuestionData();  
         Debug.Log("Data fetched successfully!");
@@ -276,70 +282,105 @@ public class PostAssignmentManager1 : MonoBehaviour
         DisplayAddedQuestionData(currAssimtQnIndex, assignmentQnList);
     }
 
-    public void HandleWorldDropdown(int val){
+    public void HandleWorldDropdown(Dropdown worldDropdown){
+        int val = worldDropdown.value;
         if (val == 0){
-            // worldSelected = "";
+            Debug.Log("val=0");
+            worldSelected = null;
+            GetQuestionDataFiltered();
+              DisplayQuestionData(currQuestionIndex);
+            Debug.Log(worldSelected);
+            Debug.Log("-----------RefreshedFinihsed------------");
+
         }
         if (val==1){
+            Debug.Log("val=1");
+
             worldSelected = "REQUIREMENT";
             GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
+            Debug.Log(worldSelected);
+
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
-        if (val==3){
+        if (val==2){
+            Debug.Log("val=2");
             worldSelected = "DESIGN";
             Debug.Log("World 3: " + worldSelected);
             GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
+            Debug.Log(worldSelected);
+
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         if (val==3){
             worldSelected = "IMPLEMENTATION";
             GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
+            Debug.Log(worldSelected);
+
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         Debug.Log("World " + worldSelected + " is selected.");
     }
-    public void HandleSectionDropdown(int val){
+    public void HandleSectionDropdown(Dropdown sectionDropdown){
+        int val = sectionDropdown.value;
         if (val == 0){
-            // sectionSelected = "";
+            Debug.Log("val-0");
+            sectionSelected = null;
         }
         if (val == 1){
+            Debug.Log("val-1");
             sectionSelected = "1";
             GetQuestionDataFiltered();
             DisplayQuestionData(currQuestionIndex);
-            // output.text = questionList[0].questionText;
+            Debug.Log("-----------RefreshedFinihsed------------");
+        }
+        if (val == 2){
+            Debug.Log("val-2");
+            sectionSelected = "3";
+            GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         if (val == 3){
             sectionSelected = "3";
             GetQuestionDataFiltered();
             DisplayQuestionData(currQuestionIndex);
-        }
-        if (val == 3){
-            sectionSelected = "3";
-            GetQuestionDataFiltered();
-            DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         if (val == 4){
             sectionSelected = "4";
             GetQuestionDataFiltered();
             DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         Debug.Log("Section " + sectionSelected + " is selected.");
     }
-    public void HandleDiffcultyDropdown(int val){
+    public void HandleDiffcultyDropdown(Dropdown levelDropdown){
+        int val = levelDropdown.value;
         if (val == 0){
-            // difficultySelected = "";
+            difficultySelected = null;
+            DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         if (val == 1){
             difficultySelected = "EASY";
             GetQuestionDataFiltered();
             DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
-        if (val == 3){
+        if (val == 2){
             difficultySelected = "MEDIUM";
             GetQuestionDataFiltered();
             DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         if (val == 3){
             difficultySelected = "HARD";
             GetQuestionDataFiltered();
-            DisplayQuestionData(currQuestionIndex);
+             DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");           
         }
         Debug.Log("Difficulty Level " + difficultySelected + " is selected " );
     }
@@ -399,12 +440,6 @@ public class PostAssignmentManager1 : MonoBehaviour
         removeButton2 = GameObject.Find("remove-button-2").GetComponent<Button>();
         removeButton3 = GameObject.Find("remove-button-3").GetComponent<Button>();
 
-        // qnPrevPageButton = GameObject.Find("qn-prev-page-button").GetComponent<Button>();
-        // qnNextPageButton = GameObject.Find("qn-next-page-button").GetComponent<Button>();
-
-        // assimtPrevPageButton = GameObject.Find("assmt-prev-page-button").GetComponent<Button>();
-        // assimtNextPageButton = GameObject.Find("assmt-next-page-button").GetComponent<Button>();
-
         addButton1.onClick.AddListener(()=>addQnListener(0,assignmentQnList));
         addButton2.onClick.AddListener(()=>addQnListener(1,assignmentQnList));
         addButton3.onClick.AddListener(()=>addQnListener(2,assignmentQnList));
@@ -429,18 +464,16 @@ public class PostAssignmentManager1 : MonoBehaviour
         AddedQnId3 = GameObject.Find("addedQnId3").GetComponent<Text>();
     }
 
-        // popUpText = GameObject.Find("popup-text").GetComponent<Text>();
-        // popUpBox = GameObject.Find("PopUpBox").GetComponent<Image>();
-        // popUpBox.gameObject.SetActive(false);
-    // }
-    // public void PopUpBox(String message){
-    //     // popUpBox.gameObject.SetActive(true);
-    //     // popUpText.text = message;
-    //     TimeSpan ts = new TimeSpan(0,0,1);
-    //     Thread.Sleep(ts);
-    //     // popUpBox.gameObject.SetActive(false);
-    // }
+    public void SetDropdown(){
+        worldDropdown = GameObject.Find("Dropdown - Select-world").GetComponent<Dropdown>();
+        worldDropdown.onValueChanged.AddListener(delegate { HandleWorldDropdown(worldDropdown);});
 
+        sectionDropdown = GameObject.Find("Dropdown - Select-section").GetComponent<Dropdown>();
+        sectionDropdown.onValueChanged.AddListener(delegate { HandleSectionDropdown(sectionDropdown);});
+
+        levelDropdown = GameObject.Find("Dropdown - Select-level").GetComponent<Dropdown>();
+        levelDropdown.onValueChanged.AddListener(delegate { HandleDiffcultyDropdown(levelDropdown);});
+    }
     public void nextPageButton(){
         SceneManager.LoadScene("PostAssignment-P2");    
     }

@@ -39,7 +39,7 @@ public class PostAssignmentManager2 : MonoBehaviour
         
     }
     public void postAssignment(){
-        AssignmentInstance.assignmentId="12ad8";
+        AssignmentInstance.assignmentId="12AD8";
         AssignmentInstance.assignmentName="Requirement Analysis";
         AssignmentInstance.assignmentDescriptions="Finish it asap";
         AssignmentInstance.totalMark=1000;
@@ -113,6 +113,8 @@ public class PostAssignmentManager2 : MonoBehaviour
         }
         Debug.Log(dueYear);
     }
+
+    
 
     public void handleDueMonthDropdown(int val){
         dueMonth = val+1;

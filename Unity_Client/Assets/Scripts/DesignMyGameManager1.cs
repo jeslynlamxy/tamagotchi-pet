@@ -15,9 +15,9 @@ public class DesignMyGameManager1  : MonoBehaviour
     private HttpManager http;
     public GameObject panelObject;
     private SceneLoaderManager scene;
-    private static string worldSelected = null;
-    private static string sectionSelected = null;
-    private static string difficultySelected = null;
+    private static string worldSelected;
+    private static string sectionSelected;
+    private static string difficultySelected;
     public Button addButton1;
     public Button addButton2;
     public Button addButton3;
@@ -50,6 +50,11 @@ public class DesignMyGameManager1  : MonoBehaviour
     public Image popUpBox;
     public Text popUpText;
 
+    private Dropdown worldDropdown;
+    private Dropdown sectionDropdown;
+    private Dropdown levelDropdown;
+
+
 
     void Start()
     {
@@ -57,6 +62,7 @@ public class DesignMyGameManager1  : MonoBehaviour
         Debug.Log("starting session...");
         SetButtons();
         SetTextBoxObjects();
+        SetDropdown();
         // Debug.Log("Fetching question data now....");
         GetQuestionData();  
         Debug.Log("Data fetched successfully!");
@@ -266,105 +272,130 @@ public class DesignMyGameManager1  : MonoBehaviour
         DisplayAddedQuestionData(currGameQnIndex, gameQnList);
     }
 
-    public void HandleWorldDropdown(int val){
+    public void HandleWorldDropdown(Dropdown worldDropdown){
+        int val = worldDropdown.value;
         if (val == 0){
+            Debug.Log("val=0");
             worldSelected = null;
             GetQuestionDataFiltered();
+              DisplayQuestionData(currQuestionIndex);
+            Debug.Log(worldSelected);
+            Debug.Log("-----------RefreshedFinihsed------------");
 
         }
         if (val==1){
+            Debug.Log("val=1");
+
             worldSelected = "REQUIREMENT";
             GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
+            Debug.Log(worldSelected);
+
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
-        if (val==3){
+        if (val==2){
+            Debug.Log("val=2");
             worldSelected = "DESIGN";
             Debug.Log("World 3: " + worldSelected);
             GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
+            Debug.Log(worldSelected);
+
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         if (val==3){
             worldSelected = "IMPLEMENTATION";
             GetQuestionDataFiltered();
+            DisplayQuestionData(currQuestionIndex);
+            Debug.Log(worldSelected);
+
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         Debug.Log("World " + worldSelected + " is selected.");
     }
-    public void HandleSectionDropdown(int val){
+    public void HandleSectionDropdown(Dropdown sectionDropdown){
+        int val = sectionDropdown.value;
         if (val == 0){
+            Debug.Log("val-0");
             sectionSelected = null;
         }
         if (val == 1){
+            Debug.Log("val-1");
             sectionSelected = "1";
             GetQuestionDataFiltered();
-            // DisplayQuestionData(currQuestionIndex);
-            // output.text = questionList[0].questionText;
+            DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
-        if (val == 3){
+        if (val == 2){
+            Debug.Log("val-2");
             sectionSelected = "3";
             GetQuestionDataFiltered();
-            // DisplayQuestionData(currQuestionIndex);
+            DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         if (val == 3){
             sectionSelected = "3";
             GetQuestionDataFiltered();
             DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         if (val == 4){
             sectionSelected = "4";
             GetQuestionDataFiltered();
             DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         Debug.Log("Section " + sectionSelected + " is selected.");
     }
-    public void HandleDiffcultyDropdown(int val){
+    public void HandleDiffcultyDropdown(Dropdown levelDropdown){
+        int val = levelDropdown.value;
         if (val == 0){
-            // difficultySelected = "";
+            difficultySelected = null;
+            DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         if (val == 1){
             difficultySelected = "EASY";
             GetQuestionDataFiltered();
             DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
-        if (val == 3){
+        if (val == 2){
             difficultySelected = "MEDIUM";
             GetQuestionDataFiltered();
             DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");
         }
         if (val == 3){
             difficultySelected = "HARD";
             GetQuestionDataFiltered();
-            
+             DisplayQuestionData(currQuestionIndex);
+            Debug.Log("-----------RefreshedFinihsed------------");           
         }
         Debug.Log("Difficulty Level " + difficultySelected + " is selected " );
     }
 
     public void QnNextPage(){
         if (currQuestionIndex + QnRows<questionList.Count){
-        // qnNextPageButton.enabled = true;
         currQuestionIndex += QnRows;
         Debug.Log("============Show next page (Page " +(currQuestionIndex/3+1) +") of question data.============");
         DisplayQuestionData(currQuestionIndex); }
         else{
-            // qnNextPageButton.enabled = false;
-            // PopUpBox("This is the Last page already!");
+
         }
     }
 
     public void QnPrevPage(){
  
         if(Math.Abs(currQuestionIndex)!=0){
-        // Debug.Log("Current Question Index (absolute value) to be decreased later: " + Math.Abs(currQuestionIndex));
-        // GetComponent<Button>().interactable = true;
-        // qnPrevPageButton.enabled = true;
         currQuestionIndex = Math.Abs(currQuestionIndex) +(-3);
-        // currQuestionIndex = -currQuestionIndex;
         Debug.Log("============Show prev page (Page " + (currQuestionIndex/3+1) +") of question data============");
         DisplayQuestionData(currQuestionIndex);}
         else{
-            // qnNextPageButton.enabled = false;
-            // PopUpBox("This is the first page already!");
         }
     }
 
-    public void AssignmentNextPage(){
+    public void GameNextPage(){
 
         currGameQnIndex += CustomGameRows;
         Debug.Log("============Show next page (Page " +(currGameQnIndex/3+1 )+") of game data============");
@@ -372,9 +403,7 @@ public class DesignMyGameManager1  : MonoBehaviour
         DisplayAddedQuestionData(currGameQnIndex, gameQnList);
     }
 
-    public void AssignmentPrevPage(){
-
-        // Debug.Log("Current Assignment Question Index (absolute value) to be decreased later: " + Math.Abs(currGameQnIndex));
+    public void GamePrevPage(){
         currGameQnIndex = Math.Abs(currGameQnIndex)+(-3);
         Debug.Log("============Show prev page (Page " +(currGameQnIndex/3+1)+") of game data============");
         DisplayAddedQuestionData(currGameQnIndex,gameQnList);
@@ -416,17 +445,16 @@ public class DesignMyGameManager1  : MonoBehaviour
         AddedQnId3 = GameObject.Find("addedQnId3").GetComponent<Text>();
     }
 
-        // popUpText = GameObject.Find("popup-text").GetComponent<Text>();
-        // popUpBox = GameObject.Find("PopUpBox").GetComponent<Image>();
-        // popUpBox.gameObject.SetActive(false);
-    // }
-    // public void PopUpBox(String message){
-    //     // popUpBox.gameObject.SetActive(true);
-    //     // popUpText.text = message;
-    //     TimeSpan ts = new TimeSpan(0,0,1);
-    //     Thread.Sleep(ts);
-    //     // popUpBox.gameObject.SetActive(false);
-    // }
+    public void SetDropdown(){
+        worldDropdown = GameObject.Find("Dropdown - Select-world").GetComponent<Dropdown>();
+        worldDropdown.onValueChanged.AddListener(delegate { HandleWorldDropdown(worldDropdown);});
+
+        sectionDropdown = GameObject.Find("Dropdown - Select-section").GetComponent<Dropdown>();
+        sectionDropdown.onValueChanged.AddListener(delegate { HandleSectionDropdown(sectionDropdown);});
+
+        levelDropdown = GameObject.Find("Dropdown - Select-level").GetComponent<Dropdown>();
+        levelDropdown.onValueChanged.AddListener(delegate { HandleDiffcultyDropdown(levelDropdown);});
+    }
 
     public void NextPageButton(){
         SceneManager.LoadScene("DesignMyGame-P2");  
