@@ -6,7 +6,11 @@ using Newtonsoft.Json;
 [System.Serializable]
 public class CustomGame : MonoBehaviour
 {
-   [JsonConstructor]
+  
+   public CustomGame(){
+
+   }
+    [JsonConstructor]
    public CustomGame(string customeGameId, string customeGameName, string customGameDescription){
       this.customeGameId = customeGameId;
       this.customeGameName = customeGameName;

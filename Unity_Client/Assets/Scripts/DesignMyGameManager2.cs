@@ -31,6 +31,9 @@ public class DesignMyGameManager2 : MonoBehaviour
         CustomGameInstance.questionList = DesignMyGameManager1.gameQnList;
     }
     public void postGame(){
+        dataController = FindObjectOfType<DataManager>();
+        CustomGameInstance= dataController.GetCustomGame();
+        CustomGameInstance.questionList = DesignMyGameManager1.gameQnList;
         CustomGameInstance.customeGameId ="abd34";
         CustomGameInstance.customeGameName ="Requirement Analysis";
         CustomGameInstance.customGameDescription="Just do it for fun";
