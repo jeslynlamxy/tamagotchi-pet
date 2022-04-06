@@ -4094,8 +4094,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 813866833}
-        m_TargetAssemblyTypeName: DesignMyGameManager1, Assembly-CSharp
-        m_MethodName: CustomGamePrevPage
+        m_TargetAssemblyTypeName: DesignMyGameManager1, Scripts
+        m_MethodName: GamePrevPage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8132,8 +8132,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1718766508}
-        m_TargetAssemblyTypeName: DesignMyGameManager1, Assembly-CSharp
-        m_MethodName: CustomGameNextPage
+        m_TargetAssemblyTypeName: DesignMyGameManager1, Scripts
+        m_MethodName: GameNextPage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -5168,7 +5168,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter Assignmetn Name...
+  m_Text: Enter Assignment Name...
 --- !u!222 &1324941246
 CanvasRenderer:
   m_ObjectHideFlags: 0
