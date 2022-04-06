@@ -75,6 +75,8 @@ public class DesignMyGameManager1  : MonoBehaviour
     }
 
     public void GetQuestionDataFiltered(){
+        Debug.Log("============ Fetching Filtered question data now ============ ");
+
         http = new HttpManager();
         var url = "";
         if (worldSelected!=null && sectionSelected!=null&difficultySelected!=null){
@@ -107,6 +109,7 @@ public class DesignMyGameManager1  : MonoBehaviour
         questionList = JsonConvert.DeserializeObject<List<Question>>(responseStr);
         questionList = questionList.ToList();
         Debug.Log(questionList);
+        DisplayQuestionData(currQuestionIndex);
     }
 
     public void LoadQuestionData(){
@@ -122,14 +125,9 @@ public class DesignMyGameManager1  : MonoBehaviour
 
         if (questionList.Count>idx){
         addButton1.enabled = true;
-        // Debug.Log("get text");
         QnContent1.text = questionList[idx].questionText;
-        // Debug.Log("Get text successful");
         String idTemp = questionList[idx].questionId;
-        // String idTemp = questionList[idx]?.questionId.ToString()??"w123";
         QnId1.text = idTemp;
-        // Debug.Log("get id sucessfully");
-        // Debug.Log("ID is " + idTemp);
         }
         else{
             Debug.Log("Row 1 is empty");
@@ -145,7 +143,6 @@ public class DesignMyGameManager1  : MonoBehaviour
             Debug.Log("Row 2 is empty");
             QnContent2.text = "";
             QnId2.text = "";
-            // addButton2.enabled = false;
         }
 
         if (questionList.Count>idx+2){
@@ -271,7 +268,9 @@ public class DesignMyGameManager1  : MonoBehaviour
 
     public void HandleWorldDropdown(int val){
         if (val == 0){
-            // worldSelected = "";
+            worldSelected = null;
+            GetQuestionDataFiltered();
+
         }
         if (val==1){
             worldSelected = "REQUIREMENT";
@@ -290,18 +289,18 @@ public class DesignMyGameManager1  : MonoBehaviour
     }
     public void HandleSectionDropdown(int val){
         if (val == 0){
-            // sectionSelected = "";
+            sectionSelected = null;
         }
         if (val == 1){
             sectionSelected = "1";
             GetQuestionDataFiltered();
-            DisplayQuestionData(currQuestionIndex);
+            // DisplayQuestionData(currQuestionIndex);
             // output.text = questionList[0].questionText;
         }
         if (val == 3){
             sectionSelected = "3";
             GetQuestionDataFiltered();
-            DisplayQuestionData(currQuestionIndex);
+            // DisplayQuestionData(currQuestionIndex);
         }
         if (val == 3){
             sectionSelected = "3";
@@ -332,7 +331,7 @@ public class DesignMyGameManager1  : MonoBehaviour
         if (val == 3){
             difficultySelected = "HARD";
             GetQuestionDataFiltered();
-            DisplayQuestionData(currQuestionIndex);
+            
         }
         Debug.Log("Difficulty Level " + difficultySelected + " is selected " );
     }

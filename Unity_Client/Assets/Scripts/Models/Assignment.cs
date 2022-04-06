@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 [System.Serializable]
 public class Assignment : MonoBehaviour
 {
+    [JsonConstructor]
     public Assignment(string assignmentId, int totalMark, string assignmentName, string assignmentTopic, string assignmentDescriptions){ 
         this.assignmentId = assignmentId;
         this.totalMark = totalMark;

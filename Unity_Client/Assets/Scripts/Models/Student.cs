@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static User;
 
+
 [System.Serializable]
 public class Student : User
 {

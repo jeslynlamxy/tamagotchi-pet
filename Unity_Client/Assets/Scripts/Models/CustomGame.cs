@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 [System.Serializable]
 public class CustomGame : MonoBehaviour
 {
-
+   [JsonConstructor]
    public CustomGame(string customeGameId, string customeGameName, string customGameDescription){
       this.customeGameId = customeGameId;
       this.customeGameName = customeGameName;
