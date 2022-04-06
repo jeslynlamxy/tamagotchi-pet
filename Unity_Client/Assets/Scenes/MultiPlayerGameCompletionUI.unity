@@ -1121,6 +1121,9 @@ MonoBehaviour:
   waterText: {fileID: 1658146768}
   winText: {fileID: 1541454874}
   victoryOrDefeatText: {fileID: 1272375084}
+  username: 
+  student:
+    lastLoginDay: 
 --- !u!4 &932890649
 Transform:
   m_ObjectHideFlags: 0
@@ -1951,9 +1954,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: LoadLeaderboardUI
+      - m_Target: {fileID: 932890648}
+        m_TargetAssemblyTypeName: MultiPlayerGameCompletionManager, Scripts
+        m_MethodName: LeaderboardButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
