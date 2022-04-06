@@ -26,13 +26,13 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
         dataController = FindObjectOfType<DataManager>();
         currentRoundData = dataController.GetMultiPlayerInstance();
         username = dataController.username;
-
+        
         int food = currentRoundData.rewardedFood;
         int water = currentRoundData.rewardedWater;
         int win = currentRoundData.winPoint;
         int playerScore = currentRoundData.finalScore;
         int opponentScore = currentRoundData.opponentStatList.Sum(item => item.timing);
-
+        currentRoundData.opponentCharacterUsed = new Pet("Pet1", 0, "Add 5 Seconds", 5, 5);
         scoreText.text = playerScore.ToString();
         winText.text = win.ToString();
         foodText.text = food.ToString();

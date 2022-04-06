@@ -21,7 +21,7 @@ public class WorldAndStageSelectionManager : MonoBehaviour
         sec4.interactable = false;
         lvl2.interactable = false;
         lvl3.interactable = false;
-        lvl4.interactable = false;
+        // lvl4.interactable = false;
         // checkAndUnlock();
     }
     void checkAndUnlock() {
