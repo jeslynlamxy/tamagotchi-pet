@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 public class MultiPlayerGameCompletionManager : MonoBehaviour
 {
@@ -84,7 +85,7 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
         SceneManager.LoadScene("LeaderboardUI");
     }
 
-    public void SocialsButtonClick()
+    public void TwitterButtonClick()
     {
         if (victoryOrDefeatText.text == "victory") {
             shareMsg = "I just obtained victory in Tamagotchi Pet Multiplayer, winners like me score " + currentRoundData.finalScore.ToString() + " come and try to beat me!";
@@ -92,6 +93,33 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
         else {
             shareMsg = "Unfortunately, i just got defeated in Tamagotchi Pet Multiplayer, i will work harder and score higher than " + currentRoundData.finalScore.ToString() + " next time.";
         }
-        StartCoroutine(DataManager.TakeScreenshotAndShare(shareMsg));
+        // links to google, as our app is not on the google play store for download
+        string twittershare = "http://twitter.com/share?text=s" + shareMsg + "&url=http://google.com";
+        // + Uri.EscapeUriString(shareMsg);
+        Application.OpenURL(twittershare);
+        
+        // for android
+        // StartCoroutine(DataManager.TakeScreenshotAndShare(shareMsg));
     }
+
+    public void FacebookButtonClick()
+    {
+        if (victoryOrDefeatText.text == "victory") {
+            shareMsg = "I just obtained victory in Tamagotchi Pet Multiplayer, winners like me score " + currentRoundData.finalScore.ToString() + " come and try to beat me!";
+        }
+        else {
+            shareMsg = "Unfortunately, i just got defeated in Tamagotchi Pet Multiplayer, i will work harder and score higher than " + currentRoundData.finalScore.ToString() + " next time.";
+        }
+
+        // links to google, as our app is not on the google play store for download
+        
+        string facebookShare = "https://www.facebook.com/sharer/sharer.php?u=google.com&quote=" + shareMsg;
+        // + Uri.EscapeUriString(shareMsg);
+        Application.OpenURL(facebookShare);
+        
+        // for android
+        // StartCoroutine(DataManager.TakeScreenshotAndShare(shareMsg));
+    }
+
+
 }
