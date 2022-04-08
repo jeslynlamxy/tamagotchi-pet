@@ -81,7 +81,7 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
         shareMsg = "I just played a game on Tamagotchi Pet and scored " + currentRoundData.finalScore.ToString() + " come and learn through this fabulous game!";
         
         // links to google, as our app is not on the google play store for download
-        string twittershare = "http://twitter.com/share?text=s" + shareMsg + "&url=http://google.com";
+        string twittershare = "http://twitter.com/share?text=" + shareMsg + "&url=http://google.com";
         // + Uri.EscapeUriString(shareMsg);
         Application.OpenURL(twittershare);
         

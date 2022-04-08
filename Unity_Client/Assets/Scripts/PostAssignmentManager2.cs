@@ -56,9 +56,9 @@ public class PostAssignmentManager2 : MonoBehaviour
 
     public void postButton(){
         postAssignment();
-        Debug.Log("Positng done");
+        Debug.Log("Posting done");
         successMsg.gameObject.SetActive(true);
-        successMsg.text = "Posted successfully!, \n Assignment Code is: " + AssignmentInstance.assignmentId;
+        successMsg.text = "Assignment Code is: " + AssignmentInstance.assignmentId;
         Application.OpenURL("https://t.me/share/url?url=google.com&text=" + successMsg.text);
         // links to google as we did not upload our app to the google play store
     }

@@ -93,8 +93,9 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
         else {
             shareMsg = "Unfortunately, i just got defeated in Tamagotchi Pet Multiplayer, i will work harder and score higher than " + currentRoundData.finalScore.ToString() + " next time.";
         }
+
         // links to google, as our app is not on the google play store for download
-        string twittershare = "http://twitter.com/share?text=s" + shareMsg + "&url=http://google.com";
+        string twittershare = "http://twitter.com/share?text=" + shareMsg + "&url=http://google.com";
         // + Uri.EscapeUriString(shareMsg);
         Application.OpenURL(twittershare);
         
@@ -112,7 +113,6 @@ public class MultiPlayerGameCompletionManager : MonoBehaviour
         }
 
         // links to google, as our app is not on the google play store for download
-        
         string facebookShare = "https://www.facebook.com/sharer/sharer.php?u=google.com&quote=" + shareMsg;
         // + Uri.EscapeUriString(shareMsg);
         Application.OpenURL(facebookShare);
