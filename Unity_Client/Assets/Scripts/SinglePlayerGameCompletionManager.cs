@@ -75,9 +75,32 @@ public class SinglePlayerGameCompletionManager : MonoBehaviour
     {
         SceneManager.LoadScene("LeaderBoardUI");
     }
-    public void SocialsButtonClick()
+
+    public void TwitterButtonClick()
     {
         shareMsg = "I just played a game on Tamagotchi Pet and scored " + currentRoundData.finalScore.ToString() + " come and learn through this fabulous game!";
-        StartCoroutine(DataManager.TakeScreenshotAndShare(shareMsg));
+        
+        // links to google, as our app is not on the google play store for download
+        string twittershare = "http://twitter.com/share?text=s" + shareMsg + "&url=http://google.com";
+        // + Uri.EscapeUriString(shareMsg);
+        Application.OpenURL(twittershare);
+        
+        // for android
+        // StartCoroutine(DataManager.TakeScreenshotAndShare(shareMsg));
     }
+
+    public void FacebookButtonClick()
+    {
+        shareMsg = "I just played a game on Tamagotchi Pet and scored " + currentRoundData.finalScore.ToString() + " come and learn through this fabulous game!";
+        
+        // links to google, as our app is not on the google play store for download
+        
+        string facebookShare = "https://www.facebook.com/sharer/sharer.php?u=google.com&quote=" + shareMsg;
+        // + Uri.EscapeUriString(shareMsg);
+        Application.OpenURL(facebookShare);
+        
+        // for android
+        // StartCoroutine(DataManager.TakeScreenshotAndShare(shareMsg));
+    }
+
 }
