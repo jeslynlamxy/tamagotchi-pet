@@ -92,7 +92,7 @@ public class CharacterSelectAndLoadingManager : MonoBehaviour
             url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT&section=1&difficultyStandard=HARD";
         }
         var questionList = http.Get<List<Question>>(url);
-        SinglePlayerInstance.questionList = GetRandomElements(questionList, 2);
+        SinglePlayerInstance.questionList = GetRandomElements(questionList, 5);
     }
     public static List<t> GetRandomElements<t>(IEnumerable<t> list, int elementsCount)
         {

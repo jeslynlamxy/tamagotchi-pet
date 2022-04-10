@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
-
+using System.Linq;
+using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 public class SinglePlayerGameManager : MonoBehaviour
 {
     private DataManager dataController;
@@ -33,7 +36,7 @@ public class SinglePlayerGameManager : MonoBehaviour
     public Pet petSelected;
     public Image petImage;
     public Sprite[] petSprites;
-
+    public bool gameMadeHarder = false;
 
     void Start()
     {
@@ -94,6 +97,10 @@ public class SinglePlayerGameManager : MonoBehaviour
             loseLife();
             ManageNext();
         }
+    }
+    public static List<t> GetRandomElements<t>(IEnumerable<t> list, int elementsCount)
+    {
+        return list.OrderBy(x => Guid.NewGuid()).Take(elementsCount).ToList();
     }
     public void GetPetChosen()
     {
@@ -249,6 +256,35 @@ public class SinglePlayerGameManager : MonoBehaviour
         ansTwoText.text = currentQuestion.answersText[1];
         ansThreeText.text = currentQuestion.answersText[2];
         ansFourText.text = currentQuestion.answersText[3];
+        Debug.Log(totalNumberOfQuestions);
+    }
+
+    void makeQuestionsHarderInRealTime()
+    {
+        if (!gameMadeHarder)
+        {
+            var level = PlayerPrefs.GetString("levelSelected", "Nil");
+            if (level == "easy" || level == "medium")
+            {
+                int numberOfQuestionsToQuery = 5;
+                var url = "temp"; // temp
+                if (level == "easy")
+                {
+                    url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT&section=1&difficultyStandard=MEDIUM";
+                }
+                else if (level == "medium")
+                {
+                    url = "http://172.21.148.165/get_question_filtered_optional?world=REQUIREMENT&section=1&difficultyStandard=HARD";
+                }
+                var questionList = GetRandomElements(http.Get<List<Question>>(url), numberOfQuestionsToQuery);
+                for (int f = 0; f < 5; f++) 
+                {
+                    questionPool.Add(questionList[f]);
+                }
+                Debug.Log("Hard questions spawned!");
+                gameMadeHarder = true;
+            }
+        }
     }
     // gen own stat id
     public async void addScore()
@@ -258,6 +294,10 @@ public class SinglePlayerGameManager : MonoBehaviour
         totalCorrect = totalCorrect + 1;
         var newStat = new Stat(dataController.generateUID(), roundId, currentQuestion.questionId, username, (int)System.Math.Round(currentTime), true, playerLife, skillLeft);
         singlePlayerInstance.statList.Add(newStat);
+        if (playerScore >= 15*4)
+        {
+            makeQuestionsHarderInRealTime();
+        }
     }
     public void loseLife()
     {
