@@ -20,7 +20,7 @@ public class SinglePlayerGameManager : MonoBehaviour
     private string skillType, studentId, roundId; // "add 5 seconds", "recover 1 life"
     private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect;
     float currentTime = 0f;
-    float startingTime = 20f;
+    float startingTime = 30f;
     private int timeBetweenQuestion = 2000;
     [SerializeField]
     private Text quesText, ansOneText, ansTwoText, ansThreeText, ansFourText, scoreText, lifeText, skillLeftText, skillExplainText;

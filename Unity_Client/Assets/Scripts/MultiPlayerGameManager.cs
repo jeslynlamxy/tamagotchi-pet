@@ -20,7 +20,7 @@ public class MultiPlayerGameManager : MonoBehaviour
     private int questionIndex, playerScore, playerLife, totalNumberOfQuestions, totalCorrect, winPoint, currentTiming, opponentTiming;
     private bool skillLeft;
     float currentTime = 0f;
-    float startingTime = 20f;
+    float startingTime = 30f;
     private int timeBetweenQuestion = 2000;
     public Button ansOne, ansTwo, ansThree, ansFour, usedSkill;
     public int difficulty;
