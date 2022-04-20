@@ -13,8 +13,6 @@ public class Assignment : MonoBehaviour
         this.assignmentName = assignmentName;
         this.assignmentTopic = assignmentTopic;
         this.assignmentDescriptions = assignmentDescriptions;
-        // this.questionList = questionList;
-        // this.targetStudentList = targetStudentList;
        // this.deuDate = new DateTime(Year, Month, Date, 23, 59, 00);
     }
     public string assignmentId { get; set; }
@@ -24,6 +22,5 @@ public class Assignment : MonoBehaviour
     public string assignmentDescriptions {get; set;}    
     
     public List<Question> questionList { get; set; } // get from backend
-    // public List<Student> targetStudentList { get; set; } // get from backend
     
 }

@@ -24,8 +24,10 @@ public class PostAssignmentManager2 : MonoBehaviour
    [SerializeField]
     public Text successMsg;
     private HttpManager http;
+    private string shareMsg;
+
     public static Assignment AssignmentInstance;
-    public static string ID="";
+    public static string ID="00000";
     public static PostAssignmentManager1 assignmentScript1;
     public static List<Question> assignmentQnListToAdd;
     
@@ -35,22 +37,14 @@ public class PostAssignmentManager2 : MonoBehaviour
         dataController = FindObjectOfType<DataManager>();
         AssignmentInstance = dataController.GetAssignment();
         AssignmentInstance.questionList = PostAssignmentManager1.assignmentQnList;
-
-        
     }
     public void postAssignment(){
-        AssignmentInstance.assignmentId="12AD8";
-        AssignmentInstance.assignmentName="Requirement Analysis";
-        AssignmentInstance.assignmentDescriptions="Finish it asap";
-        AssignmentInstance.totalMark=1000;
-        AssignmentInstance.assignmentTopic = "REQUIREMENT";
+        //post the assignmetn details to the backend database
         Debug.Log("======checking assignmetn List ======");
-
-
         Debug.Log("Posting assignment to database now");
         http = new HttpManager();
         var url = "http://172.21.148.165/add_Assignment";
-        // var response = http.Post(url, AssignmentInstance);
+        var response = http.Post(url, AssignmentInstance);
         Debug.Log("Assignment Posted Successfully");
     }
 
@@ -62,23 +56,37 @@ public class PostAssignmentManager2 : MonoBehaviour
         Application.OpenURL("https://t.me/share/url?url=google.com&text=" + successMsg.text);
         // links to google as we did not upload our app to the google play store
     }
+
+    
+    public void FacebookButtonClick()
+    {
+        shareMsg = "New Assignment Posted: " + AssignmentInstance.assignmentId;
+        // links to google, as our app is not on the google play store for download
+        
+        string facebookShare = "https://www.facebook.com/sharer/sharer.php?u=google.com&quote=" + shareMsg;
+        // + Uri.EscapeUriString(shareMsg);
+        Application.OpenURL(facebookShare);
+        
+        // for android
+        // StartCoroutine(DataManager.TakeScreenshotAndShare(shareMsg));
+    }
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void readNameInput(string title){
         assignmentTitle = title;
         Debug.Log(title);
-        // AssignmentInstance.assignmentName=assignmentTitle;
+        AssignmentInstance.assignmentName=assignmentTitle;
     }
 
     public void readDescriptionInput(string description){
         assignmentDescription = description;
         Debug.Log(description);
-        // AssignmentInstance.assignmentDescriptions=assignmentDescription;
+        AssignmentInstance.assignmentDescriptions=assignmentDescription;
     }
 
     public void readTotalMarkInput(string totalMark){
         assignmentMark = Int32.Parse(totalMark);
         Debug.Log(totalMark);
-        // AssignmentInstance.totalMark=assignmentMark;
+        AssignmentInstance.totalMark=assignmentMark;
     }
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -98,7 +106,7 @@ public class PostAssignmentManager2 : MonoBehaviour
             assignmentTopic = "IMPLEMENTATION";
         }
         Debug.Log("topic " + assignmentTopic + " is selected.");
-        // AssignmentInstance.assignmentTopic = assignmentTopic;
+        AssignmentInstance.assignmentTopic = assignmentTopic;
     }
     public void handleDueYearDropDown(int val){
         if (val == 0){
@@ -130,4 +138,4 @@ public class PostAssignmentManager2 : MonoBehaviour
     public void backButton(){
         SceneManager.LoadScene("PostAssignment-P1");
     }
-}
+    }
