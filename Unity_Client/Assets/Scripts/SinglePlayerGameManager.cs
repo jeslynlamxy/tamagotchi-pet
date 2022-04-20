@@ -38,6 +38,8 @@ public class SinglePlayerGameManager : MonoBehaviour
     public Sprite[] petSprites;
     public bool gameMadeHarder = false;
 
+    public Image backgroundImg;
+
     void Start()
     {
 
@@ -283,6 +285,8 @@ public class SinglePlayerGameManager : MonoBehaviour
                 }
                 Debug.Log("Hard questions spawned!");
                 gameMadeHarder = true;
+                backgroundImg.color = new Color32(255,0,0,100);
+                petImage.color = new Color32(255,0,0,100);
             }
         }
     }

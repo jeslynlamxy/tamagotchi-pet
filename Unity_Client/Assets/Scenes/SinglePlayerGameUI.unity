@@ -1591,6 +1591,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 522d916af9f7944fc9739fa8abcde570, type: 3}
   - {fileID: 21300000, guid: 2594a7d7126c04e0786f0de669bab9b0, type: 3}
   - {fileID: 21300000, guid: 1b1491dd8c2cf4c53865ea93f0b1f176, type: 3}
+  gameMadeHarder: 0
+  backgroundImg: {fileID: 587095624}
 --- !u!4 &794372426
 Transform:
   m_ObjectHideFlags: 0
