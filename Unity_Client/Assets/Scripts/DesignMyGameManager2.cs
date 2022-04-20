@@ -50,7 +50,7 @@ public class DesignMyGameManager2 : MonoBehaviour
         postGame();
         Debug.Log("Positng done");
         successMsg.gameObject.SetActive(true);
-        successMsg.text = "Assignment Code is: " + CustomGameInstance.customeGameId;
+        successMsg.text = "Game Code is: " + CustomGameInstance.customeGameId;
         Application.OpenURL("https://t.me/share/url?url=google.com&text=" + successMsg.text);
         // links to google as we did not upload our app to the google play store
     }
