@@ -1,2 +1,1 @@
 # tamagotchi-pet
-hello
