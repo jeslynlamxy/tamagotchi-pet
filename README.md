@@ -19,7 +19,7 @@ classroom teaching. Teachers can also login to add/remove/edit the quizzes in th
 
 ## Use Case Diagram
 
-<img src="screenshots/image47.png">
+<img src="./Screenshots/image47.png">
 
 ## Client Server Architecture Diagram
 
