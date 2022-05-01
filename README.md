@@ -23,7 +23,7 @@ classroom teaching. Teachers can also login to add/remove/edit the quizzes in th
 
 ## Client Server Architecture Diagram
 
-<img src="screenshots/image34.png">
+<img src="./Screenshots/image34.png">
 
 ## Screenshots
 
@@ -34,9 +34,9 @@ classroom teaching. Teachers can also login to add/remove/edit the quizzes in th
      <td>Student Welcome</td>
   </tr>
   <tr>
-    <td><img src="screenshots/image30.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image8.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image49.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image30.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image8.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image49.png" height="250" hspace="10"></td>
   </tr>
   <tr>
     <td>Virtual Village</td>
@@ -44,9 +44,9 @@ classroom teaching. Teachers can also login to add/remove/edit the quizzes in th
      <td>Single Multi Player Selection</td>
   </tr>
   <tr>
-    <td><img src="screenshots/image37.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image40.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image31.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image37.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image40.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image31.png" height="250" hspace="10"></td>
   </tr>
     <tr>
     <td>World and Difficulty Selection</td>
@@ -54,9 +54,9 @@ classroom teaching. Teachers can also login to add/remove/edit the quizzes in th
      <td>Single Player Game</td>
   </tr>
   <tr>
-    <td><img src="screenshots/image26.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image11.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image19.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image26.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image11.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image19.png" height="250" hspace="10"></td>
   </tr>
     <tr>
     <td>Multi Player Game</td>
@@ -64,9 +64,9 @@ classroom teaching. Teachers can also login to add/remove/edit the quizzes in th
      <td>Leaderboard</td>
   </tr>
   <tr>
-    <td><img src="screenshots/image17.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image22.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image35.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image17.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image22.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image35.png" height="250" hspace="10"></td>
   </tr>
       <tr>
     <td>View Game History</td>
@@ -74,9 +74,9 @@ classroom teaching. Teachers can also login to add/remove/edit the quizzes in th
      <td>Design New Quiz Game</td>
   </tr>
   <tr>
-    <td><img src="screenshots/image1.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image32.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image13.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image1.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image32.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image13.png" height="250" hspace="10"></td>
   </tr>
         <tr>
     <td>Teacher Welcome</td>
@@ -84,9 +84,9 @@ classroom teaching. Teachers can also login to add/remove/edit the quizzes in th
      <td>Teacher Manage Questions</td>
   </tr>
   <tr>
-    <td><img src="screenshots/image36.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image16.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image24.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image36.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image16.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image24.png" height="250" hspace="10"></td>
   </tr>
   <tr>
       <td>Teacher Add Question</td>
@@ -94,14 +94,14 @@ classroom teaching. Teachers can also login to add/remove/edit the quizzes in th
      <td>Teacher Post Assignment</td>
   </tr>
   <tr>
-    <td><img src="screenshots/image2.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image6.png" height="250" hspace="10"></td>
-    <td><img src="screenshots/image9.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image2.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image6.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image9.png" height="250" hspace="10"></td>
   </tr>
     <tr>
       <td>Teacher Post Assignment Details</td>
   </tr>
   <tr>
-    <td><img src="screenshots/image18.png" height="250" hspace="10"></td>
+    <td><img src="./Screenshots/image18.png" height="250" hspace="10"></td>
   </tr>
  </table>
